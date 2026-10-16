@@ -249,21 +249,12 @@ SSVDPRegsEnd:
 	even
 
 ; -------------------------------------------------------------------------
-; Stage image placeholder
-; -------------------------------------------------------------------------
-; The original V-INT copies a 12KB rendered image of the floor to VRAM every
-; frame. The floor can't be rendered on a Mega Drive yet, so the same DMA
-; reads blank tiles from here instead. (16KB aligned so the DMA source never
-; crosses a 128KB boundary.)
-; -------------------------------------------------------------------------
-
-	ALIGN	$4000
-stageImage:
-	dcb.b	IMGLENGTH, 0
-
-; -------------------------------------------------------------------------
 ; Display program (Main CPU program, unchanged apart from the Sub CPU
 ; handshake): background, HUD, palette cycling, results screen, etc.
+; -------------------------------------------------------------------------
+; stageImage is now a RAM variable (declared in Main.asm rsset block).
+; SampleFloor writes rendered pixels there every other frame; the V-INT
+; DMA copies it to VRAM as before.  No ROM placeholder needed.
 ; -------------------------------------------------------------------------
 
 	include	"Special Stage/Main.asm"
@@ -291,6 +282,7 @@ SSRWInit:
 	include	"Special Stage/Sub.asm"
 
 	include	"MD Port/Trace Table.asm"
+	include	"MD Port/Floor Sampler.asm"
 
 	ALIGN	$20000, $FF				; Pad ROM to a multiple of 128KB
 ROMEnd:

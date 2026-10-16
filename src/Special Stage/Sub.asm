@@ -255,6 +255,9 @@ SSFrame:
 	bsr.w	AnimateStamps			; Animate stamps
 	bsr.w	GetGfxSines			; Get sines for 3D sprite positioning
 	jsr	GenGfxTraceTblMD		; Generate the floor trace table (no divisions)
+	if def(SSMDPORT)
+	jsr	SampleFloor			; Render floor pixels into stageImage (h2v2, 15fps)
+	endif
 
 	move.b	#0,spriteCount			; Reset sprites
 	move.l	#subSprites,curSpriteSlot
@@ -588,9 +591,10 @@ LoadMap_SS8:
 
 LoadStamps:
 	if def(SSMDPORT)
-	movea.l	a1,a0				; Load stamp map only (the floor isn't rendered)
+	movea.l	a1,a0				; Load stamp map to STAMPRAM (used for collision + floor remap)
 	lea	STAMPRAM,a1
-	bra.w	KosDec
+	bsr.w	KosDec
+	jmp	LoadFloorData			; Point floorStampPtr at this stage's baked 4bpp stamps
 	else
 	move.l	a1,-(sp)			; Load stamps
 	lea	WORDRAM2M+$200,a1

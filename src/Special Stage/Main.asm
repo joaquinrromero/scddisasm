@@ -32,9 +32,7 @@ IMGV1LEN	EQU	$2000			; Part 1 length
 	rsset	WORKRAM+$FF00B000
 	endif
 MainVarsStart	rs.b	0			; Start of variables
-	if def(SSMDPORT)=0
-stageImage	rs.b	IMGLENGTH		; Stage image buffer
-	endif
+stageImage	rs.b	IMGLENGTH		; Stage image buffer (RAM in MD port, ROM in SCD original)
 sprites		rs.b	80*8			; Sprite buffer
 		rs.b	4
 splashArtLoad	rs.b	1			; Splash art load flag
@@ -74,6 +72,13 @@ scrollOffset6	rs.l	1			; Background scroll offset 6
 demoDataPtr	rs.l	1			; Demo data pointer
 		rs.b	$40
 MainVarsLen		EQU	__rs-MainVarsStart		; Size of variables area
+
+	if def(SSMDPORT)
+floorStampPtr	rs.l	1			; ROM pointer to this stage's baked 4bpp stamps
+floorRemapPtr	rs.l	1			; ROM pointer to this stage's stamp_remap word table
+floorAltFrame	rs.b	1			; Alternating frame flag (SampleFloor skips odd calls)
+		rs.b	1
+	endif
 
 lagCounter	rs.l	1			; Lag counter
 
