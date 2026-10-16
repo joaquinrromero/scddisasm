@@ -18,7 +18,11 @@ TIME_FUTURE		rs.b	1		; Future
 ; Variables
 ; -------------------------------------------------------------------------
 
+	if def(SSMDPORT)
+	rsset	SSMAINVARS
+	else
 	rsset	WORKRAM+$F00
+	endif
 MAINVARS		rs.b	0		; Main CPU global variables
 ipxVSync		rs.b	1		; IPX VSync flag
 timeAttackMode		rs.b	1		; Time attack mode flag
@@ -191,7 +195,9 @@ aniArtBuffer 		rs.b	$480		; Animated art buffer
 scrlSectSpeeds		rs.b	$200		; Scroll section speeds
 MAINVARSSZ		EQU	__rs-MAINVARS	; Size of Main CPU global variables area
 
+	if def(SSMDPORT)=0
 WORKRAMFILE		rs.b	$6000		; Work RAM file data
 WORKRAMFILESZ		EQU	$FFFB00-WORKRAMFILE
+	endif
 
 ; -------------------------------------------------------------------------

@@ -4,11 +4,13 @@
 ; Special stage Sub CPU program
 ; -------------------------------------------------------------------------
 
+	if def(SSMDPORT)=0
 	include	"_Include/Common.inc"
 	include	"_Include/Sound.inc"
 	include	"_Include/Sub CPU.inc"
 	include	"Special Stage/_Common.inc"
 	include	"Special Stage/_Global Variables.inc"
+	endif
 	
 ; -------------------------------------------------------------------------
 ; Object variables structure
@@ -84,7 +86,11 @@ gfxSize		rs.b	0			; Size of structure
 ; Variables
 ; -------------------------------------------------------------------------
 
+	if def(SSMDPORT)
+	rsset	SSVARS
+	else
 	rsset	PRGRAM+$3C000
+	endif
 VARSSTART	rs.b	0			; Start of variables
 
 sonicObject	rs.b	oSize			; Sonic object
@@ -188,13 +194,104 @@ hazardAnimFrame	rs.w	1			; Hazard animation frame
 fanAnimFrame	rs.w	1			; Fan animation frame
 		rs.b	$CC
 gfxVars		rs.b	gfxSize			; Graphics operations variables
+	if def(SSMDPORT)=0
 		rs.b	$1B9E
+	endif
 VARSLEN		EQU	__rs-VARSSTART		; Size of variables area
 
 ; -------------------------------------------------------------------------
 ; Program start
 ; -------------------------------------------------------------------------
 
+	if def(SSMDPORT)
+; -------------------------------------------------------------------------
+; Mega Drive port: initialization (replaces the Sub CPU program start)
+; -------------------------------------------------------------------------
+
+SSInit:
+	moveq	#0,d0
+	move.l	d0,specStageTimer.w		; Reset timer
+	move.w	d0,specStageRings.w		; Reset rings
+	move.b	#6,ufoCount.w			; Reset UFO count
+
+	lea	VARSSTART,a0			; Clear variables
+	move.w	#VARSLEN/4-1,d7
+
+.ClearVars:
+	move.l	#0,(a0)+
+	dbf	d7,.ClearVars
+
+	bsr.w	InitGfxOperation		; Initialize graphics operation
+
+	bsr.w	LoadStageMap			; Load stage map
+	bsr.w	GetStampTypes			; Get stamp types
+
+	move.b	#1,sonicObject+oID		; Spawn Sonic
+	move.b	#6,sonicShadowObj+oID		; Spawn Sonic's shadow
+	move.b	#$A,ttlCardBarObj+oID		; Spawn title card bar
+	move.b	#$B,ttlCardTextObj+oID		; Spawn title card text
+	bsr.w	SpawnUFOs			; Spawn UFOs
+
+	bsr.w	InitStampAnim			; Initialize stamp animation
+	move.b	#60/3,timerFrames		; Set timer frame counter
+	move.w	#20,ufoRingBonus		; Set initial UFO ring bonus
+	move.b	#1,stageInactive		; Mark stage as inactive
+
+	btst	#1,specStageFlags.w		; Are we in time attack mode?
+	bne.s	.NoCountdown			; If so, branch
+	move.l	#100,specStageTimer.w		; If not, set timer to 100 seconds
+
+.NoCountdown:
+	rts
+
+; -------------------------------------------------------------------------
+; Mega Drive port: run one frame of logic (replaces the Sub CPU main loop;
+; no graphics operation, no Word RAM handshake)
+; -------------------------------------------------------------------------
+
+SSFrame:
+	move.l	#0,subSndQueue1			; Clear sound queues
+
+	bsr.w	AnimateStamps			; Animate stamps
+	bsr.w	GetGfxSines			; Get sines for 3D sprite positioning
+	jsr	GenGfxTraceTblMD		; Generate the floor trace table (no divisions)
+
+	move.b	#0,spriteCount			; Reset sprites
+	move.l	#subSprites,curSpriteSlot
+	bsr.w	Init3DSpritePos
+
+	bsr.w	RunObjects			; Run objects
+
+	movea.l	curSpriteSlot,a0		; Set terminating sprite slot
+	move.l	#0,(a0)
+
+	bsr.w	UpdateTimer			; Update timer
+
+	bsr.w	CheckUFOPresence		; Are there any UFOs left?
+	bne.s	.NotOver			; If so, branch
+
+	move.b	specStageFlags.w,d0		; Are we in temporary or time attack mode?
+	andi.b	#3,d0
+	beq.s	.NotOver			; If not, branch
+	move.b	#1,stageOver			; Stage is now over
+
+.NotOver:
+	tst.b	stageOver			; Is the stage over?
+	bne.s	.Exit				; If so, branch
+	tst.b	gotTimeStone			; Did we get the time stone?
+	beq.s	.End				; If not, branch
+
+	moveq	#0,d0				; Mark time stone as retrieved
+	move.b	specStageID.w,d0
+	bset	d0,timeStonesSub.w
+
+.Exit:
+	bset	#0,GASUBFLAG.w			; Mark stage as over
+
+.End:
+	rts
+
+	else
 	org	$10000
 
 	move.l	#IRQ1,_LEVEL1+2.w		; Set graphics interrupt handler
@@ -367,6 +464,8 @@ MainLoop:
 	move.l	d0,GACOMSTATC.w
 	rts
 
+	endif
+
 ; -------------------------------------------------------------------------
 ; Check for UFO presence
 ; -------------------------------------------------------------------------
@@ -443,9 +542,13 @@ LoadMap_SS3:
 	lea	StampMap_SS3,a1
 	bsr.s	LoadStamps
 
+	if def(SSMDPORT)
+	rts
+	else
 	lea	Stamps_SS3_2,a0			; Load secondary stamps
 	lea	WORDRAM2M+$10000,a1
 	bra.w	KosDec
+	endif
 
 ; -------------------------------------------------------------------------
 
@@ -484,13 +587,19 @@ LoadMap_SS8:
 ; -------------------------------------------------------------------------
 
 LoadStamps:
+	if def(SSMDPORT)
+	movea.l	a1,a0				; Load stamp map only (the floor isn't rendered)
+	lea	STAMPRAM,a1
+	bra.w	KosDec
+	else
 	move.l	a1,-(sp)			; Load stamps
 	lea	WORDRAM2M+$200,a1
 	bsr.w	KosDec
 	
 	movea.l	(sp)+,a0			; Load stamp map
-	lea	WORDRAM2M+STAMPMAP,a1
+	lea	STAMPRAM,a1
 	bra.w	KosDec
+	endif
 
 ; -------------------------------------------------------------------------
 ; Decompress Kosinski data into RAM
@@ -746,7 +855,11 @@ Set3DObjectDraw:
 
 Draw3DObjects:
 	move.l	#zBuffer,d4			; Get Z buffer
+	if def(SSMDPORT)
+	move.l	#$FFFF0000,d5			; Objects live in the top 32KB of Work RAM
+	else
 	move.l	#SprMap3DSection,d5		; Use data from 3D sprite mappings section
+	endif
 	moveq	#ZBUFSLOTS*2,d6			; Number of slots per level
 	moveq	#ZBUFLEVELS-1,d7		; Number of levels
 
@@ -1253,7 +1366,7 @@ AnimateStamps:
 	andi.w	#7,hazardAnimFrame
 	
 	movea.l	hazardAnimData,a0		; Get hazard animation data
-	lea	WORDRAM2M+STAMPMAP,a1		; Get stamp map
+	lea	STAMPRAM,a1		; Get stamp map
 	move.w	hazardAnimFrame,d1		; Get frame ID
 	move.w	hazardAnimCount,d7		; Get number of stamps to animate
 
@@ -1266,7 +1379,7 @@ AnimateStamps:
 
 .Anim2:
 	movea.l	fanAnimData,a0			; Get fan animation data
-	lea	WORDRAM2M+STAMPMAP,a1		; Get stamp map
+	lea	STAMPRAM,a1		; Get stamp map
 	move.w	fanAnimFrame,d1			; Get frame ID
 	move.w	fanAnimCount,d7			; Get number of stamps to animate
 
@@ -1487,7 +1600,7 @@ GetStampAtPos:
 	lsl.w	#8,d3
 	add.w	d3,d2
 
-	lea	WORDRAM2M+STAMPMAP,a6		; Get raw stamp ID
+	lea	STAMPRAM,a6		; Get raw stamp ID
 	move.w	(a6,d2.w),d2
 	move.w	d2,d1				; Copy raw stamp ID
 	andi.w	#$7FF,d2			; Mask out flags
@@ -2096,6 +2209,7 @@ WaitUpdateStart:
 	bne.s	WaitUpdateStart			; If not, wait
 	rts
 
+	if def(SSMDPORT)=0
 ; -------------------------------------------------------------------------
 ; Give Main CPU Word RAM access
 ; -------------------------------------------------------------------------
@@ -2118,6 +2232,8 @@ WaitWordRAMAccess:
 	btst	#1,GAMEMMODE.w			; Do we have Word RAM access?
 	beq.s	WaitWordRAMAccess		; If not, wait
 	rts
+
+	endif
 
 ; -------------------------------------------------------------------------
 ; Load stamp map
@@ -2269,6 +2385,7 @@ Set3DSpritePos:
 	move.w	d3,oSprY(a0)
 	rts
 
+	if def(SSMDPORT)=0
 ; -------------------------------------------------------------------------
 ; Generate trace table
 ; -------------------------------------------------------------------------
@@ -2433,6 +2550,8 @@ GenGfxTraceTbl:
 	dbf	d7,.GenLoop			; Loop until entire table is generated
 	rts
 
+	endif
+
 ; -------------------------------------------------------------------------
 ; Initialize graphics operation
 ; -------------------------------------------------------------------------
@@ -2440,11 +2559,13 @@ GenGfxTraceTbl:
 InitGfxOperation:
 	lea	gfxVars,a1			; Graphics operations variables
 	
+	if def(SSMDPORT)=0
 	move.w	#%110,GASTAMPSIZE.w		; 32x32 stamps, 4096x4096 map, not repeated
 	move.w	#IMGHTILE-1,GAIMGVCELL.w	; Height in tiles
 	move.w	#IMGBUFFER/4,GAIMGSTART.w	; Image buffer address
 	move.w	#0,GAIMGOFFSET.w		; Image buffer offset
 	move.w	#IMGWIDTH,GAIMGHDOT.w		; Image buffer width
+	endif
 	
 	move.w	#$80,gfxFOV(a1)			; Set FOV
 	move.w	#-$40,gfxCenter(a1)		; Set center point
@@ -2485,6 +2606,7 @@ GetGfxSines:
 
 	rts
 
+	if def(SSMDPORT)=0
 ; -------------------------------------------------------------------------
 ; Run graphics operation
 ; -------------------------------------------------------------------------
@@ -2496,6 +2618,8 @@ RunGfxOperation:
 	move.w	#IMGHEIGHT,GAIMGVDOT.w		; Image buffer height
 	move.w	#TRACETBL/4,GAIMGTRACE.w	; Set trace table and start operation
 	rts
+
+	endif
 
 ; -------------------------------------------------------------------------
 ; Get sine or cosine of a value
@@ -2558,14 +2682,18 @@ SineTable:
 	
 ; -------------------------------------------------------------------------
 	
+	if def(SSMDPORT)=0
 	align	SpecStageData, $FF
 	incbin	"Special Stage/Stage Data.bin"
+	endif
 
 ; -------------------------------------------------------------------------
 ; 3D sprite mappings section
 ; -------------------------------------------------------------------------
 
+	if def(SSMDPORT)=0
 	align	PRGRAM+$30000, $FF
+	endif
 SprMap3DSection:
 
 SonicArt:
@@ -2596,8 +2724,10 @@ MapSpr_UFOShoes:
 ; Variables
 ; -------------------------------------------------------------------------
 
+	if def(SSMDPORT)=0
 	align	VARSSTART, $FF
 	dcb.b	VARSLEN, $FF
+	endif
 
 ; -------------------------------------------------------------------------
 ; Maps

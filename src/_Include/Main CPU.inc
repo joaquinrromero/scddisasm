@@ -90,7 +90,11 @@ SUBWORDRAM2M	EQU	$080000			; MCD Sub CPU address for Word RAM (2M)
 SUBWORDRAM1M	EQU	$0C0000			; MCD Sub CPU address for Word RAM (1M/1M)
 
 ; Mega CD gate array
+	if def(SSMDPORT)
+GATEARRAY	EQU	$FFFF8000			; Gate array (MD port: plain RAM block)
+	else
 GATEARRAY	EQU	$A12000			; Gate array
+	endif
 GAIRQ2		EQU	GATEARRAY+$0000		; IRQ2 send
 GARESET		EQU	GATEARRAY+$0001		; Reset
 GAPROTECT	EQU	GATEARRAY+$0002		; Write protection

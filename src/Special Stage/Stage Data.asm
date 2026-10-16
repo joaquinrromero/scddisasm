@@ -4,13 +4,16 @@
 ; Special stage data
 ; -------------------------------------------------------------------------
 
+	if def(SSMDPORT)=0
 	include	"_Include/Common.inc"
 	include	"_Include/Main CPU.inc"
 	include	"_Include/Main CPU Variables.inc"
 	include	"Special Stage/_Global Variables.inc"
+	endif
 
 ; -------------------------------------------------------------------------
 
+	if def(SSMDPORT)=0
 	org	SpecStageData
 	
 	dc.l	SS1Data
@@ -29,13 +32,16 @@
 	dc.w	SS7DataEnd-SS7Data
 	dc.l	SS8Data
 	dc.w	SS8DataEnd-SS8Data
+	endif
 	
 ; -------------------------------------------------------------------------
 ; Special stage 1
 ; -------------------------------------------------------------------------
 
 SS1Data:
+	if def(SSMDPORT)=0
 	obj	(WORKRAMFILE-$100)+SpecStgDataCopy
+	endif
 
 Pal_SS1:
 	incbin	"Special Stage/Data/Stage 1/Palette.bin"
@@ -68,7 +74,9 @@ Map_SS1BGB2:
 	incbin	"Special Stage/Data/Stage 1/Background Chunk B2.kos"
 	even
 
+	if def(SSMDPORT)=0
 	objend
+	endif
 SS1DataEnd:
 	
 ; -------------------------------------------------------------------------
@@ -76,7 +84,9 @@ SS1DataEnd:
 ; -------------------------------------------------------------------------
 	
 SS2Data:
+	if def(SSMDPORT)=0
 	obj	(WORKRAMFILE-$100)+SpecStgDataCopy
+	endif
 
 Pal_SS2:
 	incbin	"Special Stage/Data/Stage 2/Palette.bin"
@@ -113,7 +123,9 @@ Map_SS2BGB3:
 	incbin	"Special Stage/Data/Stage 2/Background Chunk B3.kos"
 	even
 
+	if def(SSMDPORT)=0
 	objend
+	endif
 SS2DataEnd:
 
 ; -------------------------------------------------------------------------
@@ -121,7 +133,9 @@ SS2DataEnd:
 ; -------------------------------------------------------------------------
 
 SS3Data:
+	if def(SSMDPORT)=0
 	obj	(WORKRAMFILE-$100)+SpecStgDataCopy
+	endif
 
 Pal_SS3:
 	incbin	"Special Stage/Data/Stage 3/Palette.bin"
@@ -166,7 +180,9 @@ Map_SS3BGB5:
 	incbin	"Special Stage/Data/Stage 3/Background Chunk B5.kos"
 	even
 
+	if def(SSMDPORT)=0
 	objend
+	endif
 SS3DataEnd:
 
 ; -------------------------------------------------------------------------
@@ -174,7 +190,9 @@ SS3DataEnd:
 ; -------------------------------------------------------------------------
 
 SS4Data:
+	if def(SSMDPORT)=0
 	obj	(WORKRAMFILE-$100)+SpecStgDataCopy
+	endif
 
 Pal_SS4:
 	incbin	"Special Stage/Data/Stage 4/Palette.bin"
@@ -223,7 +241,9 @@ Map_SS4BGB8:					; Unused
 	incbin	"Special Stage/Data/Stage 4/Background Chunk B8.bin"
 	even
 
+	if def(SSMDPORT)=0
 	objend
+	endif
 SS4DataEnd:
 
 ; -------------------------------------------------------------------------
@@ -231,7 +251,9 @@ SS4DataEnd:
 ; -------------------------------------------------------------------------
 
 SS5Data:
+	if def(SSMDPORT)=0
 	obj	(WORKRAMFILE-$100)+SpecStgDataCopy
+	endif
 
 Pal_SS5:
 	incbin	"Special Stage/Data/Stage 5/Palette.bin"
@@ -268,7 +290,9 @@ Map_SS5BGB3:
 	incbin	"Special Stage/Data/Stage 5/Background Chunk B3.kos"
 	even
 
+	if def(SSMDPORT)=0
 	objend
+	endif
 SS5DataEnd:
 
 ; -------------------------------------------------------------------------
@@ -276,7 +300,9 @@ SS5DataEnd:
 ; -------------------------------------------------------------------------
 
 SS6Data:
+	if def(SSMDPORT)=0
 	obj	(WORKRAMFILE-$100)+SpecStgDataCopy
+	endif
 
 Pal_SS6:
 	incbin	"Special Stage/Data/Stage 6/Palette.bin"
@@ -305,7 +331,9 @@ Map_SS6BGB1:
 	incbin	"Special Stage/Data/Stage 6/Background Chunk B1.bin"
 	even
 
+	if def(SSMDPORT)=0
 	objend
+	endif
 SS6DataEnd:
 
 ; -------------------------------------------------------------------------
@@ -313,7 +341,9 @@ SS6DataEnd:
 ; -------------------------------------------------------------------------
 
 SS7Data:
+	if def(SSMDPORT)=0
 	obj	(WORKRAMFILE-$100)+SpecStgDataCopy
+	endif
 
 Pal_SS7:
 	incbin	"Special Stage/Data/Stage 7/Palette.bin"
@@ -374,7 +404,9 @@ Map_SS7BGB9:
 	incbin	"Special Stage/Data/Stage 7/Background Chunk B9.kos"
 	even
 	
+	if def(SSMDPORT)=0
 	objend
+	endif
 SS7DataEnd:
 
 ; -------------------------------------------------------------------------
@@ -382,7 +414,9 @@ SS7DataEnd:
 ; -------------------------------------------------------------------------
 
 SS8Data:
+	if def(SSMDPORT)=0
 	obj	(WORKRAMFILE-$100)+SpecStgDataCopy
+	endif
 
 Pal_SS8:
 	incbin	"Special Stage/Data/Stage 8/Palette.bin"
@@ -399,7 +433,9 @@ Map_SS8BGB2:
 	incbin	"Special Stage/Data/Stage 8/Background Chunk B2.kos"
 	even
 
+	if def(SSMDPORT)=0
 	objend
+	endif
 SS8DataEnd:
 
 ; -------------------------------------------------------------------------

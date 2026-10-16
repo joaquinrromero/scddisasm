@@ -32,7 +32,14 @@ ufoCount	EQU	GACOMSTATB		; UFO count
 ; Word RAM
 ; -------------------------------------------------------------------------
 
+	if def(SSMDPORT)
+STAMPRAM	EQU	$00FF0000			; Stamp map (RAM, 32KB)
+SSVARS		EQU	$FFFF8100			; Special stage object/logic variables
+	rsset	$FFFFA600
+	else
+STAMPRAM	EQU	WORDRAM2M+STAMPMAP
 	rsset	WORDRAM2M+$1C000
+	endif
 subSprites	rs.b	$280			; Sprite buffer
 subSndQueue1	rs.b	1			; FM sound queue 1
 subSndQueue2	rs.b	1			; FM sound queue 2

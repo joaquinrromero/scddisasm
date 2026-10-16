@@ -4,6 +4,7 @@
 ; Special stage Main CPU program
 ; -------------------------------------------------------------------------
 
+	if def(SSMDPORT)=0
 	include	"_Include/Common.inc"
 	include	"_Include/Main CPU.inc"
 	include	"_Include/Main CPU Variables.inc"
@@ -12,6 +13,7 @@
 	include	"Special Stage/_Common.inc"
 	include	"Special Stage/_Global Variables.inc"
 	include	"Special Stage/Stage Data Labels.inc"
+	endif
 
 ; -------------------------------------------------------------------------
 ; Image buffer VRAM constants
@@ -24,9 +26,15 @@ IMGV1LEN	EQU	$2000			; Part 1 length
 ; Variables
 ; -------------------------------------------------------------------------
 
+	if def(SSMDPORT)
+	rsset	SSMAINVARS2
+	else
 	rsset	WORKRAM+$FF00B000
-VARSSTART	rs.b	0			; Start of variables
+	endif
+MainVarsStart	rs.b	0			; Start of variables
+	if def(SSMDPORT)=0
 stageImage	rs.b	IMGLENGTH		; Stage image buffer
+	endif
 sprites		rs.b	80*8			; Sprite buffer
 		rs.b	4
 splashArtLoad	rs.b	1			; Splash art load flag
@@ -56,7 +64,7 @@ vintCounter	rs.w	1			; V-INT counter
 savedSR		rs.w	1			; Saved status register
 extraPlayerCnt	rs.w	1			; Extra player count
 		rs.b	$56
-rngSeed		rs.l	1			; RNG seed
+mainRngSeed		rs.l	1			; RNG seed
 scrollOffset1	rs.l	1			; Background scroll offset 1
 scrollOffset2	rs.l	1			; Background scroll offset 2
 scrollOffset3	rs.l	1			; Background scroll offset 3
@@ -65,7 +73,7 @@ scrollOffset5	rs.l	1			; Background scroll offset 5
 scrollOffset6	rs.l	1			; Background scroll offset 6
 demoDataPtr	rs.l	1			; Demo data pointer
 		rs.b	$40
-VARSLEN		EQU	__rs-VARSSTART		; Size of variables area
+MainVarsLen		EQU	__rs-MainVarsStart		; Size of variables area
 
 lagCounter	rs.l	1			; Lag counter
 
@@ -73,9 +81,11 @@ lagCounter	rs.l	1			; Lag counter
 ; MMD header
 ; -------------------------------------------------------------------------
 
+	if def(SSMDPORT)=0
 	MMD	0, &
 		WORKRAMFILE, $9000, &
 		Start, 0, 0
+	endif
 
 ; -------------------------------------------------------------------------
 ; Program start
@@ -85,12 +95,16 @@ Start:
 	move.l	#VInterrupt,_LEVEL6+2.w		; Set V-INT address
 	move.l	#-1,lagCounter.w		; Disable lag counter
 	
+	if def(SSMDPORT)
+	jsr	SSInit				; Initialize the special stage logic (runs on the 68000 now)
+	else
 	bsr.w	WaitSubCPUStart			; Wait for the Sub CPU program to start
 	bsr.w	GiveWordRAMAccess		; Give Word RAM access
 	bsr.w	WaitSubCPUInit			; Wait for the Sub CPU program to finish initializing
+	endif
 	
-	lea	VARSSTART.w,a0			; Clear variables
-	move.w	#VARSLEN/4-1,d7
+	lea	MainVarsStart.w,a0			; Clear variables
+	move.w	#MainVarsLen/4-1,d7
 
 .ClearVars:
 	move.l	#0,(a0)+
@@ -136,12 +150,12 @@ Start:
 	
 	lea	stageHScroll1.w,a1		; Set stage buffer 1 horizontal scroll data
 	; BUG: d1 isn't set to 0 here
-	bsr.w	Fill128
-	bsr.w	Fill128
+	bsr.w	MainFill128
+	bsr.w	MainFill128
 	lea	stageHScroll2.w,a1		; Set stage buffer 2 horizontal scroll data
 	move.l	#$1000100,d1
-	bsr.w	Fill128
-	bsr.w	Fill128
+	bsr.w	MainFill128
+	bsr.w	MainFill128
 	
 	bsr.w	UpdateStage			; Render stage
 	bsr.w	WaitWordRAMAccess		; Wait for Word RAM access
@@ -156,7 +170,7 @@ Start:
 
 .DecompDemo:
 	lea	demoData.w,a1			; Load demo data
-	bsr.w	KosDec
+	bsr.w	MainKosDec
 	move.l	#demoData&$FFFFFF,demoDataPtr.w
 	
 	bsr.w	PrepFadeFromWhite		; Prepare to fade from white
@@ -250,6 +264,9 @@ MainLoop:
 
 .MarkDone:
 	bset	#0,GAMAINFLAG			; Tell Sub CPU the stage is over
+	if def(SSMDPORT)
+	bclr	#0,GASUBFLAG			; (no Sub CPU: it answers right away)
+	endif
 
 .WaitSubCPU:
 	btst	#0,GASUBFLAG			; Has the Sub CPU responded?
@@ -296,6 +313,9 @@ Results:
 	move.b	timeStonesSub,timeStones	; Save time stones retrieved
 	
 	bset	#0,GAMAINFLAG			; Tell Sub CPU the stage is over
+	if def(SSMDPORT)
+	bclr	#0,GASUBFLAG			; (no Sub CPU: it answers right away)
+	endif
 
 .WaitSubCPU:
 	btst	#0,GASUBFLAG			; Has the Sub CPU responded?
@@ -313,8 +333,8 @@ Results:
 	
 	bsr.w	GiveWordRAMAccess		; Give Word RAM access to the Sub CPU
 	
-	lea	VARSSTART.w,a0			; Clear variables
-	move.w	#VARSLEN/4-1,d7
+	lea	MainVarsStart.w,a0			; Clear variables
+	move.w	#MainVarsLen/4-1,d7
 
 .ClearVars:
 	move.l	#0,(a0)+
@@ -403,14 +423,30 @@ Results_MainLoop:
 
 ; -------------------------------------------------------------------------
 
+	if def(SSMDPORT)
+timeBonus	EQU	SSRWDATA+$00
+	else
 timeBonus:
 	dc.l	0				; Time bonus
+	endif
+	if def(SSMDPORT)
+ringBonus	EQU	SSRWDATA+$04
+	else
 ringBonus:
 	dc.l	0				; Ring bonus
+	endif
+	if def(SSMDPORT)
+scoreTallied	EQU	SSRWDATA+$08
+	else
 scoreTallied:
 	dc.b	0				; Score tallied flag
+	endif
+	if def(SSMDPORT)
+scrollDisable	EQU	SSRWDATA+$09
+	else
 scrollDisable:
 	dc.b	0				; Scroll disable flag
+	endif
 
 ; -------------------------------------------------------------------------
 ; Tally score
@@ -419,7 +455,7 @@ scrollDisable:
 TallyScore:
 	if REGION<>EUROPE
 		move.b	#FM_TALLY,d0		; Play tally sound
-		bsr.w	PlayFMSound
+		bsr.w	MainPlayFMSound
 	endif
 	moveq	#20,d0				; Add 20 points
 
@@ -595,8 +631,12 @@ LoadTimeStonePal:
 
 ; -------------------------------------------------------------------------
 
+	if def(SSMDPORT)
+timeStonePalDelay	EQU	SSRWDATA+$0A
+	else
 timeStonePalDelay:
 	dc.b	20				; Time stone palette load delay timer
+	endif
 	even
 
 ; -------------------------------------------------------------------------
@@ -854,12 +894,12 @@ DrawHUDBase:
 
 InitBGLineHScroll:
 	rept	$200/$80			; Set integer values
-		bsr.w	Fill128
+		bsr.w	MainFill128
 	endr
 
 	move.l	d2,d1				; Set fraction values
 	rept	$200/$80
-		bsr.w	Fill128
+		bsr.w	MainFill128
 	endr
 	rts
 
@@ -1089,8 +1129,8 @@ BGScroll_SS1Sect1:
 	asr.l	#1,d0				; Update crystals scroll offset
 	add.l	d0,scrollOffset1.w
 
-	lea	bgScrollMode(pc),a0		; Get background scroll direction
-	lea	ss1BGScrollShift(pc),a1		; Get background scroll shift intensity
+	lea	bgScrollMode,a0		; Get background scroll direction
+	lea	ss1BGScrollShift,a1		; Get background scroll shift intensity
 	tst.b	(a0)				; Are we shifting the background left?
 	bne.s	.ShiftLeft			; If so, branch
 
@@ -1125,8 +1165,8 @@ BGScroll_SS5Sect1:
 	bsr.w	GetScrollSpeed
 	add.l	d0,scrollOffset1.w
 
-	lea	bgScrollMode(pc),a0		; Get background scroll direction
-	lea	ss5BGScrollShift(pc),a1		; Get background scroll shift intensity
+	lea	bgScrollMode,a0		; Get background scroll direction
+	lea	ss5BGScrollShift,a1		; Get background scroll shift intensity
 	move.b	#0,(a0)				; Mark as not moving
 	btst	#2,scrollFlags.w		; Are we scrolling left?
 	beq.s	.NotLeft			; If not, branch
@@ -1282,13 +1322,26 @@ BGScroll_SS6Sect3:
 
 ; -------------------------------------------------------------------------
 
+	if def(SSMDPORT)
+ss1BGScrollShift	EQU	SSRWDATA+$0C
+	else
 ss1BGScrollShift:
 	dc.w	$100				; Stage 1 background scroll shift
+	endif
+	if def(SSMDPORT)
+ss5BGScrollShift	EQU	SSRWDATA+$0E
+ss6BGWaveTableOff	EQU	SSRWDATA+$0E
+	else
 ss5BGScrollShift:
 ss6BGWaveTableOff:
 	dc.w	0				; Stage 1 background scroll shift/stage 6 background scroll table offset
+	endif
+	if def(SSMDPORT)
+bgScrollMode	EQU	SSRWDATA+$10
+	else
 bgScrollMode:
 	dc.b	0				; Background scroll mode
+	endif
 	even
 
 ; -------------------------------------------------------------------------
@@ -1762,7 +1815,7 @@ PaletteCycle:
 ; -------------------------------------------------------------------------
 
 PalCycle_SS1:
-	lea	.Index(pc),a1			; Get and increment cycle index
+	lea	.Index,a1			; Get and increment cycle index
 	moveq	#8,d5
 	moveq	#0,d6
 	move.w	#1000,d7
@@ -1854,13 +1907,17 @@ PalCycle_SS1:
 	dc.b	$00, $60, $80, $A0, $C0, $E0, $C0, $A0, $40, $20, $00, $00, $00, $00, $00, $00
 	dc.b	$00, $40, $60, $80, $A0, $C0, $E0, $C0, $20, $00, $00, $00, $00, $00, $00, $00
 
+	if def(SSMDPORT)
+.Index	EQU	SSRWDATA+$12
+	else
 .Index:
 	dc.w	0				; Palette cycle index
+	endif
 
 ; -------------------------------------------------------------------------
 
 PalCycle_SS2:
-	lea	.Index(pc),a5			; Cycle
+	lea	.Index,a5			; Cycle
 	move.w	(a5),d0
 	addq.w	#2,(a5)
 	andi.w	#7,(a5)
@@ -1876,13 +1933,17 @@ PalCycle_SS2:
 	dc.w	$E00, $E60, $EA6, $ECA
 	dc.w	$E00, $E60, $EA6, $ECA
 
+	if def(SSMDPORT)
+.Index	EQU	SSRWDATA+$14
+	else
 .Index:
 	dc.w	0				; Palette cycle index
+	endif
 
 ; -------------------------------------------------------------------------
 
 PalCycle_SS3:
-	lea	.Index1(pc),a1			; Cycle 1
+	lea	.Index1,a1			; Cycle 1
 	moveq	#2,d5
 	moveq	#0,d6
 	moveq	#$2E,d7
@@ -1891,7 +1952,7 @@ PalCycle_SS3:
 	move.l	.Cycle1(pc,d0.w),$1A*2(a6)
 	move.l	.Cycle1+4(pc,d0.w),$1C*2(a6)
 
-	lea	.Timer(pc),a1			; Get and increment cycle 2 timer
+	lea	.Timer,a1			; Get and increment cycle 2 timer
 	moveq	#1,d5
 	moveq	#0,d6
 	moveq	#4,d7
@@ -1899,7 +1960,7 @@ PalCycle_SS3:
 	tst.w	d0				; Should we update cycle 2?
 	bne.s	.End				; If not, branch
 
-	lea	.Index2(pc),a1			; Cycle 2
+	lea	.Index2,a1			; Cycle 2
 	moveq	#2,d5
 	moveq	#0,d6
 	moveq	#$A,d7
@@ -1924,24 +1985,36 @@ PalCycle_SS3:
 	dc.w	$E00, $EC6, $E80, $E00
 	dc.w	$E80, $EC6
 
+	if def(SSMDPORT)
+.Index1	EQU	SSRWDATA+$16
+	else
 .Index1:
 	dc.w	0				; Palette cycle index 1
+	endif
+	if def(SSMDPORT)
+.Timer	EQU	SSRWDATA+$18
+	else
 .Timer:
 	dc.w	0				; Palette cycle 2 timer
+	endif
+	if def(SSMDPORT)
+.Index2	EQU	SSRWDATA+$1A
+	else
 .Index2:
 	dc.w	0				; Palette cycle index 2
+	endif
 
 ; -------------------------------------------------------------------------
 
 PalCycle_SS4:
-	lea	.Index1(pc),a5			; Cycle 1
+	lea	.Index1,a5			; Cycle 1
 	move.w	(a5),d0
 	addq.w	#2,(a5)
 	andi.w	#$18,d0
 	move.l	.Cycle1(pc,d0.w),$1A*2(a6)
 	move.l	.Cycle1+4(pc,d0.w),$1C*2(a6)
 
-	lea	.Timer(pc),a1			; Get and increment cycle 2 timer
+	lea	.Timer,a1			; Get and increment cycle 2 timer
 	moveq	#1,d5
 	moveq	#0,d6
 	moveq	#2,d7
@@ -1970,31 +2043,43 @@ PalCycle_SS4:
 	dc.w	$EC6, $EE8, $EEA, $EEC
 	dc.w	$EEE, $EEC, $EEA, $EE8
 
+	if def(SSMDPORT)
+.Index1	EQU	SSRWDATA+$1C
+	else
 .Index1:
 	dc.w	0				; Palette cycle index 1
+	endif
+	if def(SSMDPORT)
+.Timer	EQU	SSRWDATA+$1E
+	else
 .Timer:
 	dc.w	0				; Palette cycle 2 timer
+	endif
+	if def(SSMDPORT)
+.Index2	EQU	SSRWDATA+$20
+	else
 .Index2:
 	dc.w	0				; Palette cycle index 2
+	endif
 
 ; -------------------------------------------------------------------------
 
 PalCycle_SS5:
-	lea	.Index1(pc),a1			; Cycle 1
+	lea	.Index1,a1			; Cycle 1
 	moveq	#2,d5
 	moveq	#0,d6
 	moveq	#$C,d7
 	bsr.w	IncValue
 	move.w	.Cycle1(pc,d0.w),$1A*2(a6)
 
-	lea	.Index2(pc),a1			; Cycle 2
+	lea	.Index2,a1			; Cycle 2
 	moveq	#2,d5
 	moveq	#0,d6
 	moveq	#$32,d7
 	bsr.w	IncValue
 	move.w	.Cycle2(pc,d0.w),$2D*2(a6)
 
-	lea	.Index3(pc),a1			; Cycle 3
+	lea	.Index3,a1			; Cycle 3
 	moveq	#1,d5
 	moveq	#0,d6
 	moveq	#$33,d7
@@ -2002,7 +2087,7 @@ PalCycle_SS5:
 	andi.w	#$FFFE,d0
 	move.w	.Cycle3(pc,d0.w),$2E*2(a6)
 
-	lea	.Index4(pc),a1			; Cycle 4
+	lea	.Index4,a1			; Cycle 4
 	moveq	#1,d5
 	moveq	#0,d6
 	moveq	#$37,d7
@@ -2016,14 +2101,30 @@ PalCycle_SS5:
 
 ; -------------------------------------------------------------------------
 
+	if def(SSMDPORT)
+.Index1	EQU	SSRWDATA+$22
+	else
 .Index1:
 	dc.w	0				; Palette cycle index 1
+	endif
+	if def(SSMDPORT)
+.Index2	EQU	SSRWDATA+$24
+	else
 .Index2:
 	dc.w	0				; Palette cycle index 2
+	endif
+	if def(SSMDPORT)
+.Index3	EQU	SSRWDATA+$26
+	else
 .Index3:
 	dc.w	0				; Palette cycle index 3
+	endif
+	if def(SSMDPORT)
+.Index4	EQU	SSRWDATA+$28
+	else
 .Index4:
 	dc.w	0				; Palette cycle index 4
+	endif
 
 .Cycle1:
 	dc.w	$E20, $E40, $E60, $E80
@@ -2059,17 +2160,17 @@ PalCycle_SS5:
 ; -------------------------------------------------------------------------
 
 PalCycle_SS6:
-	lea	.Index1(pc),a1			; Cycle 1
+	lea	.Index1,a1			; Cycle 1
 	moveq	#2,d5
 	moveq	#0,d6
 	moveq	#$18,d7
 	bsr.w	IncValue
 	lea	.Cycle1(pc,d0.w),a1
 	lea	$21*2(a6),a2
-	bsr.w	Copy24
+	bsr.w	MainCopy24
 	move.w	(a1)+,(a2)+
 
-	lea	.Index2(pc),a1			; Cycle 2
+	lea	.Index2,a1			; Cycle 2
 	moveq	#2,d5
 	moveq	#0,d6
 	moveq	#$16,d7
@@ -2082,10 +2183,18 @@ PalCycle_SS6:
 
 ; -------------------------------------------------------------------------
 
+	if def(SSMDPORT)
+.Index1	EQU	SSRWDATA+$2A
+	else
 .Index1:
 	dc.w	0				; Palette cycle index 1
+	endif
+	if def(SSMDPORT)
+.Index2	EQU	SSRWDATA+$2C
+	else
 .Index2:
 	dc.w	0				; Palette cycle index 2
+	endif
 
 .Cycle1:
 	dc.w	$04E, $08E, $0CE, $4EA
@@ -2104,7 +2213,7 @@ PalCycle_SS6:
 ; -------------------------------------------------------------------------
 
 PalCycle_SS7:
-	lea	.Index(pc),a1			; Cycle
+	lea	.Index,a1			; Cycle
 	moveq	#1,d5
 	moveq	#0,d6
 	moveq	#$17,d7
@@ -2117,8 +2226,12 @@ PalCycle_SS7:
 
 ; -------------------------------------------------------------------------
 
+	if def(SSMDPORT)
+.Index	EQU	SSRWDATA+$2E
+	else
 .Index:
 	dc.w	0				; Palette cycle index
+	endif
 
 .Cycle:
 	dc.w	$C20, $C20, $E40, $E40
@@ -2140,6 +2253,9 @@ UpdateStage:
 	btst	#5,GASUBFLAG			; Are we exiting the stage manually?
 	bne.s	.End				; If so, branch
 
+	if def(SSMDPORT)
+	jsr	SSFrame				; Run one frame of the special stage logic
+	else
 	bset	#0,GACOMCMD2			; Tell Sub CPU to update the stage
 
 .WaitSubCPU:
@@ -2151,6 +2267,7 @@ UpdateStage:
 .WaitSubCPU2:
 	tst.b	GACOMSTAT2			; Has the Sub CPU responded?
 	bne.s	.WaitSubCPU2			; If not, wait
+	endif
 
 .End:
 	rts
@@ -2159,6 +2276,11 @@ UpdateStage:
 ; Give Sub CPU Word RAM access
 ; -------------------------------------------------------------------------
 
+	if def(SSMDPORT)
+GiveWordRAMAccess:
+WaitWordRAMAccess:
+	rts
+	else
 GiveWordRAMAccess:
 	btst	#0,GASUBFLAG			; Is the stage over?
 	bne.s	.End				; If so, branch
@@ -2190,6 +2312,8 @@ WaitWordRAMAccess:
 ; -------------------------------------------------------------------------
 ; Wait for the Sub CPU program to start
 ; -------------------------------------------------------------------------
+
+	endif
 
 WaitSubCPUStart:
 	btst	#7,GASUBFLAG			; Has the Sub CPU program started?
@@ -2569,10 +2693,10 @@ FadeFromWhite:
 ;	d3.w - Sine/cosine of value
 ; -------------------------------------------------------------------------
 
-GetCosine:
+MainGetCosine:
 	addi.w	#$80,d3				; Offset value for cosine
 
-GetSine:
+MainGetSine:
 	andi.w	#$1FF,d3			; Keep within range
 	move.w	d3,d4
 	btst	#7,d3				; Is the value the 2nd or 4th quarters of the sinewave?
@@ -2582,7 +2706,7 @@ GetSine:
 .NoInvert:
 	andi.w	#$7F,d4				; Get sine/cosine value
 	add.w	d4,d4
-	move.w	SineTable(pc,d4.w),d4
+	move.w	MainSineTable(pc,d4.w),d4
 
 	btst	#8,d3				; Was the input value in the 2nd half of the sinewave?
 	beq.s	.SetValue			; If not, branch
@@ -2594,7 +2718,7 @@ GetSine:
 
 ; -------------------------------------------------------------------------
 
-SineTable:
+MainSineTable:
 	dc.w	$0000, $0003, $0006, $0009, $000C, $000F, $0012, $0016
 	dc.w	$0019, $001C, $001F, $0022, $0025, $0028, $002B, $002F
 	dc.w	$0032, $0035, $0038, $003B, $003E, $0041, $0044, $0047
@@ -2657,7 +2781,7 @@ SubCPUCmd:
 ;	d0.b - Sound ID
 ; -------------------------------------------------------------------------
 
-PlayFMSound:
+MainPlayFMSound:
 	bsr.w	StopZ80				; Stop the Z80
 	tst.b	FMDrvQueue1+1			; Is queue 1 full?
 	bne.s	.CheckQueue2			; If so, branch
@@ -2765,10 +2889,18 @@ DrawExtraPlayers:
 	dc.b	$49, $48			; Icon 4
 	dc.b	$4C, $4B			; Icon 5
 
+	if def(SSMDPORT)
+.AnimFrame	EQU	SSRWDATA+$30
+	else
 .AnimFrame:
 	dc.w	0				; Animation frame
+	endif
+	if def(SSMDPORT)
+.AnimTimer	EQU	SSRWDATA+$32
+	else
 .AnimTimer:
 	dc.w	0				; Animation timer
+	endif
 
 ; -------------------------------------------------------------------------
 ; Draw results time bonus
@@ -2921,8 +3053,12 @@ DrawResultsNum:
 
 ; -------------------------------------------------------------------------
 
+	if def(SSMDPORT)
+gotLeadDigit	EQU	SSRWDATA+$34
+	else
 gotLeadDigit:
 	dc.b	0				; Leading digit found flag
+	endif
 	even
 
 ; -------------------------------------------------------------------------
@@ -3134,69 +3270,69 @@ NumTilesLower:
 ;	a1.l - Pointer to destination buffer
 ; -------------------------------------------------------------------------
 
-Fill128:
+MainFill128:
 	move.l	d1,(a1)+
-Fill124:
+MainFill124:
 	move.l	d1,(a1)+
-Fill120:
+MainFill120:
 	move.l	d1,(a1)+
-Fill116:
+MainFill116:
 	move.l	d1,(a1)+
-Fill112:
+MainFill112:
 	move.l	d1,(a1)+
-Fill108:
+MainFill108:
 	move.l	d1,(a1)+
-Fill104:
+MainFill104:
 	move.l	d1,(a1)+
-Fill100:
+MainFill100:
 	move.l	d1,(a1)+
-Fill96:
+MainFill96:
 	move.l	d1,(a1)+
-Fill92:
+MainFill92:
 	move.l	d1,(a1)+
-Fill88:
+MainFill88:
 	move.l	d1,(a1)+
-Fill84:
+MainFill84:
 	move.l	d1,(a1)+
-Fill80:
+MainFill80:
 	move.l	d1,(a1)+
-Fill76:
+MainFill76:
 	move.l	d1,(a1)+
-Fill72:
+MainFill72:
 	move.l	d1,(a1)+
-Fill68:
+MainFill68:
 	move.l	d1,(a1)+
-Fill64:
+MainFill64:
 	move.l	d1,(a1)+
-Fill60:
+MainFill60:
 	move.l	d1,(a1)+
-Fill56:
+MainFill56:
 	move.l	d1,(a1)+
-Fill52:
+MainFill52:
 	move.l	d1,(a1)+
-Fill48:
+MainFill48:
 	move.l	d1,(a1)+
-Fill44:
+MainFill44:
 	move.l	d1,(a1)+
-Fill40:
+MainFill40:
 	move.l	d1,(a1)+
-Fill36:
+MainFill36:
 	move.l	d1,(a1)+
-Fill32:
+MainFill32:
 	move.l	d1,(a1)+
-Fill28:
+MainFill28:
 	move.l	d1,(a1)+
-Fill24:
+MainFill24:
 	move.l	d1,(a1)+
-Fill20:
+MainFill20:
 	move.l	d1,(a1)+
-Fill16:
+MainFill16:
 	move.l	d1,(a1)+
-Fill12:
+MainFill12:
 	move.l	d1,(a1)+
-Fill8:
+MainFill8:
 	move.l	d1,(a1)+
-Fill4:
+MainFill4:
 	move.l	d1,(a1)+
 	rts
 
@@ -3205,20 +3341,22 @@ Fill4:
 ; -------------------------------------------------------------------------
 
 GetSubCPUData:
+	if def(SSMDPORT)=0
 	lea	WORDRAM2M+IMGBUFFER,a1		; Rendered image in Word RAM
 	lea	stageImage.w,a2			; Destination buffer
 	move.w	#(IMGLENGTH/$800)-1,d7		; Number of $800 byte chunks to copy
 
 .CopyChunks:
 	rept	$800/$80			; Copy $800 bytes
-		bsr.s	Copy128
+		bsr.s	MainCopy128
 	endr
 	dbf	d7,.CopyChunks
+	endif
 
 	lea	subSprites,a1			; Copy sprite data
 	lea	sprites.w,a2
 	rept	$280/$80
-		bsr.s	Copy128
+		bsr.s	MainCopy128
 	endr
 
 	move.b	subSplashLoad,splashArtLoad.w	; Get splash art load flag
@@ -3229,7 +3367,7 @@ GetSubCPUData:
 	lea	subSonicArtBuf,a1		; Copy Sonic art
 	lea	sonicArtBuf.w,a2
 	rept	$300/$80
-		bsr.s	Copy128
+		bsr.s	MainCopy128
 	endr
 
 	bra.w	PlaySubFMSounds			; Play FM sounds played by Sub CPU
@@ -3242,69 +3380,69 @@ GetSubCPUData:
 ;	a2.l - Pointer to destination buffer
 ; -------------------------------------------------------------------------
 
-Copy128:
+MainCopy128:
 	move.l	(a1)+,(a2)+
-Copy124:
+MainCopy124:
 	move.l	(a1)+,(a2)+
-Copy120:
+MainCopy120:
 	move.l	(a1)+,(a2)+
-Copy116:
+MainCopy116:
 	move.l	(a1)+,(a2)+
-Copy112:
+MainCopy112:
 	move.l	(a1)+,(a2)+
-Copy108:
+MainCopy108:
 	move.l	(a1)+,(a2)+
-Copy104:
+MainCopy104:
 	move.l	(a1)+,(a2)+
-Copy100:
+MainCopy100:
 	move.l	(a1)+,(a2)+
-Copy96:
+MainCopy96:
 	move.l	(a1)+,(a2)+
-Copy92:
+MainCopy92:
 	move.l	(a1)+,(a2)+
-Copy88:
+MainCopy88:
 	move.l	(a1)+,(a2)+
-Copy84:
+MainCopy84:
 	move.l	(a1)+,(a2)+
-Copy80:
+MainCopy80:
 	move.l	(a1)+,(a2)+
-Copy76:
+MainCopy76:
 	move.l	(a1)+,(a2)+
-Copy72:
+MainCopy72:
 	move.l	(a1)+,(a2)+
-Copy68:
+MainCopy68:
 	move.l	(a1)+,(a2)+
-Copy64:
+MainCopy64:
 	move.l	(a1)+,(a2)+
-Copy60:
+MainCopy60:
 	move.l	(a1)+,(a2)+
-Copy56:
+MainCopy56:
 	move.l	(a1)+,(a2)+
-Copy52:
+MainCopy52:
 	move.l	(a1)+,(a2)+
-Copy48:
+MainCopy48:
 	move.l	(a1)+,(a2)+
-Copy44:
+MainCopy44:
 	move.l	(a1)+,(a2)+
-Copy40:
+MainCopy40:
 	move.l	(a1)+,(a2)+
-Copy36:
+MainCopy36:
 	move.l	(a1)+,(a2)+
-Copy32:
+MainCopy32:
 	move.l	(a1)+,(a2)+
-Copy28:
+MainCopy28:
 	move.l	(a1)+,(a2)+
-Copy24:
+MainCopy24:
 	move.l	(a1)+,(a2)+
-Copy20:
+MainCopy20:
 	move.l	(a1)+,(a2)+
-Copy16:
+MainCopy16:
 	move.l	(a1)+,(a2)+
-Copy12:
+MainCopy12:
 	move.l	(a1)+,(a2)+
-Copy8:
+MainCopy8:
 	move.l	(a1)+,(a2)+
-Copy4:
+MainCopy4:
 	move.l	(a1)+,(a2)+
 	rts
 
@@ -3312,12 +3450,12 @@ Copy4:
 ; Get a random number
 ; -------------------------------------------------------------------------
 ; RETURNS:
-;	d0.l - Random number
+;	d0.l - MainRandom number
 ; -------------------------------------------------------------------------
 
-Random:
+MainRandom:
 	move.l	d1,-(sp)
-	move.l	rngSeed.w,d1			; Get RNG seed
+	move.l	mainRngSeed.w,d1			; Get RNG seed
 	bne.s	.GotSeed			; If it's set, branch
 	move.l	#$2A6D365A,d1			; Reset RNG seed otherwise
 
@@ -3332,7 +3470,7 @@ Random:
 	add.w	d1,d0
 	move.w	d0,d1
 	swap	d1
-	move.l	d1,rngSeed.w			; Update RNG seed
+	move.l	d1,mainRngSeed.w			; Update RNG seed
 	move.l	(sp)+,d1
 	rts
 
@@ -3344,14 +3482,14 @@ Random:
 ;	a1.l - Destination buffer pointer
 ; -------------------------------------------------------------------------
 
-KosDec:
+MainKosDec:
 	subq.l	#2,sp				; Allocate 2 bytes on the stack
 	move.b	(a0)+,1(sp)
 	move.b	(a0)+,(sp)
 	move.w	(sp),d5				; Get first description field
 	moveq	#$F,d4				; Set to loop for 16 bits
 
-KosDec_Loop:
+MainKosDec_Loop:
 	lsr.w	#1,d5				; Shift bit into the C flag
 	move	sr,d6
 	dbf	d4,.ChkBit
@@ -3362,14 +3500,14 @@ KosDec_Loop:
 
 .ChkBit:
 	move	d6,ccr				; Was the bit set?
-	bcc.s	KosDec_RLE			; If not, branch
+	bcc.s	MainKosDec_RLE			; If not, branch
 
 	move.b	(a0)+,(a1)+			; Copy byte as is
-	bra.s	KosDec_Loop
+	bra.s	MainKosDec_Loop
 
 ; -------------------------------------------------------------------------
 
-KosDec_RLE:
+MainKosDec_RLE:
 	moveq	#0,d3
 	lsr.w	#1,d5				; Get next bit
 	move	sr,d6
@@ -3381,7 +3519,7 @@ KosDec_RLE:
 
 .ChkBit:
 	move	d6,ccr				; Was the bit set?
-	bcs.s	KosDec_SeparateRLE		; If yes, branch
+	bcs.s	MainKosDec_SeparateRLE		; If yes, branch
 
 	lsr.w	#1,d5				; Shift bit into the X flag
 	dbf	d4,.Loop
@@ -3404,11 +3542,11 @@ KosDec_RLE:
 	addq.w	#1,d3				; Increment repeat count
 	moveq	#$FFFFFFFF,d2
 	move.b	(a0)+,d2			; Calculate offset
-	bra.s	KosDec_RLELoop
+	bra.s	MainKosDec_RLELoop
 
 ; -------------------------------------------------------------------------
 
-KosDec_SeparateRLE:
+MainKosDec_SeparateRLE:
 	move.b	(a0)+,d0			; Get first byte
 	move.b	(a0)+,d1			; Get second byte
 	moveq	#$FFFFFFFF,d2
@@ -3416,29 +3554,29 @@ KosDec_SeparateRLE:
 	lsl.w	#5,d2
 	move.b	d0,d2				; Calculate offset
 	andi.w	#7,d1				; Does a third byte need to be read?
-	beq.s	KosDec_SeparateRLE2		; If yes, branch
+	beq.s	MainKosDec_SeparateRLE2		; If yes, branch
 	move.b	d1,d3				; Copy repeat count
 	addq.w	#1,d3				; Increment
 
-KosDec_RLELoop:
+MainKosDec_RLELoop:
 	move.b	(a1,d2.w),d0			; Copy appropriate byte
 	move.b	d0,(a1)+			; Repeat
-	dbf	d3,KosDec_RLELoop
-	bra.s	KosDec_Loop
+	dbf	d3,MainKosDec_RLELoop
+	bra.s	MainKosDec_Loop
 
 ; -------------------------------------------------------------------------
 
-KosDec_SeparateRLE2:
+MainKosDec_SeparateRLE2:
 	move.b	(a0)+,d1
-	beq.s	KosDec_Done			; 0 indicates end of compressed data
+	beq.s	MainKosDec_Done			; 0 indicates end of compressed data
 	cmpi.b	#1,d1
-	beq.w	KosDec_Loop			; 1 indicates new description to be read
+	beq.w	MainKosDec_Loop			; 1 indicates new description to be read
 	move.b	d1,d3				; Otherwise, copy repeat count
-	bra.s	KosDec_RLELoop
+	bra.s	MainKosDec_RLELoop
 
 ; -------------------------------------------------------------------------
 
-KosDec_Done:
+MainKosDec_Done:
 	addq.l	#2,sp				; Deallocate the 2 bytes
 	rts
 
@@ -3592,6 +3730,19 @@ ReadController:
 	move.b	d1,(a5)+			; Store pressed buttons
 	and.b	d1,d0				; Store tapped buttons
 	move.b	d0,(a5)+
+	if def(SSMDPORT)
+	move.b	d0,d2				; Was A or Start just pressed?
+	andi.b	#$C0,d2
+	beq.s	.NoNextStage			; If not, branch
+	move.b	d1,d2				; Are both A and Start held?
+	andi.b	#$C0,d2
+	cmpi.b	#$C0,d2
+	bne.s	.NoNextStage			; If not, branch
+	jmp	SSNextStage			; A+Start: go to the next special stage
+
+.NoNextStage:
+	tst.b	d0
+	endif
 	bpl.s	.End				; If the start button wasn't pressed, branch
 
 	btst	#7,paused.w			; Is pausing enabled?
@@ -3726,7 +3877,7 @@ DrawTilemaps:
 .Compressed:
 	movem.l	d0-d7,-(sp)			; Decompress the tilemap
 	lea	mapKosBuffer.w,a1
-	bsr.w	KosDec
+	bsr.w	MainKosDec
 	movem.l	(sp)+,d0-d7
 
 	lea	mapKosBuffer.w,a1		; Draw the decompressed tilemap
@@ -4801,7 +4952,9 @@ Map_SS6BGB2:
 ; Pad up to stage data in Word RAM
 ; -------------------------------------------------------------------------
 
+	if def(SSMDPORT)=0
 	align	(WORKRAMFILE-$100)+SpecStgDataCopy, $FF
+	endif
 
 ; -------------------------------------------------------------------------
 
