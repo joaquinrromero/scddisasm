@@ -8,9 +8,11 @@
 ; MMD header
 ; -------------------------------------------------------------------------
 
-	MMD	0, &
-		WORDRAM2M, 0, &
-		JmpTo_Start, JmpTo_HInt, JmpTo_VInt
+	if def(MDPORT)=0
+		MMD	0, &
+			WORDRAM2M, 0, &
+			JmpTo_Start, JmpTo_HInt, JmpTo_VInt
+	endif
 
 ; -------------------------------------------------------------------------
 ; Program start

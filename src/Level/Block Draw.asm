@@ -210,7 +210,7 @@ GetBlockDataAbsXY:
 	lsr.w	#5,d0
 	andi.w	#$7F,d0
 	add.w	d3,d0
-	move.l	#LevelChunks,d3
+	move.l	levelChunksPtr.w,d3
 	move.b	(a4,d0.w),d3
 	beq.s	.End				; If it's a blank chunk, branch out of here
 
@@ -255,7 +255,7 @@ GetBlockMetadata:
 	lsr.w	#5,d0
 	andi.w	#$7F,d0
 	add.w	d3,d0
-	move.l	#LevelChunks,d3
+	move.l	levelChunksPtr.w,d3
 	move.b	(a4,d0.w),d3
 
 	subq.b	#1,d3				; Get pointer to block metadata in the chunk

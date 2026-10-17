@@ -153,8 +153,7 @@ LevelStart:
 
 	bsr.w	PlayLevelMusic			; Play level music
 
-	moveq	#0,d0				; Get level PLCs
-	lea	LevelDataIndex,a2
+	bsr.w	GetLevelDataIndex		; Get level PLCs
 	moveq	#0,d0
 	move.b	(a2),d0
 	beq.s	.LoadStdPLCs
@@ -679,7 +678,9 @@ UnpauseMusic:
 ; -------------------------------------------------------------------------
 
 VInterrupt:
-	bset	#0,GAIRQ2			; Send Sub CPU IRQ2 request
+	if def(MDPORT)=0
+		bset	#0,GAIRQ2		; Send Sub CPU IRQ2 request
+	endif
 	movem.l	d0-a6,-(sp)			; Save registers
 
 	tst.b	vintRoutine.w			; Are we lagging?

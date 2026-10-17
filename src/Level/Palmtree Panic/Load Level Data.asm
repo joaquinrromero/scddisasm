@@ -9,8 +9,7 @@
 ; -------------------------------------------------------------------------
 
 LoadLevelData:
-	moveq	#0,d0				; Prepare level data index
-	lea	LevelDataIndex,a2
+	bsr.w	GetLevelDataIndex		; Get the level data index for the current time zone
 	move.l	a2,-(sp)
 
 	addq.l	#4,a2				; Skip over level art pointer (art is loaded in PLCs instead)
@@ -21,8 +20,8 @@ LoadLevelData:
 	lea	blockBuffer,a4
 	bsr.w	NemDecToRAM
 
-	movea.l	(a2)+,a0			; Skip over level chunks (chunks are uncompressed, and are referenced directly
-						; by collision and drawing routines)
+	move.l	(a2)+,levelChunksPtr.w		; Level chunks (uncompressed, referenced directly by collision and
+						; drawing routines through levelChunksPtr)
 
 	bsr.w	LoadLevelLayout			; Load level layout
 
@@ -49,6 +48,37 @@ LoadLevelData:
 
 .End:
 	rts
+
+; -------------------------------------------------------------------------
+; Get the level data index for the current time zone
+; -------------------------------------------------------------------------
+; RETURNS:
+;	a2.l - Level data index
+; -------------------------------------------------------------------------
+
+GetLevelDataIndex:
+	moveq	#0,d0
+	move.b	timeZone,d0			; Get time zone (past, present, future)
+	andi.w	#$7F,d0				; (bit 7 only means that we are time warping)
+	add.w	d0,d0
+	add.w	d0,d0
+	lea	LevelDataIndexes,a2
+	movea.l	(a2,d0.w),a2
+	rts
+
+; -------------------------------------------------------------------------
+; Level data index for each time zone
+; -------------------------------------------------------------------------
+; Every entry points to the data of the zone being assembled for now. Once
+; several time zones share one ROM, each entry gets its own index.
+; -------------------------------------------------------------------------
+
+LevelDataIndexes:
+	dc.l	LevelDataIndex			; Past
+	dc.l	LevelDataIndex			; Present
+	dc.l	LevelDataIndex			; Future
+
+; -------------------------------------------------------------------------
 
 ; -------------------------------------------------------------------------
 ; Load a level layout

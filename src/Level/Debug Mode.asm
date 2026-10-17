@@ -120,7 +120,9 @@ UpdateDebugMode:
 
 ; -------------------------------------------------------------------------
 
+	if def(MDPORT)=0				; (on the Mega Drive it lives in RAM: see MD Port/Main.asm)
 debugSpeed:
 	dc.l	$4000
+	endif
 
 ; -------------------------------------------------------------------------

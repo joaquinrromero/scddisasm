@@ -218,7 +218,7 @@ ObjSonic_GetChunkAtPos:
 	lsr.w	#8,d1
 	andi.w	#$7F,d1
 	add.w	d1,d0
-	move.l	#LevelChunks,d1
+	moveq	#0,d1				; (only the chunk ID in the low byte is used)
 	lea	levelLayout.w,a1
 	move.b	(a1,d0.w),d1
 	andi.b	#$7F,d1

@@ -174,7 +174,9 @@ DYNOBJCOUNT		EQU	(dynObjectsEnd-dynObjects)/oSize
 fmSndQueue1 		rs.b	1		; FM sound queue 1
 fmSndQueue2 		rs.b	1		; FM sound queue 2
 fmSndQueue3 		rs.b	1		; FM sound queue 3
-			rs.b	$5F3
+			rs.b	1
+levelChunksPtr		rs.l	1		; Level chunk data pointer (set by LoadLevelData)
+			rs.b	$5F3-5
 gameMode 		rs.b	1		; Game mode
 			rs.b	1
 			
