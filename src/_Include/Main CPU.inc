@@ -471,8 +471,8 @@ DMACOPY macro src, dest, len
 ; -------------------------------------------------------------------------
 
 COPYIMG macro src, buf, part
-	local off, len, vadr
-	
+	local off, len, vadr, efbuf
+
 	if (\part)=0
 		off: = 0
 		len: = IMGV1LEN
@@ -480,8 +480,15 @@ COPYIMG macro src, buf, part
 		off: = IMGV1LEN
 		len: = IMGLENGTH-IMGV1LEN
 	endif
-	
-	vadr: = IMGVRAM+((\buf)*IMGLENGTH)
+
+	; MD port has a single stageImage buffer in RAM; ignore buf parameter
+	if def(SSMDPORT)
+		efbuf: = 0
+	else
+		efbuf: = (\buf)
+	endif
+
+	vadr: = IMGVRAM+(efbuf*IMGLENGTH)
 	if (\part)<>0
 		vadr: = vadr+IMGV1LEN
 	endif
