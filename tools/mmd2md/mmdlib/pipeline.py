@@ -72,12 +72,12 @@ def write_files(src, files, asm, asm_path):
     open(os.path.join(src, asm_path), 'w').write(asm)
 
 
-def roundtrip(repo, d, ana, names, blobs, S, dfs, opts, asm_path, max_iter=12, log=print):
+def roundtrip(repo, d, ana, names, blobs, S, dfs, opts, asm_path, max_iter=40, log=print, tag='rt'):
     """Emit + assemble (non-MD build) until the result is byte-identical to the MMD.
     Instructions asm68k cannot reproduce are emitted as raw bytes. Returns (ok, raw, asm, files, info)."""
     src = os.path.join(repo, 'src')
     raw = set()
-    tmp = os.path.join(repo, 'out', 'misc', 'roundtrip.bin')
+    tmp = os.path.join(repo, 'out', 'misc', 'roundtrip_%s.bin' % tag)
     os.makedirs(os.path.dirname(tmp), exist_ok=True)
     for it in range(max_iter):
         asm, files, info = emitmod.emit(d, ana, names, blobs, S, dfs, opts, raw)
@@ -114,3 +114,84 @@ def roundtrip(repo, d, ana, names, blobs, S, dfs, opts, asm_path, max_iter=12, l
             raw.add(item[0]); continue
         return False, raw, asm, files, info
     return False, raw, asm, files, info
+
+
+# ---------------------------------------------------------------------------- data store
+class Store:
+    """Keeps the data files of one zone folder unique: identical content is written once."""
+
+    def __init__(self, src, zone_dir):
+        self.src = src
+        self.by_sha = {}
+        self.by_path = {}
+        root = os.path.join(src, zone_dir, 'Data')
+        for sub in ('Art', 'Level', 'Collision', 'Objects', 'Palette', 'Mappings', 'Animations', 'Misc'):
+            for f in glob.glob(os.path.join(root, sub, '*')):
+                data = open(f, 'rb').read()
+                rel = os.path.relpath(f, src).replace('\\', '/')
+                sha = hashlib.sha1(data).hexdigest()
+                self.by_sha.setdefault(sha, rel); self.by_path[rel] = sha
+
+    def path_for(self, dd, sub, fname, data, act):
+        sha = hashlib.sha1(data).hexdigest()
+        if sha in self.by_sha:
+            return self.by_sha[sha]
+        stem, ext = os.path.splitext(fname)
+        cand = '%s/%s/%s' % (dd, sub, fname)
+        if cand in self.by_path and self.by_path[cand] != sha:
+            cand = '%s/%s/%s (%s)%s' % (dd, sub, stem, act, ext)
+            k = 2
+            while cand in self.by_path and self.by_path[cand] != sha:
+                cand = '%s/%s/%s (%s %d)%s' % (dd, sub, stem, act, k, ext); k += 1
+        self.by_sha[sha] = cand; self.by_path[cand] = sha
+        return cand
+
+
+# ---------------------------------------------------------------------------- ROM variables
+WRITERS = {'move', 'clr', 'add', 'addi', 'addq', 'sub', 'subi', 'subq', 'bset', 'bclr', 'bchg', 'neg', 'not', 'eor',
+           'eori', 'or', 'ori', 'and', 'andi', 'asl', 'asr', 'lsl', 'lsr', 'rol', 'ror', 'st', 'sf', 'tas', 'negx',
+           'roxl', 'roxr', 'neg', 'addx', 'subx', 'movem'}
+
+
+def find_romvars(ana, d):
+    """Absolute-long writes into the MMD's own address range (self-modifying data the cartridge cannot hold).
+    Returns {base: (size, [member addresses])}. Writes through pointers/PC-relative are found by emulation only."""
+    end = BASE + len(d)
+    w = {}
+    for a, (sz, m, o) in ana.code.items():
+        base = re.sub(r'\.[bwls]$', '', m)
+        if base not in WRITERS:
+            continue
+        last = o.split(',')[-1].strip()
+        mo = re.fullmatch(r'\$(2[0-3][0-9a-f]{4})\.l', last)
+        if mo and (',' in o or base in ('clr', 'st', 'sf', 'tas', 'neg', 'not', 'negx')):
+            v = int(mo.group(1), 16)
+            size = {'b': 1, 'w': 2, 'l': 4}.get(m[-1], 2) if '.' in m else 2
+            w[v] = max(w.get(v, 0), size)
+        if base in ('bset', 'bclr', 'bchg') and mo:
+            w[int(mo.group(1), 16)] = max(w.get(int(mo.group(1), 16), 0), 1)
+    # also variables that are *read* by address and overlap a written one (e.g. long written, word read)
+    for a, (sz, m, o) in ana.code.items():
+        for mo in re.finditer(r'\$(2[0-3][0-9a-f]{4})\.l', o):
+            v = int(mo.group(1), 16)
+            for b in list(w):
+                if b < v < b + w[b]:
+                    pass
+    groups = {}
+    cur = None
+    for v in sorted(w):
+        if cur and v < cur[0] + cur[1]:
+            cur[1] = max(cur[1], v + w[v] - cur[0]); cur[2].append(v)
+        else:
+            cur = [v, w[v], [v]]; groups[v] = cur
+    out = {}
+    for b, (base, size, members) in groups.items():
+        # include read-only aliases of the group (same bytes accessed with other sizes/offsets)
+        mem = set(members)
+        for a, (sz, m, o) in ana.code.items():
+            for mo in re.finditer(r'\$(2[0-3][0-9a-f]{4})\.l', o):
+                v = int(mo.group(1), 16)
+                if base <= v < base + size:
+                    mem.add(v)
+        out[base] = (size, sorted(mem))
+    return out
