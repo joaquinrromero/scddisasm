@@ -33,12 +33,12 @@ ObjCollapsePlatform_Init:
 	ori.b	#4,oSprFlags(a0)
 	move.b	#3,oPriority(a0)
 	move.w	#$44BE,oTile(a0)
-	lea	MapSpr_CollapsePlatform1(pc),a1
-	lea	ObjCollapsePlatform_Sizes1(pc),a2
+	movea.l	zMapCollapse1.w,a1
+	movea.l	zCollapseSizes1.w,a2
 	move.b	oSubtype(a0),d0
 	bpl.s	.SetMaps
-	lea	MapSpr_CollapsePlatform2(pc),a1
-	lea	ObjCollapsePlatform_Sizes2(pc),a2
+	movea.l	zMapCollapse2.w,a1
+	movea.l	zCollapseSizes2.w,a2
 
 .SetMaps:
 	move.l	a1,oMap(a0)
@@ -139,7 +139,7 @@ ObjCollapsePlatform_BreakUp_MultiRow:
 	lea	ObjCollapsePlatform_BreakUp_MultiRow(pc),a4
 
 .SkipThis:
-	lea	ObjCollapsePlatform_Sizes1(pc),a6
+	movea.l	zCollapseSizes1.w,a6
 	andi.w	#$F,d0
 	add.w	d0,d0
 	move.w	(a6,d0.w),d0
@@ -180,7 +180,7 @@ ObjCollapsePlatform_BreakUp_MultiRow:
 	ori.b	#4,oSprFlags(a1)
 	move.b	#3,oPriority(a1)
 	move.w	#$44BE,oTile(a1)
-	move.l	#MapSpr_CollapsePlatform3,oMap(a1)
+	move.l	zMapCollapse3.w,oMap(a1)
 	move.l	#$20000,oVar2C(a1)
 	move.b	oVar3F(a0),oID(a1)
 	move.b	oRoutine(a0),oRoutine(a1)
@@ -226,7 +226,7 @@ ObjCollapsePlatform_BreakUp_MultiRow:
 
 ObjCollapsePlatform_BreakUp_SingleRow:
 	move.b	oSubtype(a0),d2
-	lea	ObjCollapsePlatform_Sizes2(pc),a6
+	movea.l	zCollapseSizes2.w,a6
 	move.b	d2,d0
 	andi.w	#$1F,d0
 	add.w	d0,d0
@@ -278,7 +278,7 @@ ObjCollapsePlatform_BreakUp_SingleRow:
 	move.b	#3,oPriority(a1)
 	move.w	#$44BE,oTile(a1)
 	ori.b	#4,oSprFlags(a1)
-	move.l	#MapSpr_CollapsePlatform4,oMap(a1)
+	move.l	zMapCollapse4.w,oMap(a1)
 	move.l	#$20000,oVar2C(a1)
 	move.b	oVar3F(a0),oID(a1)
 	move.b	oRoutine(a0),oRoutine(a1)

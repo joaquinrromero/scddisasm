@@ -47,7 +47,7 @@ ObjCapsule_Init:
 	ori.b	#%00000100,oSprFlags(a0)	; Set sprite flags
 	addq.b	#2,oRoutine(a0)			; Next routine
 	move.b	#4,oPriority(a0)		; Set priority
-	move.l	#MapSpr_FlowerCapsule,oMap(a0)	; Set mappings
+	move.l	zMapFlowerCapsule.w,oMap(a0)	; Set mappings
 	move.w	#$2481,oTile(a0)		; Set base tile ID
 	move.b	#$20,oXRadius(a0)		; Set width
 	move.b	#$20,oWidth(a0)
@@ -58,7 +58,7 @@ ObjCapsule_Init:
 ; -------------------------------------------------------------------------
 
 ObjCapsule_Main:
-	lea	Ani_FlowerCapsule,a1		; Animate sprite
+	movea.l	zAniFlowerCapsule.w,a1		; Animate sprite
 	jsr	AnimateObject
 
 	lea	objPlayerSlot.w,a6		; Check if we have been hit
@@ -158,7 +158,8 @@ ObjCapsule_Explode:
 
 ObjCapsule_SpawnSeeds:
 	moveq	#0,d0				; Restore level palette
-	move.b	LevelPaletteID,d0
+	movea.l	zLevelPaletteID.w,a0
+	move.b	(a0),d0
 	move.l	d7,d6
 	jsr	LoadPalette
 	move.l	d6,d7
@@ -174,7 +175,7 @@ ObjCapsule_SpawnSeeds:
 	move.w	oX(a0),oX(a1)			; Set position
 	move.w	oY(a0),oY(a1)
 	move.b	#$A,oRoutine(a1)		; Set seed routine
-	move.l	#MapSpr_FlowerCapsule,oMap(a1)	; Set mappings
+	move.l	zMapFlowerCapsule.w,oMap(a1)	; Set mappings
 	move.w	#$2481,oTile(a1)		; Set base tile ID
 	move.b	#1,oAnim(a1)			; Set animation
 
@@ -207,7 +208,7 @@ ObjCapsule_SpawnSeeds:
 ; -------------------------------------------------------------------------
 
 ObjCapsule_Seed:
-	lea	Ani_FlowerCapsule,a1		; Animate sprite
+	movea.l	zAniFlowerCapsule.w,a1		; Animate sprite
 	jsr	AnimateObject
 
 	jsr	ObjMoveGrv			; Move

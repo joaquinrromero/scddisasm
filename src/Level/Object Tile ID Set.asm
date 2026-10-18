@@ -5,10 +5,10 @@
 ; -------------------------------------------------------------------------
 
 SetObjectTileID:
-	lea	ObjectTileIDs,a1
+	movea.l	zObjectTileIDs.w,a1
 	add.w	d0,d0
-	move.w	ObjectTileIDs(pc,d0.w),d4
-	lea	ObjectTileIDs(pc,d4.w),a2
+	move.w	(a1,d0.w),d4
+	lea	(a1,d4.w),a2
 	moveq	#0,d1
 	move.b	oSubtype2(a0),d1
 	add.w	d1,d1

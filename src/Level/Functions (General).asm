@@ -581,7 +581,7 @@ NemBCT_ShortCode_Loop:
 LoadPLC:
 	movem.l	a1-a2,-(sp)			; Save registers
 	
-	lea	PLCLists,a1			; Prepare PLC list index
+	movea.l	zPLCLists.w,a1			; Prepare PLC list index
 	add.w	d0,d0				; Get pointer to PLC list
 	move.w	(a1,d0.w),d0
 	lea	(a1,d0.w),a1
@@ -616,7 +616,7 @@ LoadPLC:
 InitPLC:
 	movem.l	a1-a2,-(sp)			; Save registers
 	
-	lea	PLCLists,a1			; Prepare PLC list index
+	movea.l	zPLCLists.w,a1			; Prepare PLC list index
 	add.w	d0,d0				; Get pointer to PLC list
 	move.w	(a1,d0.w),d0
 	lea	(a1,d0.w),a1
@@ -785,7 +785,7 @@ DecompPLC_Pop:
 ; -------------------------------------------------------------------------
 
 LoadPLCImm:
-	lea	PLCLists,a1			; Prepare PLC list index
+	movea.l	zPLCLists.w,a1			; Prepare PLC list index
 	add.w	d0,d0				; Get pointer to PLC list
 	move.w	(a1,d0.w),d0
 	lea	(a1,d0.w),a1

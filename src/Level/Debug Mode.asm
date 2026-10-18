@@ -48,7 +48,7 @@ UpdateDebugMode:
 	move.w	oX(a0),d3
 	jsr	GetLevelBlock
 	move.w	(a1),debugBlock
-	lea	DebugItemIndex,a2
+	movea.l	zDebugItemIndex.w,a2
 	btst	#6,p1CtrlTap.w
 	beq.s	.NoInc
 	moveq	#0,d1
@@ -120,7 +120,9 @@ UpdateDebugMode:
 
 ; -------------------------------------------------------------------------
 
+	if def(MDPORT)=0				; (on the Mega Drive it lives in RAM: see MD Port/Main.asm)
 debugSpeed:
 	dc.l	$4000
+	endif
 
 ; -------------------------------------------------------------------------

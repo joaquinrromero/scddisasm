@@ -63,7 +63,7 @@ ObjExplosion_Init:
 	andi.b	#$7F,oTile(a0)			; Set low priority
 
 .HighPriority:
-	move.l	#MapSpr_Explosion,oMap(a0)	; Set mappings
+	move.l	zMapExplosion.w,oMap(a0)	; Set mappings
 
 	bsr.s	ObjExplosion_MakePoints		; Make points object if it should
 

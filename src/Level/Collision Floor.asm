@@ -462,7 +462,7 @@ GetLevelBlock:
 	andi.w	#$7F,d1
 	add.w	d1,d0				; Combine the X and Y into a level layout data index value
 
-	move.l	#LevelChunks,d1			; Get base chunk data pointer
+	move.l	levelChunksPtr.w,d1		; Get base chunk data pointer
 	lea	levelLayout.w,a1		; Get chunk that the block we want is in
 	move.b	(a1,d0.w),d1
 	beq.s	.Blank				; If it's a blank chunk, branch
@@ -668,7 +668,7 @@ GetLevelBlock:
 
 FindLevelFloor:
 	bsr.w	GetLevelBlock			; Get block at position
-	cmpi.l	#LevelChunks,d1			; Is it a blank block?
+	cmp.l	levelChunksPtr.w,d1		; Is it a blank block?
 	beq.s	.IsBlank			; If so, branch
 
 	move.w	(a1),d0				; Get block ID
@@ -759,7 +759,7 @@ FindLevelFloor:
 
 FindLevelFloor2:
 	bsr.w	GetLevelBlock			; Get block at position
-	cmpi.l	#LevelChunks,d1			; Is it a blank block?
+	cmp.l	levelChunksPtr.w,d1		; Is it a blank block?
 	beq.s	.IsBlank			; If so, branch
 
 	move.w	(a1),d0				; Get block ID
@@ -857,7 +857,7 @@ FindLevelFloor2:
 
 FindLevelWall:
 	bsr.w	GetLevelBlock			; Get block at position
-	cmpi.l	#LevelChunks,d1			; Is it a blank block?
+	cmp.l	levelChunksPtr.w,d1		; Is it a blank block?
 	beq.s	.IsBlank			; If so, branch
 
 	move.w	(a1),d0				; Get block ID
@@ -939,7 +939,7 @@ FindLevelWall:
 
 FindLevelWall2:
 	bsr.w	GetLevelBlock			; Get block at position
-	cmpi.l	#LevelChunks,d1			; Is it a blank block?
+	cmp.l	levelChunksPtr.w,d1		; Is it a blank block?
 	beq.s	.IsBlank			; If so, branch
 
 	move.w	(a1),d0				; Get block ID

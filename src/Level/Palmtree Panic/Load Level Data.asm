@@ -9,8 +9,7 @@
 ; -------------------------------------------------------------------------
 
 LoadLevelData:
-	moveq	#0,d0				; Prepare level data index
-	lea	LevelDataIndex,a2
+	bsr.w	GetLevelDataIndex		; Get the level data index for the current time zone
 	move.l	a2,-(sp)
 
 	addq.l	#4,a2				; Skip over level art pointer (art is loaded in PLCs instead)
@@ -21,8 +20,8 @@ LoadLevelData:
 	lea	blockBuffer,a4
 	bsr.w	NemDecToRAM
 
-	movea.l	(a2)+,a0			; Skip over level chunks (chunks are uncompressed, and are referenced directly
-						; by collision and drawing routines)
+	move.l	(a2)+,levelChunksPtr.w		; Level chunks (uncompressed, referenced directly by collision and
+						; drawing routines through levelChunksPtr)
 
 	bsr.w	LoadLevelLayout			; Load level layout
 
@@ -51,6 +50,17 @@ LoadLevelData:
 	rts
 
 ; -------------------------------------------------------------------------
+; Get the level data index for the current time zone
+; -------------------------------------------------------------------------
+; RETURNS:
+;	a2.l - Level data index
+; -------------------------------------------------------------------------
+
+GetLevelDataIndex:
+	movea.l	zLevelDataIndex.w,a2
+	rts
+
+; -------------------------------------------------------------------------
 ; Load a level layout
 ; -------------------------------------------------------------------------
 
@@ -75,7 +85,7 @@ LoadLevelLayout:
 .LoadPlane:
 	moveq	#0,d0				; Get pointer to layout data
 	add.w	d1,d0
-	lea	LevelLayouts,a1
+	movea.l	zLevelLayouts.w,a1
 	move.w	(a1,d0.w),d0
 	lea	(a1,d0.w),a1
 

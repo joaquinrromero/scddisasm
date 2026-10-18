@@ -12,7 +12,7 @@
 ; -------------------------------------------------------------------------
 
 LoadFadePal:
-	lea	PaletteTable,a1			; Get pointer to palette metadata
+	movea.l	zPaletteTable.w,a1			; Get pointer to palette metadata
 	lsl.w	#3,d0
 	adda.w	d0,a1
 

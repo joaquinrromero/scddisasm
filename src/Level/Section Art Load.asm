@@ -5,7 +5,7 @@
 ; -------------------------------------------------------------------------
 
 LoadSectionArt:
-	lea	SectionRanges(pc),a1
+	movea.l	zSectionRanges.w,a1
 	moveq	#0,d0
 	moveq	#0,d1
 	move.w	cameraX.w,d0
@@ -18,13 +18,14 @@ LoadSectionArt:
 
 .LoadPLC:
 	move.b	d1,sectionID
-	move.w	SectionInitPLCs(pc,d1.w),d0
+	movea.l	zSectionInitPLCs.w,a1
+	move.w	(a1,d1.w),d0
 	jmp	LoadPLC
 
 ; -------------------------------------------------------------------------
 
 UpdateSectionArt:
-	lea	SectionRanges(pc),a1
+	movea.l	zSectionRanges.w,a1
 	moveq	#0,d0
 	moveq	#0,d1
 	move.w	cameraX.w,d0
@@ -42,7 +43,8 @@ UpdateSectionArt:
 
 .LoadPLC:
 	move.b	d1,sectionID
-	move.w	SectionUpdatePLCs(pc,d1.w),d0
+	movea.l	zSectionUpdatePLCs.w,a1
+	move.w	(a1,d1.w),d0
 	jmp	InitPLC
 
 ; -------------------------------------------------------------------------

@@ -263,6 +263,10 @@ PLC_Signpost:
 
 ; -------------------------------------------------------------------------
 
+	if def(MDPORT)
+		ALIGN	$10000				; Chunk lookups replace only the low byte/word of this address
+	endif
+
 LevelChunks:
 	if DEMO=0
 		incbin	"Level/Palmtree Panic/Data/Chunks (Act 1 Present).bin"

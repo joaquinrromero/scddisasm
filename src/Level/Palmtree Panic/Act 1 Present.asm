@@ -4,7 +4,9 @@
 ; Palmtree Panic Act 1 Present
 ; -------------------------------------------------------------------------
 
-	include	"Level/_Definitions.inc"
+	if def(MDPORT)=0				; (MD port includes these in its own Main.asm)
+		include	"Level/_Definitions.inc"
+	endif
 
 ; -------------------------------------------------------------------------
 

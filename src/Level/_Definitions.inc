@@ -174,7 +174,40 @@ DYNOBJCOUNT		EQU	(dynObjectsEnd-dynObjects)/oSize
 fmSndQueue1 		rs.b	1		; FM sound queue 1
 fmSndQueue2 		rs.b	1		; FM sound queue 2
 fmSndQueue3 		rs.b	1		; FM sound queue 3
-			rs.b	$5F3
+			rs.b	1
+levelChunksPtr		rs.l	1		; Level chunk data pointer (set by LoadLevelData)
+
+; Per-time-zone data/code pointers, copied from ZoneTable by LoadZoneVars (same order as ZoneTable)
+zoneVars		rs.b	0
+zLevelDataIndex	rs.l	1		; LevelDataIndex
+zLevelLayouts	rs.l	1		; LevelLayouts
+zLevelCollision	rs.l	1		; LevelCollision
+zPLCLists	rs.l	1		; PLCLists
+zPaletteTable	rs.l	1		; PaletteTable
+zObjectTileIDs	rs.l	1		; ObjectTileIDs
+zObjectIndex	rs.l	1		; ObjectIndex
+zDebugItemIndex	rs.l	1		; DebugItemIndex
+zSectionRanges	rs.l	1		; SectionRanges
+zSectionInitPLCs	rs.l	1		; SectionInitPLCs
+zSectionUpdatePLCs	rs.l	1		; SectionUpdatePLCs
+zCollapseSizes1	rs.l	1		; ObjCollapsePlatform_Sizes1
+zCollapseSizes2	rs.l	1		; ObjCollapsePlatform_Sizes2
+zMapCollapse1	rs.l	1		; MapSpr_CollapsePlatform1
+zMapCollapse2	rs.l	1		; MapSpr_CollapsePlatform2
+zMapCollapse3	rs.l	1		; MapSpr_CollapsePlatform3
+zMapCollapse4	rs.l	1		; MapSpr_CollapsePlatform4
+zMapExplosion	rs.l	1		; MapSpr_Explosion
+zMapFlowerCapsule	rs.l	1		; MapSpr_FlowerCapsule
+zAniFlowerCapsule	rs.l	1		; Ani_FlowerCapsule
+zLevelSizeLoad	rs.l	1		; LevelSizeLoad
+zLevelScroll	rs.l	1		; LevelScroll
+zDrawLevel	rs.l	1		; DrawLevel
+zInitLevelDraw	rs.l	1		; InitLevelDraw
+zDrawLevelBG	rs.l	1		; DrawLevelBG
+zPaletteCycle	rs.l	1		; PaletteCycle
+zLevelPaletteID	rs.l	1		; LevelPaletteID
+zoneVarsEnd		rs.b	0
+			rs.b	$5F3-5-(zoneVarsEnd-zoneVars)
 gameMode 		rs.b	1		; Game mode
 			rs.b	1
 			
@@ -425,6 +458,7 @@ DBGITEM macro id, priority, mappings, tile, subtype, flip, subtype2, frame
 
 DBGEND macro
 	__dbgCount\#__dbgID: EQU __dbgCount
+	__dbgID: = __dbgID+1			; Next debug list gets its own counter symbol
 	endm
 
 ; -------------------------------------------------------------------------

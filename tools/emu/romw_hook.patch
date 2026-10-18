@@ -1,0 +1,109 @@
+diff --git a/core/mem68k.c b/core/mem68k.c
+index b27a7eb..ad5cbc5 100644
+--- a/core/mem68k.c
++++ b/core/mem68k.c
+@@ -46,7 +46,7 @@
+ unsigned int m68k_read_bus_8(unsigned int address)
+ {
+ #ifdef LOGERROR
+-  error("Unused read8 %08X (%08X)\n", address, m68k_get_reg(M68K_REG_PC));
++  error("Unused read8 %08X (%08X)\n", address, m68k.pc);
+ #endif
+   address = m68k.pc | (address & 1);
+   return READ_BYTE(m68k.memory_map[((address)>>16)&0xff].base, (address) & 0xffff);
+@@ -55,24 +55,42 @@ unsigned int m68k_read_bus_8(unsigned int address)
+ unsigned int m68k_read_bus_16(unsigned int address)
+ {
+ #ifdef LOGERROR
+-  error("Unused read16 %08X (%08X)\n", address, m68k_get_reg(M68K_REG_PC));
++  error("Unused read16 %08X (%08X)\n", address, m68k.pc);
+ #endif
+   address = m68k.pc;
+   return *(uint16 *)(m68k.memory_map[((address)>>16)&0xff].base + ((address) & 0xfffe));
+ }
+ 
+ 
++#include <unistd.h>
++static void romw(const char *t, unsigned int a, unsigned int d)
++{
++  static const char hx[] = "0123456789ABCDEF";
++  char buf[48]; int i = 0, k;
++  if (a >= 0x400000) return;
++  buf[i++]='R';buf[i++]='O';buf[i++]='M';buf[i++]='W';buf[i++]=' ';buf[i++]=t[0];buf[i++]=' ';
++  for (k = 20; k >= 0; k -= 4) buf[i++] = hx[(a >> k) & 15];
++  buf[i++]=' ';
++  for (k = 12; k >= 0; k -= 4) buf[i++] = hx[(d >> k) & 15];
++  buf[i++]=' ';buf[i++]='p';buf[i++]='c';buf[i++]='=';
++  { unsigned int pc = m68k.pc; for (k = 20; k >= 0; k -= 4) buf[i++] = hx[(pc >> k) & 15]; }
++  buf[i++]='\n';
++  write(2, buf, i);
++}
++
+ void m68k_unused_8_w(unsigned int address, unsigned int data)
+ {
++  romw("b", address, data);
+ #ifdef LOGERROR
+-  error("Unused write8 %08X = %02X (%08X)\n", address, data, m68k_get_reg(M68K_REG_PC));
++  error("Unused write8 %08X = %02X (%08X)\n", address, data, m68k.pc);
+ #endif
+ }
+ 
+ void m68k_unused_16_w(unsigned int address, unsigned int data)
+ {
++  romw("w", address, data);
+ #ifdef LOGERROR
+-  error("Unused write16 %08X = %04X (%08X)\n", address, data, m68k_get_reg(M68K_REG_PC));
++  error("Unused write16 %08X = %04X (%08X)\n", address, data, m68k.pc);
+ #endif
+ }
+ 
+@@ -84,7 +102,7 @@ void m68k_unused_16_w(unsigned int address, unsigned int data)
+ void m68k_lockup_w_8 (unsigned int address, unsigned int data)
+ {
+ #ifdef LOGERROR
+-  error ("Lockup %08X = %02X (%08X)\n", address, data, m68k_get_reg(M68K_REG_PC));
++  error ("Lockup %08X = %02X (%08X)\n", address, data, m68k.pc);
+ #endif
+   if (!config.force_dtack)
+   {
+@@ -96,7 +114,7 @@ void m68k_lockup_w_8 (unsigned int address, unsigned int data)
+ void m68k_lockup_w_16 (unsigned int address, unsigned int data)
+ {
+ #ifdef LOGERROR
+-  error ("Lockup %08X = %04X (%08X)\n", address, data, m68k_get_reg(M68K_REG_PC));
++  error ("Lockup %08X = %04X (%08X)\n", address, data, m68k.pc);
+ #endif
+   if (!config.force_dtack)
+   {
+@@ -108,7 +126,7 @@ void m68k_lockup_w_16 (unsigned int address, unsigned int data)
+ unsigned int m68k_lockup_r_8 (unsigned int address)
+ { 
+ #ifdef LOGERROR
+-  error ("Lockup %08X.b (%08X)\n", address, m68k_get_reg(M68K_REG_PC));
++  error ("Lockup %08X.b (%08X)\n", address, m68k.pc);
+ #endif
+   if (!config.force_dtack)
+   {
+@@ -122,7 +140,7 @@ unsigned int m68k_lockup_r_8 (unsigned int address)
+ unsigned int m68k_lockup_r_16 (unsigned int address)
+ {
+ #ifdef LOGERROR
+-  error ("Lockup %08X.w (%08X)\n", address, m68k_get_reg(M68K_REG_PC));
++  error ("Lockup %08X.w (%08X)\n", address, m68k.pc);
+ #endif
+   if (!config.force_dtack)
+   {
+diff --git a/libretro/libretro.c b/libretro/libretro.c
+index 3e63862..7887324 100644
+--- a/libretro/libretro.c
++++ b/libretro/libretro.c
+@@ -3631,6 +3631,9 @@ void *retro_get_memory_data(unsigned id)
+          return sram.on ? sram.sram : NULL;
+       case RETRO_MEMORY_SYSTEM_RAM:
+          return work_ram;
++      case 3:
++         return vram;   /* debug: VRAM (tools/emu) */
++      case 4: { static unsigned pcv; pcv = m68k_get_reg(M68K_REG_PC); return &pcv; }   /* debug: 68k PC (tools/emu) */
+       default:
+          return NULL;
+    }

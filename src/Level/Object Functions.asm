@@ -20,7 +20,7 @@ RunObjects:
 
 	add.w	d0,d0				; Run object
 	add.w	d0,d0
-	lea	ObjectIndex,a1
+	movea.l	zObjectIndex.w,a1
 	movea.l -4(a1,d0.w),a1
 	jsr	(a1)
 

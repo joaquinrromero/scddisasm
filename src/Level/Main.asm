@@ -17,6 +17,7 @@ LevelMusicIDs_S1:
 ; -------------------------------------------------------------------------
 
 LevelStart:
+	bsr.w	LoadZoneVars			; Load the pointers for the current time zone
 	clr.w	demoMode			; Clear demo mode flag
 
 	cmpi.b	#$7F,timeStones			; Did we get all of the time stones?
@@ -153,8 +154,7 @@ LevelStart:
 
 	bsr.w	PlayLevelMusic			; Play level music
 
-	moveq	#0,d0				; Get level PLCs
-	lea	LevelDataIndex,a2
+	bsr.w	GetLevelDataIndex		; Get level PLCs
 	moveq	#0,d0
 	move.b	(a2),d0
 	beq.s	.LoadStdPLCs
@@ -242,11 +242,11 @@ LevelStart:
 	moveq	#3,d0
 	bsr.w	LoadFadePal
 
-	bsr.w	LevelSizeLoad			; Get level size and start position
-	bsr.w	LevelScroll			; Initialize level scrolling
+	bsr.w	ZoneLevelSizeLoad			; Get level size and start position
+	bsr.w	ZoneLevelScroll			; Initialize level scrolling
 	bset	#2,scrollFlags.w		; Force draw a block column on the left side of the screen
 	bsr.w	LoadLevelData			; Load level data
-	bsr.w	InitLevelDraw			; Begin level drawing
+	bsr.w	ZoneInitLevelDraw			; Begin level drawing
 	jsr	ConvColArray			; Convert collision data (dummied out)
 	bsr.w	LoadLevelCollision		; Load collision block IDs
 
@@ -415,14 +415,14 @@ Level_MainLoop:
 	bra.s	.DrawObjects			; Don't handle level scrolling
 
 .DoScroll:
-	bsr.w	LevelScroll			; Handle level scrolling
+	bsr.w	ZoneLevelScroll			; Handle level scrolling
 
 .DrawObjects:
 	jsr	DrawObjects			; Draw objects
 
 	tst.w	timeStopTimer			; Is the time stop timer active?
 	bne.s	.SkipPalCycle			; If so, branch
-	bsr.w	PaletteCycle			; Handle palette cycling
+	bsr.w	ZonePaletteCycle			; Handle palette cycling
 
 .SkipPalCycle:
 	jsr	UpdateSectionArt		; Update section art
@@ -488,23 +488,10 @@ RestoreZoneFlowers:
 ; -------------------------------------------------------------------------
 
 LoadLevelCollision:
-	moveq	#0,d0				; Get level collision pointer
-	move.b	zone,d0
-	lsl.w	#2,d0
-	move.l	LevelColIndex(pc,d0.w),collisionPtr.w
+	move.l	zLevelCollision.w,collisionPtr.w	; Get level collision pointer
 	rts
 
 ; -------------------------------------------------------------------------
-
-LevelColIndex:
-	dc.l	LevelCollision			; They are all the same. For some reason,
-	dc.l	LevelCollision			; the Sonic CD team decided to keep this table
-	dc.l	LevelCollision			; instead of just directly setting the pointer
-	dc.l	LevelCollision
-	dc.l	LevelCollision
-	dc.l	LevelCollision
-	dc.l	LevelCollision
-	dc.l	LevelCollision
 
 ; -------------------------------------------------------------------------
 ; Handle global animations
@@ -679,7 +666,9 @@ UnpauseMusic:
 ; -------------------------------------------------------------------------
 
 VInterrupt:
-	bset	#0,GAIRQ2			; Send Sub CPU IRQ2 request
+	if def(MDPORT)=0
+		bset	#0,GAIRQ2		; Send Sub CPU IRQ2 request
+	endif
 	movem.l	d0-a6,-(sp)			; Save registers
 
 	tst.b	vintRoutine.w			; Are we lagging?
@@ -788,7 +777,7 @@ VInt_S1SegaScr:					; Pointer to here is leftover from Sonic 1's
 
 VInt_S1Title:
 	bsr.w	DoVIntUpdates			; Do V-INT updates
-	bsr.w	DrawLevelBG			; Draw level BG
+	bsr.w	ZoneDrawLevelBG			; Draw level BG
 	bsr.w	DecompPLCFast			; Process PLC art decompression
 
 	tst.w	vintTimer.w			; Is the V-INT timer running?
@@ -841,7 +830,7 @@ VInt_Level:
 	movem.l	d0-d7,camXCopy
 	movem.l	scrollFlags.w,d0-d1
 	movem.l	d0-d1,scrollFlagsCopy
-	bsr.w	DrawLevel
+	bsr.w	ZoneDrawLevel
 
 	bsr.w	DecompPLCSlow			; Process PLC art decompression
 	jmp	UpdateHUD			; Update the HUD
@@ -871,7 +860,7 @@ VInt_LevelLoad:
 	movem.l	d0-d7,camXCopy
 	movem.l	scrollFlags.w,d0-d1
 	movem.l	d0-d1,scrollFlagsCopy
-	bsr.w	DrawLevel
+	bsr.w	ZoneDrawLevel
 
 	bra.w	DecompPLCFast			; Process PLC art decompression
 
