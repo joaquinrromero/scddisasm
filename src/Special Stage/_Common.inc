@@ -34,8 +34,7 @@ ufoCount	EQU	GACOMSTATB		; UFO count
 
 	if def(SSMDPORT)
 STAMPRAM	EQU	$00FF0000			; Stamp map (RAM, 32KB)
-SSVARS		EQU	$FFFF8100			; Special stage object/logic variables
-	rsset	$FFFFA600
+	rsset	RAM_SUBBUF			; (SSVARS and the rest of the RAM map: "MD Port/RAM Map.inc")
 	else
 STAMPRAM	EQU	WORDRAM2M+STAMPMAP
 	rsset	WORDRAM2M+$1C000
@@ -49,5 +48,8 @@ subSplashLoad	rs.b	1			; Splash art load flag
 subScrollFlags	rs.b	1			; Scroll flags
 		rs.b	$7A
 subSonicArtBuf	rs.b	$300			; Sonic art buffer
+	if def(SSMDPORT)
+SUBBUFEND	rs.b	0
+	endif
 
 ; -------------------------------------------------------------------------

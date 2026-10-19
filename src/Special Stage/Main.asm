@@ -32,7 +32,11 @@ IMGV1LEN	EQU	$2000			; Part 1 length
 	rsset	WORKRAM+$FF00B000
 	endif
 MainVarsStart	rs.b	0			; Start of variables
-stageImage	rs.b	IMGLENGTH		; Stage image buffer (RAM in MD port, ROM in SCD original)
+	if def(SSMDPORT)
+stageImage	EQU	SSIMGBAND		; One band of the floor image (own region, see "MD Port/RAM Map.inc")
+	else
+stageImage	rs.b	IMGLENGTH		; Stage image buffer
+	endif
 sprites		rs.b	80*8			; Sprite buffer
 		rs.b	4
 splashArtLoad	rs.b	1			; Splash art load flag
@@ -74,13 +78,23 @@ demoDataPtr	rs.l	1			; Demo data pointer
 MainVarsLen		EQU	__rs-MainVarsStart		; Size of variables area
 
 	if def(SSMDPORT)
+MainVarsMark	EQU	__rs			; (back to the display variables after the floor block)
+	rsset	SSFLOORVARS
 floorStampPtr	rs.l	1			; ROM pointer to this stage's baked 4bpp stamps
 floorRemapPtr	rs.l	1			; ROM pointer to this stage's stamp_remap word table
-floorAltFrame	rs.b	1			; Alternating frame flag (SampleFloor skips odd calls)
-		rs.b	1
+floorBand	rs.b	1			; Band being rendered (0..FLOORBANDS-1)
+floorRow	rs.b	1			; Next sample row of that band (0..47)
+floorFill	rs.b	1			; RAM band buffer being rendered into (0/1)
+floorDmaSel	rs.b	1			; RAM band buffer the V-INT copies next (0/1)
+floorReady	rs.b	2			; Per RAM band buffer: band+1 when it is waiting for its DMA, else 0
+floorShowSel	rs.b	1			; VRAM image buffer on screen (0 = buffer 1, 1 = buffer 2)
+floorHidSel	rs.b	1			; VRAM image buffer being built (the other one)
+FLOORVARSEND	rs.b	0
+	rsset	MainVarsMark
 	endif
 
 lagCounter	rs.l	1			; Lag counter
+MainVarsEnd	rs.b	0			; End of the display program variables
 
 ; -------------------------------------------------------------------------
 ; MMD header
@@ -964,9 +978,15 @@ VInterrupt:
 ; -------------------------------------------------------------------------
 
 VInt_CopyStage1_1:
+	if def(SSMDPORT)
+	jsr	ShowFloorBuf			; Show the finished floor buffer
+	bsr.w	CopyHScroll			; Update horizontal scroll data
+	jsr	CopyFloorBand			; Copy a finished floor band to the hidden buffer if there is one
+	else
 	bsr.w	ShowStageBuf2			; Show stage buffer 2
 	bsr.w	CopyHScroll			; Update horizontal scroll data
 	COPYIMG	stageImage, 0, 0		; Copy rendered stage image
+	endif
 	jsr	ReadController(pc)		; Read controller
 	bra.w	VInt_Finish			; Finish
 
@@ -974,7 +994,11 @@ VInt_CopyStage1_1:
 
 VInt_CopyStage1_2:
 	bsr.w	CopyHScrollSects		; Update horizontal scroll data
+	if def(SSMDPORT)
+	jsr	CopyFloorBand			; Copy a finished floor band if there is one
+	else
 	COPYIMG	stageImage, 0, 1		; Copy rendered stage image
+	endif
 	bsr.w	CopySprites			; Copy sprite data
 	bsr.w	PaletteCycle			; Cycle palette
 	bra.w	VInt_Finish			; Finish
@@ -982,9 +1006,15 @@ VInt_CopyStage1_2:
 ; -------------------------------------------------------------------------
 
 VInt_CopyStage2_1:
+	if def(SSMDPORT)
+	jsr	ShowFloorBuf			; Show the finished floor buffer
+	bsr.w	CopyHScroll			; Update horizontal scroll data
+	jsr	CopyFloorBand			; Copy a finished floor band to the hidden buffer if there is one
+	else
 	bsr.w	ShowStageBuf1			; Show stage buffer 1
 	bsr.w	CopyHScroll			; Update horizontal scroll data
 	COPYIMG	stageImage, 1, 0		; Copy rendered stage image
+	endif
 	jsr	ReadController(pc)		; Read controller
 	bra.w	VInt_Finish			; Finish
 
@@ -992,7 +1022,11 @@ VInt_CopyStage2_1:
 
 VInt_CopyStage2_2:
 	bsr.w	CopyHScrollSects		; Update horizontal scroll data
+	if def(SSMDPORT)
+	jsr	CopyFloorBand			; Copy a finished floor band if there is one
+	else
 	COPYIMG	stageImage, 1, 1		; Copy rendered stage image
+	endif
 	bsr.w	CopySprites			; Copy sprite data
 	bsr.w	PaletteCycle			; Cycle palette
 	bra.w	VInt_Finish			; Finish
@@ -1001,6 +1035,9 @@ VInt_CopyStage2_2:
 
 VInt_CopyStageDone:
 	bsr.w	CopyHScrollSects		; Update horizontal scroll data
+	if def(SSMDPORT)
+	jsr	CopyFloorBand			; Copy a finished floor band if there is one
+	endif
 	bra.w	VInt_Finish			; Finish
 
 ; -------------------------------------------------------------------------
@@ -2751,7 +2788,12 @@ VSync:
 
 .Wait:
 	btst	#0,ipxVSync			; Has the V-INT handler run?
-	bne.s	.Wait				; If not, wait
+	beq.s	.Done				; If so, we are done
+	if def(SSMDPORT)
+	jsr	SampleFloorSlice		; Not yet: use the idle time to render a few floor rows
+	endif
+	bra.s	.Wait
+.Done:
 	rts
 
 ; -------------------------------------------------------------------------

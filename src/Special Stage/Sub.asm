@@ -254,10 +254,6 @@ SSFrame:
 
 	bsr.w	AnimateStamps			; Animate stamps
 	bsr.w	GetGfxSines			; Get sines for 3D sprite positioning
-	jsr	GenGfxTraceTblMD		; Generate the floor trace table (no divisions)
-	if def(SSMDPORT)
-	jsr	SampleFloor			; Render floor pixels into stageImage (h2v2, 15fps)
-	endif
 
 	move.b	#0,spriteCount			; Reset sprites
 	move.l	#subSprites,curSpriteSlot

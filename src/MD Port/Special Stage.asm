@@ -11,26 +11,9 @@
 
 SSMDPORT	EQU	1				; Special stage Mega Drive port build flag
 
-; -------------------------------------------------------------------------
-; Work RAM map (all of it sign-extended so absolute short addressing works)
-;
-;   $FF0000-$FF7FFF  Stamp map (32KB, collision data for the floor)
-;   $FFFF8000        "Gate array" block (plain RAM now; comm flags/registers)
-;   $FFFF8100        Special stage logic variables and objects (ex Sub CPU)
-;   $FFFFA600        Sprite buffer / Sonic art buffer handed to the display code
-;   $FFFFAC00        Display program variables (ex Main CPU)
-;   $FFFFC800        IPX-style global variables
-;   $FFFFD900        Writable data that used to sit inside the Main CPU program
-;                    image (palette cycle indices, scroll state...): ROM can't
-;                    hold it
-;   (stack grows down from $FFFFFFFF)
-; -------------------------------------------------------------------------
+; Work RAM map: see "MD Port/RAM Map.inc" (checked by "RAM Check.inc" below)
 
-SSPERSIST	EQU	$FFFFFF00			; Survives restarts: magic word + stage ID
-TRACETBLMD	EQU	$FFFFE000			; Floor trace table (96 rows * 8 bytes)
-SSMAINVARS2	EQU	$FFFFAC00			; Display program variables
-SSMAINVARS	EQU	$FFFFC800			; IPX-style global variables
-SSRWDATA	EQU	$FFFFD900			; Writable data that lived inside the Main CPU program image
+	include	"MD Port/RAM Map.inc"
 
 	include	"_Include/Common.inc"
 	include	"_Include/Main CPU.inc"			; Hardware definitions and macros
@@ -195,12 +178,13 @@ EntryPoint:
 	movea.l	(Vectors).l,sp				; Reset the stack pointer
 
 	jsr	SSRWInit					; Initial values of the writable data
-	move.b	#1,specStageID.w			; Default: stage 1
+	; specStageID is 0-BASED (0 = stage 1 ... 7 = stage 8), like everywhere in the
+	; original code (StageMaps, LoadStageData, time stone bits...). RAM was just
+	; cleared, so a cold start is stage 1 (ID 0).
 	cmpi.w	#$5353,SSPERSIST.w			; Did A+Start pick a stage?
 	bne.s	.NoPersist
 	move.b	SSPERSIST+2.w,d0
 	andi.b	#7,d0
-	beq.s	.NoPersist				; 0 is invalid (stages are 1-8)
 	move.b	d0,specStageID.w
 
 .NoPersist:
@@ -215,12 +199,9 @@ EntryPoint:
 SSNextStage:
 	move	#$2700,sr				; Interrupts off
 	moveq	#0,d0
-	move.b	specStageID.w,d0			; Next stage ID, wrapping after stage 8
+	move.b	specStageID.w,d0			; Next stage ID (0-based), wrapping after stage 8
 	addq.b	#1,d0
-	cmpi.b	#9,d0				; Wrap stage 9 -> stage 1 (stages are 1-8)
-	bne.s	.NoWrap
-	moveq	#1,d0
-.NoWrap:
+	andi.b	#7,d0
 	move.b	d0,SSPERSIST+2.w
 	move.w	#$5353,SSPERSIST.w
 	jmp	EntryPoint				; Restart with the new stage
@@ -257,9 +238,9 @@ SSVDPRegsEnd:
 ; Display program (Main CPU program, unchanged apart from the Sub CPU
 ; handshake): background, HUD, palette cycling, results screen, etc.
 ; -------------------------------------------------------------------------
-; stageImage is now a RAM variable (declared in Main.asm rsset block).
-; SampleFloor writes rendered pixels there every other frame; the V-INT
-; DMA copies it to VRAM as before.  No ROM placeholder needed.
+; stageImage is one band of the floor image in RAM (see "RAM Map.inc").
+; SampleFloor renders one band per logic frame; the V-INT copies it to the
+; hidden VRAM buffer, and the buffers swap once all the bands are in.
 ; -------------------------------------------------------------------------
 
 	include	"Special Stage/Main.asm"
@@ -288,6 +269,8 @@ SSRWInit:
 
 	include	"MD Port/Trace Table.asm"
 	include	"MD Port/Floor Sampler.asm"
+
+	include	"MD Port/RAM Check.inc"
 
 	ALIGN	$20000, $FF				; Pad ROM to a multiple of 128KB
 ROMEnd:
