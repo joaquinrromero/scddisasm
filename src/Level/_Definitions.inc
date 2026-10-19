@@ -206,6 +206,7 @@ zInitLevelDraw	rs.l	1		; InitLevelDraw
 zDrawLevelBG	rs.l	1		; DrawLevelBG
 zPaletteCycle	rs.l	1		; PaletteCycle
 zLevelPaletteID	rs.l	1		; LevelPaletteID
+zObjectLayouts	rs.l	1		; ObjectLayouts
 zoneVarsEnd		rs.b	0
 			rs.b	$5F3-5-(zoneVarsEnd-zoneVars)
 gameMode 		rs.b	1		; Game mode

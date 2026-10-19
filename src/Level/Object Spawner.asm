@@ -42,7 +42,7 @@ SpawnObjects:
 SpawnObjects_Init:
 	addq.b	#2,objSpawnRoutine.w		; Next routine
 
-	lea	ObjectLayouts,a0		; Get object layout
+	movea.l	zObjectLayouts.w,a0		; Get object layout
 	movea.l	a0,a1
 	adda.w	(a0),a0
 	move.l	a0,objChunkRight.w

@@ -24,3 +24,4 @@ InitLevelDraw=R12A_InitLevelDraw
 DrawLevelBG=R12A_DrawLevelBG
 PaletteCycle=R12A_PaletteCycle
 LevelPaletteID=R12A_LevelPaletteID
+ObjectLayouts=R12A_ObjectLayouts

@@ -17,7 +17,7 @@ except Exception:
     pass
 
 
-def run(path, frames=300, seed=1):
+def run(path, frames=300, seed=1, probes=None):
     rom = open(path, 'rb').read()
     random.seed(seed)
     uc = Uc(UC_ARCH_M68K, UC_MODE_BIG_ENDIAN)
@@ -57,6 +57,7 @@ def run(path, frames=300, seed=1):
 
     def code(uc_, addr, size, ud):
         hist.append(addr)
+        if probes and addr in probes: probes[addr](uc_)
         if addr == trap:
             st['trap'] += 1; uc_.emu_stop()
         if uc_.mem_read(addr, 2) == b'\x4e\x73':          # RTE (manual: the model has no exception frames)

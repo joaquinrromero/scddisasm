@@ -47,6 +47,7 @@ ZoneData_Past:
 	dc.l	Past_DrawLevelBG
 	dc.l	Past_PaletteCycle
 	dc.l	Past_LevelPaletteID
+	dc.l	ObjectLayouts
 
 ZoneData_Present:
 	dc.l	LevelDataIndex
@@ -76,6 +77,7 @@ ZoneData_Present:
 	dc.l	DrawLevelBG
 	dc.l	PaletteCycle
 	dc.l	LevelPaletteID
+	dc.l	ObjectLayouts
 
 ZoneData_GoodFuture:
 	dc.l	GoodFuture_LevelDataIndex
@@ -105,6 +107,7 @@ ZoneData_GoodFuture:
 	dc.l	GoodFuture_DrawLevelBG
 	dc.l	GoodFuture_PaletteCycle
 	dc.l	GoodFuture_LevelPaletteID
+	dc.l	ObjectLayouts
 
 ZoneData_BadFuture:
 	dc.l	BadFuture_LevelDataIndex
@@ -134,6 +137,7 @@ ZoneData_BadFuture:
 	dc.l	BadFuture_DrawLevelBG
 	dc.l	BadFuture_PaletteCycle
 	dc.l	BadFuture_LevelPaletteID
+	dc.l	ObjectLayouts
 
 ZoneData_R12A:
 	dc.l	R12A_LevelDataIndex
@@ -163,3 +167,4 @@ ZoneData_R12A:
 	dc.l	R12A_DrawLevelBG
 	dc.l	R12A_PaletteCycle
 	dc.l	R12A_LevelPaletteID
+	dc.l	R12A_ObjectLayouts

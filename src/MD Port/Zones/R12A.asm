@@ -1490,123 +1490,181 @@ R12A_PLC_Std:
 
 R12A_PLC_Cam1_Full:
 	dc.w	$A
-	dc.w	$23
-	dc.w	$718C
+	dc.l	R12A_Data_236EBA+$2D2
 	dc.w	$6B40
-	dc.w	$23
-	dc.w	$707E
+	dc.l	R12A_Data_236EBA+$1C4
 	dc.w	$6D80
-	dc.w	$23
-	dc.w	$7328
+	dc.l	R12A_Data_237272+$B6
 	dc.w	$7000
-	dc.w	$23
-	dc.w	$8D7C
+	dc.l	Art_Animals
+	dc.w	$71E0
+	dc.l	Art_PataBata
+	dc.w	$74E0
+	dc.l	Art_Springboard
+	dc.w	$7B60
+	dc.l	R12A_Art_Checkpoint+$FA
+	dc.w	$7E00
+	dc.l	Art_Anton
+	dc.w	$8000
+	dc.l	Art_SwingingPlatform
+	dc.w	$8300
+	dc.l	Art_Tamabboh
+	dc.w	$8580
+	dc.l	Art_DiagonalSpring
+	dc.w	$9200
 
-	dc.b	$71,$E0,$00,$23,$7F,$34,$74,$E0,$00,$23,$89,$82,$7B,$60,$00,$23,$6A,$7C,$7E,$00,$00,$23,$7A,$02,$80,$00,$00,$23,$8C,$2A,$83,$00,$00,$23,$85,$0C,$85,$80,$00,$23,$51,$C8,$92,$00
 R12A_PLC_Cam2_Full:
 	dc.w	$9
-	dc.w	$23
-	dc.w	$718C
+	dc.l	R12A_Data_236EBA+$2D2
 	dc.w	$6B40
-	dc.w	$23
-	dc.w	$707E
+	dc.l	R12A_Data_236EBA+$1C4
 	dc.w	$6D80
-	dc.w	$23
-	dc.w	$7328
+	dc.l	R12A_Data_237272+$B6
 	dc.w	$7000
-	dc.w	$23
+	dc.l	Art_Animals
+	dc.w	$71E0
+	dc.l	Art_Mosqui
+	dc.w	$74E0
+	dc.l	R12A_Art_Checkpoint+$FA
+	dc.w	$7E00
+	dc.l	Art_Anton
+	dc.w	$8000
+	dc.l	Art_SwingingPlatform
+	dc.w	$8300
+	dc.l	Art_Tamabboh
+	dc.w	$8580
+	dc.l	Art_DiagonalSpring
+	dc.w	$9200
 
-	dc.b	$8D,$7C,$71,$E0,$00,$23,$7B,$E6,$74,$E0,$00,$23,$6A,$7C,$7E,$00,$00,$23,$7A,$02,$80,$00,$00,$23,$8C,$2A,$83,$00,$00,$23,$85,$0C,$85,$80,$00,$23,$51,$C8,$92,$00
 R12A_PLC_Cam3_Full:
 	dc.w	$8
-	dc.w	$23
-	dc.w	$718C
+	dc.l	R12A_Data_236EBA+$2D2
 	dc.w	$6B40
-	dc.w	$23
-	dc.w	$707E
+	dc.l	R12A_Data_236EBA+$1C4
 	dc.w	$6D80
-	dc.w	$23
-	dc.w	$7328
+	dc.l	R12A_Data_237272+$B6
 	dc.w	$7000
+	dc.l	Art_Animals
+	dc.w	$71E0
+	dc.l	R12A_Data_2376BA+$9A
+	dc.w	$74E0
+	dc.l	Art_RobotGenWithered
+	dc.w	$8000
+	dc.l	Art_SwingingPlatform
+	dc.w	$8300
+	dc.l	Art_Tamabboh
+	dc.w	$8580
+	dc.l	Art_DiagonalSpring
+	dc.w	$9200
 
-	dc.b	$00,$23,$8D,$7C,$71,$E0,$00,$23,$77,$54,$74,$E0,$00,$23,$90,$28,$80,$00,$00,$23,$8C,$2A,$83,$00,$00,$23,$85,$0C,$85,$80,$00,$23,$51,$C8,$92,$00
 R12A_PLC_Cam4_Full:
 	dc.w	$9
-	dc.w	$23
-	dc.w	$718C
+	dc.l	R12A_Data_236EBA+$2D2
 	dc.w	$6B40
-	dc.w	$23
-	dc.w	$707E
+	dc.l	R12A_Data_236EBA+$1C4
 	dc.w	$6D80
-	dc.w	$23
-	dc.w	$7328
+	dc.l	R12A_Data_237272+$B6
 	dc.w	$7000
-	dc.w	$23
+	dc.l	Art_Animals
+	dc.w	$71E0
+	dc.l	Art_PataBata
+	dc.w	$74E0
+	dc.l	Art_Anton
+	dc.w	$7B60
+	dc.l	Art_RobotGenWithered
+	dc.w	$8000
+	dc.l	Art_SwingingPlatform
+	dc.w	$8300
+	dc.l	Art_Tamabboh
+	dc.w	$8580
+	dc.l	Art_DiagonalSpring
+	dc.w	$9200
 
-	dc.b	$8D,$7C,$71,$E0,$00,$23,$7F,$34,$74,$E0,$00,$23,$7A,$02,$7B,$60,$00,$23,$90,$28,$80,$00,$00,$23,$8C,$2A,$83,$00,$00,$23,$85,$0C,$85,$80,$00,$23,$51,$C8,$92,$00
 R12A_PLC_Cam5_Full:
 	dc.w	$8
-	dc.w	$23
-	dc.w	$718C
+	dc.l	R12A_Data_236EBA+$2D2
 	dc.w	$6B40
-	dc.w	$23
-	dc.w	$707E
+	dc.l	R12A_Data_236EBA+$1C4
 	dc.w	$6D80
-	dc.w	$23
-	dc.w	$7328
+	dc.l	R12A_Data_237272+$B6
 	dc.w	$7000
+	dc.l	Art_Animals
+	dc.w	$71E0
+	dc.l	Art_PataBata
+	dc.w	$74E0
+	dc.l	Art_TagaTaga
+	dc.w	$7B60
+	dc.l	Art_SwingingPlatform
+	dc.w	$8300
+	dc.l	Art_Tamabboh
+	dc.w	$8580
+	dc.l	Art_DiagonalSpring
+	dc.w	$9200
 
-	dc.b	$00,$23,$8D,$7C,$71,$E0,$00,$23,$7F,$34,$74,$E0,$00,$23,$81,$FE,$7B,$60,$00,$23,$8C,$2A,$83,$00,$00,$23,$85,$0C,$85,$80,$00,$23,$51,$C8,$92,$00
 R12A_PLC_Cam1_Incr:
 	dc.w	$4
-	dc.w	$23
-	dc.w	$7328
+	dc.l	R12A_Data_237272+$B6
 	dc.w	$7000
-	dc.w	$23
-	dc.w	$8D7C
+	dc.l	Art_Animals
+	dc.w	$71E0
+	dc.l	Art_PataBata
+	dc.w	$74E0
+	dc.l	Art_Springboard
+	dc.w	$7B60
+	dc.l	Art_DiagonalSpring
+	dc.w	$9200
 
-	dc.b	$71,$E0,$00,$23,$7F,$34,$74,$E0,$00,$23,$89,$82,$7B,$60,$00,$23,$51,$C8,$92,$00
 R12A_PLC_Cam2_Incr:
 	dc.w	$2
-	dc.w	$23
-	dc.w	$7BE6
+	dc.l	Art_Mosqui
 	dc.w	$74E0
+	dc.l	R12A_Art_Checkpoint+$FA
+	dc.w	$7E00
+	dc.l	Art_Anton
+	dc.w	$8000
 
-	dc.b	$00,$23,$6A,$7C,$7E,$00,$00,$23,$7A,$02,$80,$00
 R12A_PLC_Cam3_Incr:
 	dc.w	$1
-	dc.w	$23
-	dc.w	$7754
+	dc.l	R12A_Data_2376BA+$9A
+	dc.w	$74E0
+	dc.l	Art_RobotGenWithered
+	dc.w	$8000
 
-	dc.b	$74,$E0,$00,$23,$90,$28,$80,$00
 R12A_PLC_Cam4_Incr:
 	dc.w	$2
-	dc.w	$23
-	dc.w	$7F34
+	dc.l	Art_PataBata
 	dc.w	$74E0
+	dc.l	Art_Anton
+	dc.w	$7B60
+	dc.l	Art_RobotGenWithered
+	dc.w	$8000
 
-	dc.b	$00,$23,$7A,$02,$7B,$60,$00,$23,$90,$28,$80,$00
 R12A_PLC_Cam5_Incr:
 	dc.w	$0
-	dc.w	$23
+	dc.l	Art_TagaTaga
+	dc.w	$7B60
 
-	dc.b	$81,$FE,$7B,$60
 R12A_PLC_Results:
 	dc.w	$0
-	dc.w	$23
+	dc.l	Art_Results
+	dc.w	$7880
 
-	dc.b	$34,$32,$78,$80
 R12A_PLC_Signpost:
 	dc.w	$2
-	dc.w	$23
-	dc.w	$2E56
+	dc.l	Art_Signpost
 	dc.w	$8780
+	dc.l	Art_BigRing
+	dc.w	$9100
+	dc.l	MapSpr_BigRingFlash+$1A0
+	dc.w	$7DE0
 
 	incbin	"Level/Palmtree Panic/Data/Level/Padding (Act 2 Present).bin"
 	ALIGN	$10000				; Chunk lookups replace only the low byte/word of this address
 
 R12A_LevelChunks:
 	incbin	"Level/Palmtree Panic/Data/Level/Chunks (Act 2 Present).bin"
+R12A_LevelDemo:
+	incbin	"Level/Palmtree Panic/Data/Level/Demo (Act 2 Present).bin"
 R12A_MapSpr_Explosion:
 	incbin	"Level/Palmtree Panic/Data/Mappings/MapSpr_Explosion (Act 1 Past).bin"
 R12A_Ani_FlowerCapsule:
@@ -1684,3 +1742,11 @@ R12A_LevelBlocks:
 R12A_Art_LevelTiles:
 	incbin	"Level/Palmtree Panic/Data/Level/Tiles (Act 2 Present).bin"
 
+R12A_ObjectLayouts:
+	dc.w	.Layout-R12A_ObjectLayouts
+	dc.w	.Null-R12A_ObjectLayouts
+	dc.w	$FFFF,0,0,0
+.Layout:
+	incbin	"Level/Palmtree Panic/Data/Objects/Objects (Act 2).bin"
+.Null:
+	dc.w	$FFFF,0,0
