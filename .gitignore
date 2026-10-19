@@ -33,3 +33,4 @@ src/_SonLVL/dllcache
 src/Special Stage/Stage Data Labels.inc
 src/Special Stage/Stage Data.bin
 src/DA Garden/Track Title Labels.inc
+__pycache__/
