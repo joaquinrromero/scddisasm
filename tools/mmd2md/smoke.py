@@ -39,7 +39,7 @@ def run(path, frames=300, seed=1, probes=None):
     rom_end = len(rom)
     writes = collections.Counter()
     st = {'trap': 0, 'v': False, 'ran': 0}
-    hist = collections.deque(maxlen=300)
+    hist = collections.deque(maxlen=int(__import__("os").environ.get("HM","300")))
 
     def wr(uc_, access, addr, size, value, ud):
         if addr < rom_end:
