@@ -83,7 +83,7 @@ sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 OUT = sys.argv[1] if len(sys.argv) > 1 else "src/MD Port/Floor Demo"
 NANG = int(os.environ.get("NANG", "32")); R0 = int(os.environ.get("R0", "55"))
 Z = 0x160; SEG = 16
-X0_CAM = 0x540; Y0_CAM = 0x520           # camera start in map pixels
+X0_CAM = 0x6E0; Y0_CAM = 0x660           # camera start in map pixels (stamp 55,51 — fully valid 7×7 area)
 os.makedirs(OUT, exist_ok=True)
 
 S, M = decode_stage(1)
@@ -108,7 +108,10 @@ packed_stamps[:, :, :] = (S[:, :, 0::2] << 4) | S[:, :, 1::2]
 open(f"{OUT}/stamps_packed.bin", "wb").write(packed_stamps.tobytes())
 
 # ---- stamp map (ROM) ----
-open(f"{OUT}/stamp_map.bin", "wb").write(M.astype(">u2").tobytes())
+# Clamp invalid entries (>=nstamps or 0xFFFF) to stamp 0 to avoid out-of-bounds access
+M_safe = M.copy()
+M_safe[M_safe >= nstamps] = 0
+open(f"{OUT}/stamp_map.bin", "wb").write(M_safe.astype(">u2").tobytes())
 
 # ---- angle tables ----
 # Format per segment: 1 signed longword (base byte-offset of packed byte 0 of the segment,

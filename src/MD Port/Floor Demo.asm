@@ -438,31 +438,31 @@ LoadStampTex:
 	moveq	#FD_WSTAMPS-1,d6		; d6 = stamp-col counter
 
 .SCol:
-	; Look up stamp index for column d5 of map row a0
-	move.w	d5,a3				; save current col in a3
-	andi.w	#$7F,d5
-	add.w	d5,d5				; word offset in map row
-	move.w	(a0,d5.w),d5			; d5 = stamp index (0..nstamps-1)
+	; d5 = running stamp column (unwrapped).  a3 used as scratch.
+	move.w	d5,a3				; a3 = running col (preserved across this iter)
+	andi.w	#$7F,d5				; d5 = wrapped col (0..127)
+	lsl.w	#1,d5				; d5 = byte offset into map row (col*2)
+	move.w	(a0,d5.w),d5			; d5.w = stamp index — upper word still dirty!
+	andi.l	#$FFFF,d5			; clear upper word → d5 = clean stamp index
 
-	; a2 → packed pixel row d4 of stamp d5
-	; offset = d5*512 + d4*16
+	; a2 → stamp pixel row d4 in ROM
 	lsl.l	#8,d5				; d5 * 256
-	add.l	d5,d5				; d5 * 512
+	add.l	d5,d5				; d5 * 512 (each stamp = 512 bytes)
 	lea	FloorStampsPacked,a2
 	adda.l	d5,a2				; a2 → stamp base
 	move.w	d4,d5
-	lsl.w	#4,d5				; d4 * 16
+	lsl.w	#4,d5				; d4 * 16 (each row = 16 bytes)
 	adda.w	d5,a2				; a2 → pixel row within stamp
 
-	; Copy 16 bytes (one packed stamp row = 32 pixels) to texture
+	; Copy 16 bytes to RAM texture
 	move.l	(a2)+,(a1)+
 	move.l	(a2)+,(a1)+
 	move.l	(a2)+,(a1)+
 	move.l	(a2)+,(a1)+
 
-	; Restore col counter and advance to next stamp column
-	move.w	a3,d5				; d5 = saved col
-	addq.w	#1,d5				; next column
+	; Next column
+	move.w	a3,d5				; restore running col
+	addq.w	#1,d5				; increment
 	dbf	d6,.SCol
 
 	; Next pixel row
