@@ -26,7 +26,7 @@ ZoneData_Past:
 	dc.l	Past_PLCLists
 	dc.l	Past_PaletteTable
 	dc.l	Past_ObjectTileIDs
-	dc.l	Past_ObjectIndex
+	dc.l	ObjectIndex
 	dc.l	Past_DebugItemIndex
 	dc.l	Past_SectionRanges
 	dc.l	Past_SectionInitPLCs
@@ -86,7 +86,7 @@ ZoneData_GoodFuture:
 	dc.l	GoodFuture_PLCLists
 	dc.l	GoodFuture_PaletteTable
 	dc.l	GoodFuture_ObjectTileIDs
-	dc.l	GoodFuture_ObjectIndex
+	dc.l	ObjectIndex
 	dc.l	GoodFuture_DebugItemIndex
 	dc.l	GoodFuture_SectionRanges
 	dc.l	GoodFuture_SectionInitPLCs
@@ -116,7 +116,7 @@ ZoneData_BadFuture:
 	dc.l	BadFuture_PLCLists
 	dc.l	BadFuture_PaletteTable
 	dc.l	BadFuture_ObjectTileIDs
-	dc.l	BadFuture_ObjectIndex
+	dc.l	ObjectIndex
 	dc.l	BadFuture_DebugItemIndex
 	dc.l	BadFuture_SectionRanges
 	dc.l	BadFuture_SectionInitPLCs
@@ -146,7 +146,7 @@ ZoneData_R12A:
 	dc.l	R12A_PLCLists
 	dc.l	R12A_PaletteTable
 	dc.l	R12A_ObjectTileIDs
-	dc.l	R12A_ObjectIndex
+	dc.l	ObjectIndex
 	dc.l	DebugItemIndex
 	dc.l	R12A_SectionRanges
 	dc.l	R12A_SectionInitPLCs

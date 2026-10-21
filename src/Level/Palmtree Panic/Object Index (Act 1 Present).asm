@@ -45,16 +45,16 @@ ObjectIndex:
 	dc.l	ObjSpikes			; 26 - Spikes
 	dc.l	ObjNull				; 27 - Blank
 	dc.l	ObjSpringBoard			; 28 - Springboard
-	dc.l	ObjNull				; 29 - Blank
+	dc.l	ObjPPZ29			; 29 - PPZ Act 2 solid object (TODO: name)
 	dc.l	Obj3DRamp			; 2A - 3D ramp marker
-	dc.l	ObjNull				; 2B - Blank
+	dc.l	ObjNull				; 2B - Blank (was the Checkpoint in the past/future tables; now ID 13 for all)
 	dc.l	Obj3DPlant			; 2C - Plant surrounding 3D ramp
 	dc.l	ObjRobotGenerator		; 2D - Robot generator
 	dc.l	ObjProjector			; 2E - Metal Sonic holographic projector
 	dc.l	ObjAmyRose			; 2F - Amy Rose
 	dc.l	ObjAmyHeart			; 30 - Amy Rose heart
 	dc.l	ObjSonicHole			; 31 - Sonic hole
-	dc.l	ObjNull				; 32 - Blank
+	dc.l	ObjScenery			; 32 - Scenery (the layout only places it in the past/future)
 	dc.l	ObjLogShadow			; 33 - Log shadow
 	dc.l	ObjSpinTunnel			; 34 - Spin tunnel tag
 	dc.l	ObjTunnelDoorV			; 35 - Vertical spin tunnel door

@@ -47,6 +47,7 @@
 	include	"Level/Object Spawner.asm"
 	include	"Level/Palmtree Panic/Object Layout (Act 1).asm"
 	include	"Level/Palmtree Panic/Objects/Scenery/Main.asm"
+	include	"Level/Palmtree Panic/Objects/PPZ29/Main.asm"
 	include	"Level/Palmtree Panic/Objects/Log Shadow/Main.asm"
 	include	"Level/Palmtree Panic/Objects/Tunnel Path/Main.asm"
 	include	"Level/Object Solid.asm"

@@ -7,7 +7,6 @@
 	include	"MD Port/Zones/Past/Palette Cycle (Past).asm"
 	include	"MD Port/Zones/Past/Palette Data (Act 1 Past).asm"
 	include	"MD Port/Zones/Past/Scroll (Act 1 Past).asm"
-	include	"MD Port/Zones/Past/Object Index (Act 1 Past).asm"
 	include	"MD Port/Zones/Past/Debug Objects (Act 1 Past).asm"
 	include	"MD Port/Zones/Past/Data (Past).asm"
 	include	"MD Port/Zones/Past/Section Data (Act 1 Past).asm"

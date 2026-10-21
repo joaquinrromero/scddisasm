@@ -7,7 +7,6 @@
 	include	"MD Port/Zones/BadFuture/Palette Cycle (Bad Future).asm"
 	include	"MD Port/Zones/BadFuture/Palette Data (Act 1 Bad Future).asm"
 	include	"MD Port/Zones/BadFuture/Scroll (Act 1 Bad Future).asm"
-	include	"MD Port/Zones/BadFuture/Object Index (Act 1 Bad Future).asm"
 	include	"MD Port/Zones/BadFuture/Debug Objects (Act 1 Bad Future).asm"
 	include	"MD Port/Zones/BadFuture/Data (Future).asm"
 	include	"MD Port/Zones/BadFuture/Section Data (Act 1 Bad Future).asm"

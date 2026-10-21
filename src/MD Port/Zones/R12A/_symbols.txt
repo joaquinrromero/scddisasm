@@ -5,7 +5,6 @@ LevelCollision=R12A_LevelCollision
 PLCLists=R12A_PLCLists
 PaletteTable=R12A_PaletteTable
 ObjectTileIDs=R12A_ObjectTileIDs
-ObjectIndex=R12A_ObjectIndex
 SectionRanges=R12A_SectionRanges
 SectionInitPLCs=R12A_SectionInitPLCs
 SectionUpdatePLCs=R12A_SectionUpdatePLCs

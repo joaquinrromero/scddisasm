@@ -7,7 +7,6 @@
 	include	"MD Port/Zones/GoodFuture/Palette Cycle (Good Future).asm"
 	include	"MD Port/Zones/GoodFuture/Palette Data (Act 1 Good Future).asm"
 	include	"MD Port/Zones/GoodFuture/Scroll (Act 1 Good Future).asm"
-	include	"MD Port/Zones/GoodFuture/Object Index (Act 1 Good Future).asm"
 	include	"MD Port/Zones/GoodFuture/Debug Objects (Act 1 Good Future).asm"
 	include	"MD Port/Zones/GoodFuture/Data (Future).asm"
 	include	"MD Port/Zones/GoodFuture/Section Data (Act 1 Good Future).asm"

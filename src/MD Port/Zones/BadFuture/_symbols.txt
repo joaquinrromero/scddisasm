@@ -47,7 +47,6 @@ MoveScreenHoriz_MoveCam
 ObjCollapsePlatform_Sizes1
 ObjCollapsePlatform_Sizes2
 ObjNull
-ObjectIndex
 ObjectTileIDs
 PLCLists
 PLC_Cam1_Full
