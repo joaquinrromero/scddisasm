@@ -1,6 +1,7 @@
 import pickle,json,struct,collections,re,sys,os
 sys.path.insert(0,'/home/claude/work/unified/tools/rounds'); os.environ['CCZ']='/home/claude/work/mdport/src/Level/'
 import rlib
+CR={}
 rows=pickle.load(open('/tmp/objrows.pkl','rb')); used=pickle.load(open('/tmp/used.pkl','rb'))
 nul=lambda t: len(t)<=2
 # names: pristine PPZ index comments
@@ -46,6 +47,7 @@ for r in sorted(rows):
             v=struct.unpack('>H',d[q+2:q+4])[0]
             if w==0x117C and struct.unpack('>H',d[q+4:q+6])[0]!=0: continue
             if 1<=v<=0x60: ids.add(v)
+    CR[r]=set(ids)
     for v in ids: created[v][r[1]].add(r[2:])
     o=m['ObjectIndex']-0x200000
     ptrs=[struct.unpack('>I',d[o+4*i:o+4*i+4])[0] for i in range(len(rows[r]))]
@@ -66,3 +68,4 @@ open('/home/claude/work/unified/tools/rounds/object_unused.txt','w').write('\n'.
 co=[f"ID {v:02X} {names.get(v,('',''))[0]} created by code in {sum(len(x) for x in created[v].values())} rounds, placed in layouts of {sum(1 for r in used if used[r].get(v))}" for v in sorted(created)]
 open('/home/claude/work/unified/tools/rounds/object_created.txt','w').write('\n'.join(co)+'\n')
 print('\n'.join(out)[:5500])
+pickle.dump(CR,open('/tmp/created.pkl','wb'))
