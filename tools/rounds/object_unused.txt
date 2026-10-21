@@ -1,69 +1,40 @@
-Implemented objects (non-null ObjectIndex slot) that no object layout of the round places = beta remnants / unused. [spawn] = some code of that round writes this ID as an immediate (so it may be created by another object).
-ID 01  unused in 70 rounds: Z1:1A/1B/1C/1D/2A/2B/2C/2D/3C/3D Z3:1A/1B/1C/1D/2A/2B/2C/2D/3C/3D Z4:1A/1B/1C/1D/2A/2B/2C/2D/3C/3D Z5:1A/1B/1C/1D/2A/2B/2C/2D/3C/3D Z6:1A/1B/1C/1D/2A/2B/2C/2D/3C/3D Z7:1A/1B/1C/1D/2A/2B/2C/2D/3C/3D Z8:1A/1B/1C/1D/2A/2B/2C/2D/3C/3D
-ID 02  unused in 70 rounds: Z1:1A/1B/1C/1D/2A/2B/2C/2D/3C/3D Z3:1A/1B/1C/1D/2A/2B/2C/2D/3C/3D Z4:1A/1B/1C/1D/2A/2B/2C/2D/3C/3D Z5:1A/1B/1C/1D/2A/2B/2C/2D/3C/3D Z6:1A/1B/1C/1D/2A/2B/2C/2D/3C/3D Z7:1A/1B/1C/1D/2A/2B/2C/2D/3C/3D Z8:1A/1B/1C/1D/2A/2B/2C/2D/3C/3D
-ID 03  unused in 70 rounds: Z1:1A/1B/1C/1D/2A/2B/2C/2D/3C/3D Z3:1A/1B/1C/1D/2A/2B/2C/2D/3C/3D Z4:1A/1B/1C/1D/2A/2B/2C/2D/3C/3D Z5:1A/1B/1C/1D/2A/2B/2C/2D/3C/3D Z6:1A/1B/1C/1D/2A/2B/2C/2D/3C/3D Z7:1A/1B/1C/1D/2A/2B/2C/2D/3C/3D Z8:1A/1B/1C/1D/2A/2B/2C/2D/3C/3D
-ID 04  unused in 28 rounds: Z1:1A/1B/1C/1D/2A/2B/2C/2D Z4:1A/1B/1C/1D/2A/2B/2C/2D/3C/3D Z7:1A/1B/1C/1D/2A/2B/2C/2D/3C/3D
-ID 05  unused in 4 rounds: Z4:1A/1B/1C/1D
-ID 06  unused in 70 rounds: Z1:1A/1B/1C/1D/2A/2B/2C/2D/3C/3D Z3:1A/1B/1C/1D/2A/2B/2C/2D/3C/3D Z4:1A/1B/1C/1D/2A/2B/2C/2D/3C/3D Z5:1A/1B/1C/1D/2A/2B/2C/2D/3C/3D Z6:1A/1B/1C/1D/2A/2B/2C/2D/3C/3D Z7:1A/1B/1C/1D/2A/2B/2C/2D/3C/3D Z8:1A/1B/1C/1D/2A/2B/2C/2D/3C/3D
-ID 07  unused in 2 rounds: Z5:3C/3D
-ID 09  unused in 8 rounds: Z7:1A*/1B*/1C*/1D*/2A*/2B*/2C*/2D*
-ID 0A  unused in 2 rounds: Z7:3C*/3D*
-ID 0B  unused in 70 rounds: Z1:1A*/1B*/1C*/1D*/2A*/2B*/2C*/2D*/3C*/3D* Z3:1A*/1B*/1C*/1D*/2A*/2B*/2C*/2D*/3C*/3D* Z4:1A*/1B*/1C*/1D*/2A*/2B*/2C*/2D*/3C*/3D* Z5:1A*/1B*/1C*/1D*/2A*/2B*/2C*/2D*/3C*/3D* Z6:1A*/1B*/1C*/1D*/2A*/2B*/2C*/2D*/3C*/3D* Z7:1A*/1B*/1C*/1D*/2A*/2B*/2C*/2D*/3C*/3D* Z8:1A*/1B*/1C*/1D*/2A*/2B*/2C*/2D*/3C*/3D*
-ID 0C  unused in 70 rounds: Z1:1A/1B/1C/1D/2A/2B/2C/2D/3C/3D Z3:1A/1B/1C/1D/2A/2B/2C/2D/3C/3D Z4:1A/1B/1C/1D/2A/2B/2C/2D/3C/3D Z5:1A/1B/1C/1D/2A/2B/2C/2D/3C/3D Z6:1A/1B/1C/1D/2A/2B/2C/2D/3C/3D Z7:1A/1B/1C/1D/2A/2B/2C/2D/3C/3D Z8:1A/1B/1C/1D/2A/2B/2C/2D/3C/3D
-ID 0D  unused in 62 rounds: Z1:3C/3D Z3:1A/1B/1C/1D/2A/2B/2C/2D/3C/3D Z4:1A/1B/1C/1D/2A/2B/2C/2D/3C/3D Z5:1A/1B/1C/1D/2A/2B/2C/2D/3C/3D Z6:1A/1B/1C/1D/2A/2B/2C/2D/3C/3D Z7:1A/1B/1C/1D/2A/2B/2C/2D/3C/3D Z8:1A/1B/1C/1D/2A/2B/2C/2D/3C/3D
-ID 0E  unused in 70 rounds: Z1:1A*/1B*/1C*/1D*/2A*/2B*/2C*/2D*/3C*/3D* Z3:1A*/1B*/1C*/1D*/2A*/2B*/2C*/2D*/3C*/3D* Z4:1A*/1B*/1C*/1D*/2A*/2B*/2C*/2D*/3C*/3D* Z5:1A*/1B*/1C*/1D*/2A*/2B*/2C*/2D*/3C*/3D* Z6:1A*/1B*/1C*/1D*/2A*/2B*/2C*/2D*/3C*/3D* Z7:1A*/1B*/1C*/1D*/2A*/2B*/2C*/2D*/3C*/3D* Z8:1A*/1B*/1C*/1D*/2A*/2B*/2C*/2D*/3C*/3D*
-ID 0F  unused in 52 rounds: Z1:3C/3D Z3:1A/1B/1C/1D/2A/2B/2C/2D/3C/3D Z4:1A/1B/1C/1D/2A/2B/2C/2D/3C/3D Z5:1A/1B/1C/1D/2A/2B/2C/2D/3C/3D Z6:1A/1B/1C/1D/2A/2B/2C/2D/3C/3D Z7:1A/1B/1C/1D/2A/2B/2C/2D/3C/3D
-ID 11  unused in 70 rounds: Z1:1A*/1B*/1C*/1D*/2A*/2B*/2C*/2D*/3C*/3D* Z3:1A*/1B*/1C*/1D*/2A*/2B*/2C*/2D*/3C*/3D* Z4:1A*/1B*/1C*/1D*/2A*/2B*/2C*/2D*/3C*/3D* Z5:1A*/1B*/1C*/1D*/2A*/2B*/2C*/2D*/3C*/3D* Z6:1A*/1B*/1C*/1D*/2A*/2B*/2C*/2D*/3C*/3D* Z7:1A*/1B*/1C*/1D*/2A*/2B*/2C*/2D*/3C*/3D* Z8:1A*/1B*/1C*/1D*/2A*/2B*/2C*/2D*/3C*/3D*
-ID 12  unused in 10 rounds: Z3:1A/1B/1C/1D/2A/2B/2C/2D/3C/3D
-ID 14  unused in 14 rounds: Z1:3C*/3D* Z3:3C*/3D* Z4:3C*/3D* Z5:3C*/3D* Z6:3C*/3D* Z7:3C*/3D* Z8:3C*/3D*
-ID 15  unused in 60 rounds: Z1:1A*/1B*/1C*/1D*/2A*/2B*/2C*/2D* Z3:1A*/1B*/1C*/1D*/2A*/2B*/2C*/2D* Z4:1A*/1B*/1C*/1D*/2A*/2B*/2C*/2D* Z5:1A*/1B*/1C*/1D*/2A*/2B*/2C*/2D* Z6:1A*/1B*/1C*/1D*/2A*/2B*/2C*/2D* Z7:1A*/1B*/1C*/1D*/2A*/2B*/2C*/2D*/3C*/3D* Z8:1A*/1B*/1C*/1D*/2A*/2B*/2C*/2D*/3C*/3D*
-ID 16  unused in 10 rounds: Z1:3C/3D Z3:3C/3D Z5:3C/3D Z7:3C/3D Z8:3C/3D
-ID 17  unused in 14 rounds: Z1:3C/3D Z3:3C/3D Z4:3C/3D Z5:3C/3D Z6:3C/3D Z7:3C/3D Z8:3C/3D
-ID 18  unused in 70 rounds: Z1:1A*/1B*/1C*/1D*/2A*/2B*/2C*/2D*/3C*/3D* Z3:1A*/1B*/1C*/1D*/2A*/2B*/2C*/2D*/3C*/3D* Z4:1A*/1B*/1C*/1D*/2A*/2B*/2C*/2D*/3C*/3D* Z5:1A*/1B*/1C*/1D*/2A*/2B*/2C*/2D*/3C*/3D* Z6:1A*/1B*/1C*/1D*/2A*/2B*/2C*/2D*/3C*/3D* Z7:1A*/1B*/1C*/1D*/2A*/2B*/2C*/2D*/3C*/3D* Z8:1A*/1B*/1C*/1D*/2A*/2B*/2C*/2D*/3C*/3D*
-ID 1A  unused in 70 rounds: Z1:1A*/1B*/1C*/1D*/2A*/2B*/2C*/2D*/3C*/3D* Z3:1A*/1B*/1C*/1D*/2A*/2B*/2C*/2D*/3C*/3D* Z4:1A*/1B*/1C*/1D*/2A*/2B*/2C*/2D*/3C*/3D* Z5:1A*/1B*/1C*/1D*/2A*/2B*/2C*/2D*/3C*/3D* Z6:1A*/1B*/1C*/1D*/2A*/2B*/2C*/2D*/3C*/3D* Z7:1A*/1B*/1C*/1D*/2A*/2B*/2C*/2D*/3C*/3D* Z8:1A*/1B*/1C*/1D*/2A*/2B*/2C*/2D*/3C*/3D*
-ID 1B  unused in 62 rounds: Z1:3C/3D Z3:1A/1B/1C/1D/2A/2B/2C/2D/3C/3D Z4:1A/1B/1C/1D/2A/2B/2C/2D/3C/3D Z5:1A/1B/1C/1D/2A/2B/2C/2D/3C/3D Z6:1A/1B/1C/1D/2A/2B/2C/2D/3C/3D Z7:1A/1B/1C/1D/2A/2B/2C/2D/3C/3D Z8:1A/1B/1C/1D/2A/2B/2C/2D/3C/3D
-ID 1C  unused in 70 rounds: Z1:1A*/1B*/1C*/1D*/2A*/2B*/2C*/2D*/3C*/3D* Z3:1A*/1B*/1C*/1D*/2A*/2B*/2C*/2D*/3C*/3D* Z4:1A*/1B*/1C*/1D*/2A*/2B*/2C*/2D*/3C*/3D* Z5:1A*/1B*/1C*/1D*/2A*/2B*/2C*/2D*/3C*/3D* Z6:1A*/1B*/1C*/1D*/2A*/2B*/2C*/2D*/3C*/3D* Z7:1A*/1B*/1C*/1D*/2A*/2B*/2C*/2D*/3C*/3D* Z8:1A*/1B*/1C*/1D*/2A*/2B*/2C*/2D*/3C*/3D*
-ID 1E  unused in 2 rounds: Z6:3C/3D
-ID 1F  unused in 70 rounds: Z1:1A*/1B*/1C*/1D*/2A*/2B*/2C*/2D*/3C*/3D* Z3:1A*/1B*/1C*/1D*/2A*/2B*/2C*/2D*/3C*/3D* Z4:1A/1B/1C/1D/2A/2B/2C/2D/3C/3D Z5:1A*/1B*/1C*/1D*/2A*/2B*/2C*/2D*/3C*/3D* Z6:1A*/1B*/1C*/1D*/2A*/2B*/2C*/2D*/3C*/3D* Z7:1A*/1B*/1C*/1D*/2A*/2B*/2C*/2D*/3C*/3D* Z8:1A*/1B*/1C*/1D*/2A*/2B*/2C*/2D*/3C*/3D*
-ID 20  unused in 12 rounds: Z4:3C*/3D* Z5:3C*/3D* Z6:2A*/2B*/2C*/2D*/3C*/3D* Z7:3C*/3D*
-ID 21  unused in 22 rounds: Z1:3C/3D Z3:3C/3D Z4:1A*/1B*/1C*/1D*/2A*/2B*/2C*/2D*/3C*/3D* Z6:3C*/3D* Z8:1A/1B/1C/1D/3C/3D
-ID 22  unused in 10 rounds: Z3:3C/3D Z5:3C*/3D* Z8:1A/1B/1C/1D/3C/3D
-ID 23  unused in 12 rounds: Z3:3C/3D Z5:3C*/3D* Z6:2A/2B/2C/2D/3C/3D Z7:3C/3D
-ID 24  unused in 6 rounds: Z3:3C/3D Z6:3C/3D Z7:3C/3D
-ID 25  unused in 14 rounds: Z3:1A*/1B*/1C*/1D*/2A*/2B*/2C*/2D*/3C*/3D* Z6:3C/3D Z7:3C/3D
-ID 26  unused in 12 rounds: Z1:3C/3D Z3:2A/2B/2C/2D/3C/3D Z6:3C/3D Z7:3C/3D
-ID 27  unused in 8 rounds: Z3:2A*/2B*/2C*/2D*/3C*/3D* Z7:3C/3D
-ID 28  unused in 14 rounds: Z1:1A/1B/1C/1D/3C/3D Z3:1A/1B/1C/1D/3C/3D Z7:3C*/3D*
-ID 29  unused in 17 rounds: Z3:1A*/1B*/1C*/1D*/2A*/2B*/2C*/2D*/3C*/3D* Z4:2A* Z7:3C/3D Z8:1A/1B/1C/1D
-ID 2A  unused in 12 rounds: Z3:3C/3D Z5:1A/1B/1C/1D Z6:3C/3D Z7:2A/2B/2C/2D
-ID 2B  unused in 17 rounds: Z1:1B/1C/1D/3C*/3D* Z4:3C/3D Z6:2A/2B/2C/2D/3C/3D Z8:2A/2B/2C/2D
-ID 2C  unused in 16 rounds: Z1:3C*/3D* Z3:3C/3D Z6:2A/2B/2C/2D/3C/3D Z8:2A/2B/2C/2D/3C/3D
-ID 2D  unused in 8 rounds: Z1:3C*/3D* Z3:3C/3D Z6:3C/3D Z7:3C*/3D*
-ID 2E  unused in 8 rounds: Z1:3C*/3D* Z3:3C/3D Z6:3C/3D Z7:3C*/3D*
-ID 2F  unused in 8 rounds: Z1:3C*/3D* Z3:3C/3D Z6:3C/3D Z7:3C*/3D*
-ID 30  unused in 5 rounds: Z1:1A*/3C*/3D* Z7:3C*/3D*
-ID 31  unused in 6 rounds: Z1:3C*/3D* Z3:1A* Z4:1A* Z7:3C*/3D*
-ID 32  unused in 18 rounds: Z1:3C*/3D* Z3:3C*/3D* Z5:1A/1B/1C/1D/2A/2B/2C/2D/3C*/3D* Z6:2A/2B/2C/2D
-ID 33  unused in 7 rounds: Z3:1A*/3C*/3D* Z4:2A/2B/2C/2D
-ID 34  unused in 5 rounds: Z3:1A* Z5:3C*/3D* Z7:3C*/3D*
-ID 35  unused in 8 rounds: Z5:3C*/3D* Z6:3C*/3D* Z8:2A/2B/2C/2D
-ID 36  unused in 4 rounds: Z5:3C*/3D* Z6:3C*/3D*
-ID 37  unused in 12 rounds: Z3:3C/3D Z5:3C*/3D* Z6:3C*/3D* Z7:3C*/3D* Z8:1A*/1B*/1C*/1D*
-ID 38  unused in 6 rounds: Z3:3C/3D Z5:3C*/3D* Z6:3C*/3D*
-ID 39  unused in 6 rounds: Z3:3C*/3D* Z5:3C*/3D* Z6:3C*/3D*
-ID 3A  unused in 70 rounds: Z1:1A*/1B*/1C*/1D*/2A*/2B*/2C*/2D*/3C*/3D* Z3:1A*/1B*/1C*/1D*/2A*/2B*/2C*/2D*/3C*/3D* Z4:1A*/1B*/1C*/1D*/2A*/2B*/2C*/2D*/3C*/3D* Z5:1A*/1B*/1C*/1D*/2A*/2B*/2C*/2D*/3C*/3D* Z6:1A*/1B*/1C*/1D*/2A*/2B*/2C*/2D*/3C*/3D* Z7:1A*/1B*/1C*/1D*/2A*/2B*/2C*/2D*/3C*/3D* Z8:1A*/1B*/1C*/1D*/2A*/2B*/2C*/2D*/3C*/3D*
-ID 3B  unused in 70 rounds: Z1:1A*/1B*/1C*/1D*/2A*/2B*/2C*/2D*/3C*/3D* Z3:1A*/1B*/1C*/1D*/2A*/2B*/2C*/2D*/3C*/3D* Z4:1A*/1B*/1C*/1D*/2A*/2B*/2C*/2D*/3C*/3D* Z5:1A*/1B*/1C*/1D*/2A*/2B*/2C*/2D*/3C*/3D* Z6:1A*/1B*/1C*/1D*/2A*/2B*/2C*/2D*/3C*/3D* Z7:1A*/1B*/1C*/1D*/2A*/2B*/2C*/2D*/3C*/3D* Z8:1A*/1B*/1C*/1D*/2A*/2B*/2C*/2D*/3C*/3D*
-ID 3C  unused in 70 rounds: Z1:1A*/1B*/1C*/1D*/2A*/2B*/2C*/2D*/3C*/3D* Z3:1A*/1B*/1C*/1D*/2A*/2B*/2C*/2D*/3C*/3D* Z4:1A*/1B*/1C*/1D*/2A*/2B*/2C*/2D*/3C*/3D* Z5:1A*/1B*/1C*/1D*/2A*/2B*/2C*/2D*/3C*/3D* Z6:1A*/1B*/1C*/1D*/2A*/2B*/2C*/2D*/3C*/3D* Z7:1A*/1B*/1C*/1D*/2A*/2B*/2C*/2D*/3C*/3D* Z8:1A*/1B*/1C*/1D*/2A*/2B*/2C*/2D*/3C*/3D*
-ID 3D  unused in 10 rounds: Z1:3C/3D Z3:3C*/3D* Z6:3C*/3D* Z8:2A*/2B*/2C*/2D*
-ID 3E  unused in 6 rounds: Z1:3C/3D Z3:3C*/3D* Z4:3C*/3D*
-ID 3F  unused in 8 rounds: Z1:3C/3D Z3:3C*/3D* Z6:3C*/3D* Z8:3C*/3D*
-ID 40  unused in 8 rounds: Z1:3C*/3D* Z4:1C*/1D* Z6:3C*/3D* Z8:3C*/3D*
-ID 41  unused in 4 rounds: Z4:1C*/1D* Z8:3C*/3D*
-ID 42  unused in 2 rounds: Z8:3C*/3D*
-ID 43  unused in 2 rounds: Z8:3C*/3D*
-ID 4B  unused in 2 rounds: Z4:3C*/3D*
-ID 4D  unused in 2 rounds: Z4:3C*/3D*
-ID 4E  unused in 2 rounds: Z4:3C*/3D*
-ID 4F  unused in 2 rounds: Z4:3C*/3D*
-ID 50  unused in 4 rounds: Z4:1A/2A/2C/2D
-(* = [spawn])
+Implemented objects that NO layout places and that no code creates (spawn via FindObjSlot+move.b #id / morph move.b #id,(a0)).
+Objects created by other objects (explosion, points, lost ring, ...) are NOT listed. Names: PPZ index comment, else most common non-auto label.
+
+ID 01  ObjSonic - Sonic  unused in 70 rounds: Z1:1A/1B/1C/1D/2A/2B/2C/2D/3C/3D Z3:1A/1B/1C/1D/2A/2B/2C/2D/3C/3D Z4:1A/1B/1C/1D/2A/2B/2C/2D/3C/3D Z5:1A/1B/1C/1D/2A/2B/2C/2D/3C/3D Z6:1A/1B/1C/1D/2A/2B/2C/2D/3C/3D Z7:1A/1B/1C/1D/2A/2B/2C/2D/3C/3D Z8:1A/1B/1C/1D/2A/2B/2C/2D/3C/3D
+ID 02  ObjSonic - Player 2 Sonic  unused in 70 rounds: Z1:1A/1B/1C/1D/2A/2B/2C/2D/3C/3D Z3:1A/1B/1C/1D/2A/2B/2C/2D/3C/3D Z4:1A/1B/1C/1D/2A/2B/2C/2D/3C/3D Z5:1A/1B/1C/1D/2A/2B/2C/2D/3C/3D Z6:1A/1B/1C/1D/2A/2B/2C/2D/3C/3D Z7:1A/1B/1C/1D/2A/2B/2C/2D/3C/3D Z8:1A/1B/1C/1D/2A/2B/2C/2D/3C/3D
+ID 04  ObjWaterfall - Unused (broken) waterfall generator  unused in 18 rounds: Z1:1A/1B/1C/1D/2A/2B/2C/2D Z7:1A/1B/1C/1D/2A/2B/2C/2D/3C/3D
+ID 05  ObjEarthquake - Earthquake (scrapped)  unused in 4 rounds: Z4:1A/1B/1C/1D
+ID 06  ObjTestBadnik - Test badnik  unused in 70 rounds: Z1:1A/1B/1C/1D/2A/2B/2C/2D/3C/3D Z3:1A/1B/1C/1D/2A/2B/2C/2D/3C/3D Z4:1A/1B/1C/1D/2A/2B/2C/2D/3C/3D Z5:1A/1B/1C/1D/2A/2B/2C/2D/3C/3D Z6:1A/1B/1C/1D/2A/2B/2C/2D/3C/3D Z7:1A/1B/1C/1D/2A/2B/2C/2D/3C/3D Z8:1A/1B/1C/1D/2A/2B/2C/2D/3C/3D
+ID 07  ObjTunnelPath - Tunnel Path  unused in 2 rounds: Z5:3C/3D
+ID 0C  ObjTunnelDoorSplashSet - Spin tunnel door water splash setup (scrapped)  unused in 70 rounds: Z1:1A/1B/1C/1D/2A/2B/2C/2D/3C/3D Z3:1A/1B/1C/1D/2A/2B/2C/2D/3C/3D Z4:1A/1B/1C/1D/2A/2B/2C/2D/3C/3D Z5:1A/1B/1C/1D/2A/2B/2C/2D/3C/3D Z6:1A/1B/1C/1D/2A/2B/2C/2D/3C/3D Z7:1A/1B/1C/1D/2A/2B/2C/2D/3C/3D Z8:1A/1B/1C/1D/2A/2B/2C/2D/3C/3D
+ID 0D  ObjTunnelDoor - Spin tunnel door  unused in 62 rounds: Z1:3C/3D Z3:1A/1B/1C/1D/2A/2B/2C/2D/3C/3D Z4:1A/1B/1C/1D/2A/2B/2C/2D/3C/3D Z5:1A/1B/1C/1D/2A/2B/2C/2D/3C/3D Z6:1A/1B/1C/1D/2A/2B/2C/2D/3C/3D Z7:1A/1B/1C/1D/2A/2B/2C/2D/3C/3D Z8:1A/1B/1C/1D/2A/2B/2C/2D/3C/3D
+ID 0F  ObjMovingSpring - Moving spring  unused in 52 rounds: Z1:3C/3D Z3:1A/1B/1C/1D/2A/2B/2C/2D/3C/3D Z4:1A/1B/1C/1D/2A/2B/2C/2D/3C/3D Z5:1A/1B/1C/1D/2A/2B/2C/2D/3C/3D Z6:1A/1B/1C/1D/2A/2B/2C/2D/3C/3D Z7:1A/1B/1C/1D/2A/2B/2C/2D/3C/3D
+ID 12  ObjFloatBlock - Floating block  unused in 10 rounds: Z3:1A/1B/1C/1D/2A/2B/2C/2D/3C/3D
+ID 16  ObjGoalPost - Goal post  unused in 10 rounds: Z1:3C/3D Z3:3C/3D Z5:3C/3D Z7:3C/3D Z8:3C/3D
+ID 17  ObjSignpost - Signpost  unused in 14 rounds: Z1:3C/3D Z3:3C/3D Z4:3C/3D Z5:3C/3D Z6:3C/3D Z7:3C/3D Z8:3C/3D
+ID 1B  ObjBoulder - Boulder  unused in 62 rounds: Z1:3C/3D Z3:1A/1B/1C/1D/2A/2B/2C/2D/3C/3D Z4:1A/1B/1C/1D/2A/2B/2C/2D/3C/3D Z5:1A/1B/1C/1D/2A/2B/2C/2D/3C/3D Z6:1A/1B/1C/1D/2A/2B/2C/2D/3C/3D Z7:1A/1B/1C/1D/2A/2B/2C/2D/3C/3D Z8:1A/1B/1C/1D/2A/2B/2C/2D/3C/3D
+ID 1E  ObjNull - Blank (CCZ flipper)  unused in 2 rounds: Z6:3C/3D
+ID 22  ObjTamabboh - Tamabboh badnik/projectiles  unused in 8 rounds: Z3:3C/3D Z8:1A/1B/1C/1D/3C/3D
+ID 23  ObjMissile - Missile (scrapped)  unused in 10 rounds: Z3:3C/3D Z6:2A/2B/2C/2D/3C/3D Z7:3C/3D
+ID 24  ObjAnimal - Animal  unused in 6 rounds: Z3:3C/3D Z6:3C/3D Z7:3C/3D
+ID 25  ObjNull - Blank  unused in 4 rounds: Z6:3C/3D Z7:3C/3D
+ID 26  ObjSpikes - Spikes  unused in 12 rounds: Z1:3C/3D Z3:2A/2B/2C/2D/3C/3D Z6:3C/3D Z7:3C/3D
+ID 27  ObjNull - Blank  unused in 2 rounds: Z7:3C/3D
+ID 28  ObjSpringBoard - Springboard  unused in 12 rounds: Z1:1A/1B/1C/1D/3C/3D Z3:1A/1B/1C/1D/3C/3D
+ID 29  ObjNull - Blank  unused in 6 rounds: Z7:3C/3D Z8:1A/1B/1C/1D
+ID 2A  Obj3DRamp - 3D ramp marker  unused in 12 rounds: Z3:3C/3D Z5:1A/1B/1C/1D Z6:3C/3D Z7:2A/2B/2C/2D
+ID 2B  ObjNull - Blank  unused in 15 rounds: Z1:1B/1C/1D Z4:3C/3D Z6:2A/2B/2C/2D/3C/3D Z8:2A/2B/2C/2D
+ID 2C  Obj3DPlant - Plant surrounding 3D ramp  unused in 14 rounds: Z3:3C/3D Z6:2A/2B/2C/2D/3C/3D Z8:2A/2B/2C/2D/3C/3D
+ID 2D  ObjRobotGenerator - Robot generator  unused in 4 rounds: Z3:3C/3D Z6:3C/3D
+ID 2E  ObjProjector - Metal Sonic holographic projector  unused in 4 rounds: Z3:3C/3D Z6:3C/3D
+ID 2F  ObjAmyRose - Amy Rose  unused in 4 rounds: Z3:3C/3D Z6:3C/3D
+ID 32  ObjNull - Blank  unused in 12 rounds: Z5:1A/1B/1C/1D/2A/2B/2C/2D Z6:2A/2B/2C/2D
+ID 33  ObjLogShadow - Log shadow  unused in 4 rounds: Z4:2A/2B/2C/2D
+ID 35  ObjTunnelDoorV - Vertical spin tunnel door  unused in 4 rounds: Z8:2A/2B/2C/2D
+ID 37  ObjNull - Blank  unused in 2 rounds: Z3:3C/3D
+ID 38  ObjNull - Blank  unused in 2 rounds: Z3:3C/3D
+ID 3D  ObjMosqui - Mosqui badnik  unused in 2 rounds: Z1:3C/3D
+ID 3E  ObjPataBata - Pata-Bata badnik  unused in 2 rounds: Z1:3C/3D
+ID 3F  ObjAnton - Anton badnik  unused in 2 rounds: Z1:3C/3D
+ID 50  ObjNull   unused in 4 rounds: Z4:1A/2A/2C/2D

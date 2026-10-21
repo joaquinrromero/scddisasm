@@ -1,0 +1,60 @@
+ID 03 ObjPowerup created by code in 70 rounds, placed in layouts of 0
+ID 04 ObjWaterfall created by code in 20 rounds, placed in layouts of 8
+ID 05 ObjEarthquake created by code in 10 rounds, placed in layouts of 12
+ID 08 ObjEarthquakeSet created by code in 10 rounds, placed in layouts of 12
+ID 09 ObjSpinningDisc created by code in 70 rounds, placed in layouts of 14
+ID 0A ObjSpring created by code in 70 rounds, placed in layouts of 68
+ID 0B ObjTunnelDoorSplash created by code in 70 rounds, placed in layouts of 0
+ID 0E ObjSpinSplash created by code in 70 rounds, placed in layouts of 0
+ID 10 ObjRing created by code in 70 rounds, placed in layouts of 70
+ID 11 ObjLostRing created by code in 70 rounds, placed in layouts of 0
+ID 13 ObjCheckpoint created by code in 70 rounds, placed in layouts of 56
+ID 14 ObjBigRing created by code in 70 rounds, placed in layouts of 56
+ID 15 ObjCapsule created by code in 70 rounds, placed in layouts of 10
+ID 18 ObjExplosion created by code in 70 rounds, placed in layouts of 0
+ID 19 ObjMonitorTimePost created by code in 70 rounds, placed in layouts of 70
+ID 1A ObjMonitorItem created by code in 70 rounds, placed in layouts of 0
+ID 1C ObjHUDPoints created by code in 70 rounds, placed in layouts of 0
+ID 1D ObjNull created by code in 4 rounds, placed in layouts of 24
+ID 1E ObjNull created by code in 10 rounds, placed in layouts of 26
+ID 1F ObjFlower created by code in 70 rounds, placed in layouts of 0
+ID 20 ObjCollapsePlatform created by code in 32 rounds, placed in layouts of 50
+ID 21 ObjPlatform created by code in 70 rounds, placed in layouts of 46
+ID 22 ObjTamabboh created by code in 8 rounds, placed in layouts of 56
+ID 23 ObjMissile created by code in 8 rounds, placed in layouts of 40
+ID 24 ObjAnimal created by code in 20 rounds, placed in layouts of 60
+ID 25 ObjNull created by code in 10 rounds, placed in layouts of 38
+ID 27 ObjNull created by code in 12 rounds, placed in layouts of 44
+ID 28 ObjSpringBoard created by code in 10 rounds, placed in layouts of 48
+ID 29 ObjNull created by code in 29 rounds, placed in layouts of 40
+ID 2B ObjNull created by code in 2 rounds, placed in layouts of 32
+ID 2C Obj3DPlant created by code in 3 rounds, placed in layouts of 38
+ID 2D ObjRobotGenerator created by code in 14 rounds, placed in layouts of 40
+ID 2E ObjProjector created by code in 4 rounds, placed in layouts of 44
+ID 2F ObjAmyRose created by code in 22 rounds, placed in layouts of 42
+ID 30 ObjAmyHeart created by code in 6 rounds, placed in layouts of 28
+ID 31 ObjSonicHole created by code in 6 rounds, placed in layouts of 26
+ID 32 ObjNull created by code in 8 rounds, placed in layouts of 32
+ID 33 ObjLogShadow created by code in 9 rounds, placed in layouts of 30
+ID 34 ObjSpinTunnel created by code in 9 rounds, placed in layouts of 32
+ID 35 ObjTunnelDoorV created by code in 4 rounds, placed in layouts of 40
+ID 36 ObjBreakableWall created by code in 16 rounds, placed in layouts of 30
+ID 37 ObjNull created by code in 10 rounds, placed in layouts of 12
+ID 38 ObjNull created by code in 4 rounds, placed in layouts of 28
+ID 39 ObjNull created by code in 16 rounds, placed in layouts of 18
+ID 3A ObjResults created by code in 70 rounds, placed in layouts of 0
+ID 3B ObjGameOver created by code in 70 rounds, placed in layouts of 0
+ID 3C ObjTitleCard created by code in 70 rounds, placed in layouts of 0
+ID 3D ObjMosqui created by code in 12 rounds, placed in layouts of 18
+ID 3E ObjPataBata created by code in 14 rounds, placed in layouts of 24
+ID 3F ObjAnton created by code in 8 rounds, placed in layouts of 12
+ID 40 ObjTagaTaga created by code in 70 rounds, placed in layouts of 8
+ID 41  created by code in 4 rounds, placed in layouts of 0
+ID 42  created by code in 2 rounds, placed in layouts of 4
+ID 43  created by code in 2 rounds, placed in layouts of 8
+ID 47  created by code in 2 rounds, placed in layouts of 2
+ID 48  created by code in 4 rounds, placed in layouts of 4
+ID 4B  created by code in 2 rounds, placed in layouts of 0
+ID 4D  created by code in 2 rounds, placed in layouts of 0
+ID 4E  created by code in 2 rounds, placed in layouts of 0
+ID 4F  created by code in 2 rounds, placed in layouts of 0
