@@ -1,0 +1,20 @@
+Review of object differences (diffs read from the decompiled sources; numbers are $2xxxxx pointers of the retail MMD)
+
+A. Same code, different pointers/constants only (one routine + per-zone parameters)
+   ID 0A Spring     R12A vs R53C: only oMap pointers (3 mappings).
+   ID 15 Capsule    R13C vs R33C: oMap pointer + one byte read ($20e32c vs $20f680, a per-zone value).
+   ID 13 Checkpoint R12A vs R61B: oMap pointer only.
+   ID 26 R41A vs R42A: only 3 pointers (mappings/anim).
+B. Same code, different DATA tables
+   ID 07 TunnelPath R12A vs R82A: paths (waypoint tables) differ per level and are inline; code identical except the points in C.
+C. Real behavioural differences (candidates for zone checks or per-zone variants)
+   ID 07 TunnelPath Z5 (QQZ): extra subtype tests, a flag test ($ff158f) and a fixed speed (#$a00,$14(a6)); Z8 (MMZ): cmpi #$80 subtype branch and andi #$7f,2(a6).
+   ID 1D Z8 (MMZ 3C/3D) vs Z3: a different, larger object (219 vs 109 lines) that reuses the ID.
+   ID 20 CCZ vs PPZ: other object (follows a parent via $34(a0), copies X/Y). Same ID, different object.
+D. Small differences that look like beta remnants / fixes made only in some rounds
+   ID 13 Checkpoint R41A/TTZ: lacks `move.b miniSonic,savedMiniSonic` that PPZ has.
+   ID 0A Spring R82A (MMZ): lacks the ObjSpring2 routine that PPZ/QQZ have.
+   ID 30 R42A: 3-line stub where R41A has a 37-line object.
+E. Not trustworthy yet (decompiler left raw dc.w code in those bodies)
+   104 of 1536 used object bodies (7%), e.g. ID 10 Ring in R12*/R13*/R31*, IDs 33/35/38/48 in several rounds.
+   They distort the family comparison (a raw body never matches a decoded one). relocate_blobs.py + a re-decode fixes this.
