@@ -1,8 +1,8 @@
 BETA objects = implementations present in the code but never placed in any layout, never created by code (FindObjSlot/morph/fixed RAM slot) and with no >=60%-similar counterpart that is used, in ANY of the 70 rounds.
 Keep the code in Main, NO ObjectIndex entry.
 
-old ID 04  ObjWaterfall  45 lines  ; Z1:2A/2B/2C/2D
-old ID 06  ObjTestBadnik  30 lines  ; Z1:2A/2B/2C/2D/3C/3D Z3:1A/1B/1C/1D/2A/2B/2C/2D/3C/3D Z5:1A/1B/1C/1D/2A/2B/2C/2D/3C/3D Z7:1A/1B/1C/1D/2A/2B/2C/2D/3C/3D Z8:1A/1B/1C/1D/2A/2B/2C/2D/3C/3D
+old ID 04  ObjWaterfall  45 lines  ; Z1:1A/1B/1C/1D/2A/2B/2C/2D
+old ID 06  ObjTestBadnik  30 lines  ; Z1:1A/1B/1C/1D/2A/2B/2C/2D/3C/3D Z3:1A/1B/1C/1D/2A/2B/2C/2D/3C/3D Z5:1A/1B/1C/1D/2A/2B/2C/2D/3C/3D Z7:1A/1B/1C/1D/2A/2B/2C/2D/3C/3D Z8:1A/1B/1C/1D/2A/2B/2C/2D/3C/3D
 old ID 06  ObjExplosion_MakePoints  15 lines  ; Z4:1A/1B/1C/1D/2A/2B/2C/2D/3C/3D
-old ID 0C  ObjTunnelDoor_ChkCollision  24 lines  ; Z1:2A/2B/2C/2D/3C/3D Z3:1A/1B/1C/1D/2A/2B/2C/2D/3C/3D Z5:1A/1B/1C/1D/2A/2B/2C/2D/3C/3D Z6:1B/1C/1D/2A/2B/2C/2D/3C/3D Z7:1A/1B/1C/1D/2A/2B/2C/2D/3C/3D Z8:1A/1B/1C/1D/2A/2B/2C/2D/3C/3D
+old ID 0C  ObjTunnelDoor_ChkCollision  24 lines  ; Z1:1A/1B/1C/1D/2A/2B/2C/2D/3C/3D Z3:1A/1B/1C/1D/2A/2B/2C/2D/3C/3D Z5:1A/1B/1C/1D/2A/2B/2C/2D/3C/3D Z6:1A/1B/1C/1D/2A/2B/2C/2D/3C/3D Z7:1A/1B/1C/1D/2A/2B/2C/2D/3C/3D Z8:1A/1B/1C/1D/2A/2B/2C/2D/3C/3D
 old ID 32  Obj32_20EDDE  26 lines  ; Z5:1A/1B/1C/1D/2A/2B/2C/2D

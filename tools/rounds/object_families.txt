@@ -1,160 +1,165 @@
-ID 04   (Obj04_208E70)   7 rounds, 1 variants, 1 families
-   F0.0   107 lines  base             ; Z6:1B/1C/1D/2A/2B/2C/2D
-ID 05   (Obj05_2069EC)   11 rounds, 2 variants, 2 families
+ID 04   (Obj04_208E52)   8 rounds, 1 variants, 1 families
+   F0.0   107 lines  base             ; Z6:1A/1B/1C/1D/2A/2B/2C/2D
+ID 05   (Obj05_2069EC)   12 rounds, 2 variants, 2 families
    F0.0   103 lines  base             ; Z4:2A/2B/2C/2D
-   F1.0   299 lines  base             ; Z6:1B/1C/1D/2A/2B/2C/2D
-ID 07   (ObjTunnelPath)   25 rounds, 4 variants, 2 families
-   F0.0   242 lines  base             ; Z1:2A/2B/2C/2D
+   F1.0   299 lines  base             ; Z6:1A/1B/1C/1D/2A/2B/2C/2D
+ID 07   (ObjTunnelPath)   30 rounds, 4 variants, 2 families
+   F0.0   242 lines  base             ; Z1:1A/1B/1C/1D/2A/2B/2C/2D
    F0.1   265 lines  moderate 72%     ; Z5:1A/1B/1C/1D/2A/2B/2C/2D
    F0.2   221 lines  minor 94%        ; Z8:2A/2B/2C/2D
-   F1.0   308 lines  base             ; Z6:1B/1C/1D/2A/2B/2C/2D/3C/3D
-ID 08   (Obj08_208872)   11 rounds, 2 variants, 2 families
-   F0.0    68 lines  base             ; Z6:1B/1C/1D
+   F1.0   308 lines  base             ; Z6:1A/1B/1C/1D/2A/2B/2C/2D/3C/3D
+ID 08   (Obj08_208854)   12 rounds, 2 variants, 2 families
+   F0.0    68 lines  base             ; Z6:1A/1B/1C/1D
    F1.0   121 lines  base             ; Z7:1A/1B/1C/1D/2A/2B/2C/2D
-ID 09   (ObjSpinningDisc)   10 rounds, 2 variants, 2 families
-   F0.0   160 lines  base             ; Z1:2A/2B/2C/2D
+ID 09   (ObjSpinningDisc)   14 rounds, 2 variants, 2 families
+   F0.0   160 lines  base             ; Z1:1A/1B/1C/1D/2A/2B/2C/2D
    F1.0    22 lines  base             ; Z8:2A/2B/2C/2D/3C/3D
-ID 0A   (ObjSpring)   63 rounds, 3 variants, 1 families
-   F0.0   276 lines  base             ; Z1:2A/2B/2C/2D/3C/3D Z3:1A/1B/1C/1D/2A/2B/2C/2D/3C/3D Z4:1A/1B/1C/1D/2A/2B/2C/2D/3C/3D Z5:1A/1B/1C/1D/2A/2B/2C/2D Z6:1B/1C/1D/2A/2B/2C/2D/3C/3D Z7:1A/1B/1C/1D/2A/2B/2C/2D
+ID 0A   (ObjSpring)   68 rounds, 3 variants, 1 families
+   F0.0   276 lines  base             ; Z1:1A/1B/1C/1D/2A/2B/2C/2D/3C/3D Z3:1A/1B/1C/1D/2A/2B/2C/2D/3C/3D Z4:1A/1B/1C/1D/2A/2B/2C/2D/3C/3D Z5:1A/1B/1C/1D/2A/2B/2C/2D Z6:1A/1B/1C/1D/2A/2B/2C/2D/3C/3D Z7:1A/1B/1C/1D/2A/2B/2C/2D
    F0.1   277 lines  minor 100%       ; Z5:3C/3D
    F0.2   256 lines  minor 96%        ; Z8:1A/1B/1C/1D/2A/2B/2C/2D/3C/3D
-ID 0D   (ObjTunnelDoor)   4 rounds, 1 variants, 1 families
-   F0.0    84 lines  base             ; Z1:2A/2B/2C/2D
-ID 0F   (ObjMovingSpring)   14 rounds, 2 variants, 2 families
-   F0.0    67 lines  base             ; Z1:2A/2B/2C/2D
+ID 0D   (ObjTunnelDoor)   8 rounds, 1 variants, 1 families
+   F0.0    84 lines  base             ; Z1:1A/1B/1C/1D/2A/2B/2C/2D
+ID 0F   (ObjMovingSpring)   18 rounds, 2 variants, 2 families
+   F0.0    67 lines  base             ; Z1:1A/1B/1C/1D/2A/2B/2C/2D
    F1.0    39 lines  base             ; Z8:1A/1B/1C/1D/2A/2B/2C/2D/3C/3D
-ID 10   (Obj10_209AB4)   65 rounds, 4 variants, 2 families
-   F0.0    44 lines  base             ; Z1:2A/2B/2C/2D/3C/3D Z3:1A/1B/1C/1D/2A/2B/2C/2D Z4:1A/1B/1C/1D/2A/2B/2C/2D/3C/3D Z5:1A/1B/1C/1D/2A/2B/2C/2D/3C/3D Z6:1B/1C/1D/2A/2B/2C/2D Z7:1A/1B/1C/1D/2A/2B/2C/2D Z8:1A/1B/1C/1D/2A/2B/2C/2D
+ID 10   (Obj10_209C8C)   70 rounds, 4 variants, 2 families
+   F0.0    44 lines  base             ; Z1:1A/1B/1C/1D/2A/2B/2C/2D/3C/3D Z3:1A/1B/1C/1D/2A/2B/2C/2D Z4:1A/1B/1C/1D/2A/2B/2C/2D/3C/3D Z5:1A/1B/1C/1D/2A/2B/2C/2D/3C/3D Z6:1A/1B/1C/1D/2A/2B/2C/2D Z7:1A/1B/1C/1D/2A/2B/2C/2D Z8:1A/1B/1C/1D/2A/2B/2C/2D
    F1.0   144 lines  base             ; Z3:3C/3D Z8:3C/3D
    F1.1   145 lines  minor 100%       ; Z6:3C/3D
    F1.2   145 lines  minor 100%       ; Z7:3C/3D
-ID 12   (ObjFloatBlock)   4 rounds, 1 variants, 1 families
-   F0.0    98 lines  base             ; Z1:2A/2B/2C/2D
-ID 13   (ObjCheckpoint)   48 rounds, 3 variants, 1 families
-   F0.0   120 lines  base             ; Z1:2A/2B/2C/2D Z3:1A/2A/2B/2C/2D Z5:1A/1B/1C/1D/2A/2B/2C/2D Z7:1A/1B/1C/1D/2A/2B/2C/2D Z8:1A/1B/1C/1D/2A/2B/2C/2D
+ID 12   (ObjFloatBlock)   8 rounds, 1 variants, 1 families
+   F0.0    98 lines  base             ; Z1:1A/1B/1C/1D/2A/2B/2C/2D
+ID 13   (ObjCheckpoint)   50 rounds, 3 variants, 1 families
+   F0.0   120 lines  base             ; Z1:1A/2A/2B/2C/2D Z3:1A/2A/2B/2C/2D Z5:1A/1B/1C/1D/2A/2B/2C/2D Z7:1A/1B/1C/1D/2A/2B/2C/2D Z8:1A/1B/1C/1D/2A/2B/2C/2D
    F0.1   119 lines  minor 100%       ; Z4:1A/1B/1C/1D/2A/2B/2C/2D
-   F0.2   121 lines  minor 100%       ; Z6:1B/1C/1D/2A/2B/2C/2D
-ID 14   (ObjBigRing)   51 rounds, 1 variants, 1 families
-   F0.0   107 lines  base             ; Z1:2A/2B/2C/2D Z3:1A/1B/1C/1D/2A/2B/2C/2D Z4:1A/1B/1C/1D/2A/2B/2C/2D Z5:1A/1B/1C/1D/2A/2B/2C/2D Z6:1B/1C/1D/2A/2B/2C/2D Z7:1A/1B/1C/1D/2A/2B/2C/2D Z8:1A/1B/1C/1D/2A/2B/2C/2D
+   F0.2   121 lines  minor 100%       ; Z6:1A/1B/1C/1D/2A/2B/2C/2D
+ID 14   (ObjBigRing)   56 rounds, 1 variants, 1 families
+   F0.0   107 lines  base             ; Z1:1A/1B/1C/1D/2A/2B/2C/2D Z3:1A/1B/1C/1D/2A/2B/2C/2D Z4:1A/1B/1C/1D/2A/2B/2C/2D Z5:1A/1B/1C/1D/2A/2B/2C/2D Z6:1A/1B/1C/1D/2A/2B/2C/2D Z7:1A/1B/1C/1D/2A/2B/2C/2D Z8:1A/1B/1C/1D/2A/2B/2C/2D
 ID 15   (ObjCapsule)   10 rounds, 2 variants, 1 families
    F0.0   165 lines  base             ; Z1:3C/3D Z4:3C/3D Z5:3C/3D Z6:3C/3D
    F0.1   166 lines  minor 100%       ; Z3:3C/3D
-ID 16   (ObjGoalPost)   55 rounds, 1 variants, 1 families
-   F0.0    87 lines  base             ; Z1:2A/2B/2C/2D Z3:1A/1B/1C/1D/2A/2B/2C/2D Z4:1A/1B/1C/1D/2A/2B/2C/2D/3C/3D Z5:1A/1B/1C/1D/2A/2B/2C/2D Z6:1B/1C/1D/2A/2B/2C/2D/3C/3D Z7:1A/1B/1C/1D/2A/2B/2C/2D Z8:1A/1B/1C/1D/2A/2B/2C/2D
-ID 17   (Obj17_20D4EC)   51 rounds, 1 variants, 1 families
-   F0.0    12 lines  base             ; Z1:2A/2B/2C/2D Z3:1A/1B/1C/1D/2A/2B/2C/2D Z4:1A/1B/1C/1D/2A/2B/2C/2D Z5:1A/1B/1C/1D/2A/2B/2C/2D Z6:1B/1C/1D/2A/2B/2C/2D Z7:1A/1B/1C/1D/2A/2B/2C/2D Z8:1A/1B/1C/1D/2A/2B/2C/2D
-ID 19   (ObjMonitorTimepost)   65 rounds, 1 variants, 1 families
-   F0.0     6 lines  base             ; Z1:2A/2B/2C/2D/3C/3D Z3:1A/1B/1C/1D/2A/2B/2C/2D/3C/3D Z4:1A/1B/1C/1D/2A/2B/2C/2D/3C/3D Z5:1A/1B/1C/1D/2A/2B/2C/2D/3C/3D Z6:1B/1C/1D/2A/2B/2C/2D/3C/3D Z7:1A/1B/1C/1D/2A/2B/2C/2D/3C/3D Z8:1A/1B/1C/1D/2A/2B/2C/2D/3C/3D
-ID 1B   (Obj1B_209420)   4 rounds, 1 variants, 1 families
-   F0.0    10 lines  base             ; Z1:2A/2B/2C/2D
+ID 16   (ObjGoalPost)   60 rounds, 1 variants, 1 families
+   F0.0    87 lines  base             ; Z1:1A/1B/1C/1D/2A/2B/2C/2D Z3:1A/1B/1C/1D/2A/2B/2C/2D Z4:1A/1B/1C/1D/2A/2B/2C/2D/3C/3D Z5:1A/1B/1C/1D/2A/2B/2C/2D Z6:1A/1B/1C/1D/2A/2B/2C/2D/3C/3D Z7:1A/1B/1C/1D/2A/2B/2C/2D Z8:1A/1B/1C/1D/2A/2B/2C/2D
+ID 17   (Obj17_20D7C2)   56 rounds, 1 variants, 1 families
+   F0.0    12 lines  base             ; Z1:1A/1B/1C/1D/2A/2B/2C/2D Z3:1A/1B/1C/1D/2A/2B/2C/2D Z4:1A/1B/1C/1D/2A/2B/2C/2D Z5:1A/1B/1C/1D/2A/2B/2C/2D Z6:1A/1B/1C/1D/2A/2B/2C/2D Z7:1A/1B/1C/1D/2A/2B/2C/2D Z8:1A/1B/1C/1D/2A/2B/2C/2D
+ID 19   (ObjMonitorTimepost)   70 rounds, 1 variants, 1 families
+   F0.0     6 lines  base             ; Z1:1A/1B/1C/1D/2A/2B/2C/2D/3C/3D Z3:1A/1B/1C/1D/2A/2B/2C/2D/3C/3D Z4:1A/1B/1C/1D/2A/2B/2C/2D/3C/3D Z5:1A/1B/1C/1D/2A/2B/2C/2D/3C/3D Z6:1A/1B/1C/1D/2A/2B/2C/2D/3C/3D Z7:1A/1B/1C/1D/2A/2B/2C/2D/3C/3D Z8:1A/1B/1C/1D/2A/2B/2C/2D/3C/3D
+ID 1B   (Obj1B_2095F8)   8 rounds, 1 variants, 1 families
+   F0.0    10 lines  base             ; Z1:1A/1B/1C/1D/2A/2B/2C/2D
 ID 1D   (Obj3DPlant)   24 rounds, 4 variants, 3 families
    F0.0   109 lines  base             ; Z3:1A/1B/1C/1D/2A/2B/2C/2D/3C/3D
    F0.1   219 lines  moderate 66%     ; Z8:3C/3D
    F1.0   106 lines  base             ; Z7:1A/1B/1C/1D/2A/2B/2C/2D
    F2.0   176 lines  base             ; Z8:2A/2B/2C/2D
-ID 1E   (ObjSpinTunnel)   25 rounds, 3 variants, 3 families
+ID 1E   (ObjSpinTunnel)   26 rounds, 3 variants, 3 families
    F0.0   111 lines  base             ; Z3:1A/1B/1C/1D/2A/2B/2C/2D/3C/3D
-   F1.0   137 lines  base             ; Z6:1B/1C/1D/2A/2B/2C/2D
+   F1.0   137 lines  base             ; Z6:1A/1B/1C/1D/2A/2B/2C/2D
    F2.0   549 lines  base             ; Z7:1A/1B/1C/1D/2A/2B/2C/2D
-ID 20   (ObjCollapsePlatform)   45 rounds, 7 variants, 6 families
-   F0.0   247 lines  base             ; Z1:2A/2B/2C/2D
+ID 20   (ObjCollapsePlatform)   50 rounds, 10 variants, 6 families
+   F0.0   248 lines  base             ; Z1:1A
+   F0.1   250 lines  minor 99%        ; Z1:1B
+   F0.2   246 lines  minor 99%        ; Z1:1C/1D
+   F0.3   247 lines  minor 100%       ; Z1:2A/2B/2C/2D
    F1.0    33 lines  base             ; Z3:1A/1B/1C/1D/2A/2B/2C/2D/3C/3D
    F2.0   220 lines  base             ; Z4:1A/1B/1C/1D/2A/2B/2C/2D
    F3.0    11 lines  base             ; Z5:1A/1B/1C/1D/2A/2B/2C/2D
-   F4.0    26 lines  base             ; Z6:1B/1C/1D
+   F4.0    26 lines  base             ; Z6:1A/1B/1C/1D
    F4.1    37 lines  moderate 79%     ; Z7:1A/1B/1C/1D/2A/2B/2C/2D
    F5.0   209 lines  base             ; Z8:2A/2B/2C/2D
-ID 21   (ObjPataBata)   41 rounds, 7 variants, 7 families
-   F0.0    91 lines  base             ; Z1:2A/2B/2C/2D
+ID 21   (ObjPataBata)   46 rounds, 7 variants, 7 families
+   F0.0    91 lines  base             ; Z1:1A/1B/1C/1D/2A/2B/2C/2D
    F1.0    90 lines  base             ; Z3:1A/1B/1C/1D/2A/2B/2C/2D
    F2.0    64 lines  base             ; Z5:1A/1B/1C/1D/2A/2B/2C/2D
    F3.0    65 lines  base             ; Z5:3C/3D
-   F4.0   214 lines  base             ; Z6:1B/1C/1D/2A/2B/2C/2D
+   F4.0   214 lines  base             ; Z6:1A/1B/1C/1D/2A/2B/2C/2D
    F5.0   114 lines  base             ; Z7:1A/1B/1C/1D/2A/2B/2C/2D
    F6.0    59 lines  base             ; Z8:2A/2B/2C/2D
-ID 22   (ObjTamabboh)   51 rounds, 7 variants, 6 families
-   F0.0   192 lines  base             ; Z1:2A/2B/2C/2D/3C/3D
+ID 22   (ObjTamabboh)   56 rounds, 7 variants, 6 families
+   F0.0   192 lines  base             ; Z1:1A/1B/1C/1D/2A/2B/2C/2D/3C/3D
    F1.0   107 lines  base             ; Z3:1A/1B/1C/1D/2A/2B/2C/2D
    F2.0    27 lines  base             ; Z4:1A/1B/1C/1D/2A/2B/2C/2D
-   F2.1    19 lines  moderate 78%     ; Z6:1B/1C/1D/2A/2B/2C/2D/3C/3D
+   F2.1    19 lines  moderate 78%     ; Z6:1A/1B/1C/1D/2A/2B/2C/2D/3C/3D
    F3.0   182 lines  base             ; Z5:1A/1B/1C/1D/2A/2B/2C/2D
    F4.0   208 lines  base             ; Z7:1A/1B/1C/1D/2A/2B/2C/2D
    F5.0    99 lines  base             ; Z8:2A/2B/2C/2D
-ID 23   (Obj23_20C452)   31 rounds, 5 variants, 5 families
+ID 23   (Obj23_20C452)   32 rounds, 5 variants, 5 families
    F0.0    56 lines  base             ; Z3:1A/1B/1C/1D/2A/2B/2C/2D
    F1.0   212 lines  base             ; Z5:1A/1B/1C/1D/2A/2B/2C/2D
-   F2.0   148 lines  base             ; Z6:1B/1C/1D
+   F2.0   148 lines  base             ; Z6:1A/1B/1C/1D
    F3.0   461 lines  base             ; Z7:1A/1B/1C/1D/2A/2B/2C/2D
    F4.0   469 lines  base             ; Z8:2A/2B/2C/2D
-ID 24   (ObjAnimal)   47 rounds, 6 variants, 6 families
-   F0.0     9 lines  base             ; Z1:2A/2B/2C/2D/3C/3D
+ID 24   (ObjAnimal)   52 rounds, 6 variants, 6 families
+   F0.0     9 lines  base             ; Z1:1A/1B/1C/1D/2A/2B/2C/2D/3C/3D
    F1.0   188 lines  base             ; Z3:1A/1B/1C/1D/2A/2B/2C/2D
    F2.0   119 lines  base             ; Z5:1A/1B/1C/1D/2A/2B/2C/2D
-   F3.0    54 lines  base             ; Z6:1B/1C/1D/2A/2B/2C/2D
+   F3.0    54 lines  base             ; Z6:1A/1B/1C/1D/2A/2B/2C/2D
    F4.0    32 lines  base             ; Z7:1A/1B/1C/1D/2A/2B/2C/2D
    F5.0   132 lines  base             ; Z8:1A/1B/1C/1D/2A/2B/2C/2D/3C/3D
-ID 25   (Obj25_20CEE0)   36 rounds, 5 variants, 5 families
+ID 25   (Obj25_20CEE0)   37 rounds, 5 variants, 5 families
    F0.0    92 lines  base             ; Z4:2A/2C/2D
    F1.0    91 lines  base             ; Z5:1A/1B/1C/1D/2A/2B/2C/2D
-   F2.0    27 lines  base             ; Z6:1B/1C/1D/2A/2B/2C/2D
+   F2.0    27 lines  base             ; Z6:1A/1B/1C/1D/2A/2B/2C/2D
    F3.0     8 lines  base             ; Z7:1A/1B/1C/1D/2A/2B/2C/2D
    F4.0   119 lines  base             ; Z8:1A/1B/1C/1D/2A/2B/2C/2D/3C/3D
-ID 26   (Obj26_20BF50)   34 rounds, 7 variants, 5 families
-   F0.0     8 lines  base             ; Z1:2A/2B/2C/2D
+ID 26   (Obj26_20C128)   38 rounds, 7 variants, 5 families
+   F0.0     8 lines  base             ; Z1:1A/1B/1C/1D/2A/2B/2C/2D
    F1.0    20 lines  base             ; Z3:1A/1B/1C/1D
    F1.1    21 lines  minor 93%        ; Z4:1A/2A
    F1.2    29 lines  moderate 78%     ; Z6:2A/2B/2C/2D
    F2.0    33 lines  base             ; Z5:1A/1B/1C/1D/2A/2B/2C/2D
    F3.0   113 lines  base             ; Z7:1A/1B/1C/1D/2A/2B/2C/2D
    F4.0   223 lines  base             ; Z8:2A/2B/2C/2D
-ID 27   (ObjProjector)   39 rounds, 5 variants, 5 families
+ID 27   (ObjProjector)   40 rounds, 5 variants, 5 families
    F0.0   114 lines  base             ; Z4:1A/1B/1C/1D/2A/2B/2C/2D
    F1.0   111 lines  base             ; Z5:1A/1B/1C/1D/2A/2B/2C/2D
-   F2.0    27 lines  base             ; Z6:1B/1C/1D/2A/2B/2C/2D/3C/3D
+   F2.0    27 lines  base             ; Z6:1A/1B/1C/1D/2A/2B/2C/2D/3C/3D
    F3.0   129 lines  base             ; Z7:1A/1B/1C/1D/2A/2B/2C/2D
    F4.0   153 lines  base             ; Z8:1A/1B/1C/1D/3C/3D
-ID 28   (ObjAnimal)   43 rounds, 8 variants, 6 families
+ID 28   (ObjAnimal)   44 rounds, 8 variants, 6 families
    F0.0    14 lines  base             ; Z1:2A/2B/2C/2D
    F1.0    22 lines  base             ; Z3:2A/2B/2C/2D
    F2.0    42 lines  base             ; Z4:1A/2A/2C/2D
-   F2.1    55 lines  moderate 87%     ; Z6:1B/1C/1D/2A/2B/2C/2D/3C/3D
+   F2.1    55 lines  moderate 87%     ; Z6:1A/1B/1C/1D/2A/2B/2C/2D/3C/3D
    F3.0   161 lines  base             ; Z5:1A/1B/1C/1D/2A/2B/2C/2D
    F3.1   135 lines  minor 91%        ; Z5:3C/3D
    F4.0     9 lines  base             ; Z7:1A/1B/1C/1D/2A/2B/2C/2D
    F5.0   181 lines  base             ; Z8:1A/1B/1C/1D
-ID 29   (ObjAnimal)   32 rounds, 5 variants, 5 families
+ID 29   (ObjAnimal)   33 rounds, 5 variants, 5 families
    F0.0    31 lines  base             ; Z4:1A
    F1.0   106 lines  base             ; Z5:1A/1B/1C/1D/2A/2B/2C/2D
-   F2.0     9 lines  base             ; Z6:1B/1C/1D/2A/2B/2C/2D/3C/3D
+   F2.0     9 lines  base             ; Z6:1A/1B/1C/1D/2A/2B/2C/2D/3C/3D
    F3.0   133 lines  base             ; Z7:1A/1B/1C/1D/2A/2B/2C/2D
    F4.0   159 lines  base             ; Z8:2A/2B/2C/2D/3C/3D
-ID 2A   (Obj2A_20B136)   30 rounds, 7 variants, 7 families
-   F0.0    95 lines  base             ; Z3:1A/1B/1C/1D/2A/2B/2C/2D
-   F1.0    57 lines  base             ; Z4:1A
-   F2.0   163 lines  base             ; Z5:2A/2B/2C/2D
-   F3.0   217 lines  base             ; Z6:1B/1C/1D/2A/2B/2C/2D
-   F4.0   227 lines  base             ; Z7:1A/1B/1C/1D
-   F5.0    26 lines  base             ; Z8:1A/1B/1C/1D
-   F6.0   117 lines  base             ; Z8:3C/3D
-ID 2B   (ObjSpinTunnel)   31 rounds, 6 variants, 6 families
+ID 2A   (Obj3DRamp)   32 rounds, 8 variants, 8 families
+   F0.0   118 lines  base             ; Z1:1A
+   F1.0    95 lines  base             ; Z3:1A/1B/1C/1D/2A/2B/2C/2D
+   F2.0    57 lines  base             ; Z4:1A
+   F3.0   163 lines  base             ; Z5:2A/2B/2C/2D
+   F4.0   217 lines  base             ; Z6:1A/1B/1C/1D/2A/2B/2C/2D
+   F5.0   227 lines  base             ; Z7:1A/1B/1C/1D
+   F6.0    26 lines  base             ; Z8:1A/1B/1C/1D
+   F7.0   117 lines  base             ; Z8:3C/3D
+ID 2B   (ObjSpinTunnel)   32 rounds, 6 variants, 6 families
    F0.0    88 lines  base             ; Z4:1A/1B/1C/1D/2A/2B/2C/2D
    F1.0    80 lines  base             ; Z5:1A/1B/1C/1D/2A/2B/2C/2D
-   F2.0   162 lines  base             ; Z6:1B/1C/1D
+   F2.0   162 lines  base             ; Z6:1A/1B/1C/1D
    F3.0   137 lines  base             ; Z7:1A/1B/1C/1D/2A/2B/2C/2D
    F4.0   116 lines  base             ; Z7:3C/3D
    F5.0    55 lines  base             ; Z8:3C/3D
-ID 2C   (ObjProjector)   33 rounds, 9 variants, 6 families
-   F0.0   121 lines  base             ; Z3:1A/2A
-   F0.1   106 lines  minor 93%        ; Z3:1B/2B
-   F0.2   134 lines  minor 95%        ; Z3:1C/1D/2C/2D
-   F1.0   204 lines  base             ; Z4:1A/1B/1C/1D/2A/2B/2C/2D
-   F2.0   105 lines  base             ; Z5:1A
-   F2.1   129 lines  moderate 89%     ; Z5:1B/1C/1D/2A/2B/2C/2D
-   F3.0   181 lines  base             ; Z6:1B/1C/1D
-   F4.0   541 lines  base             ; Z7:3C/3D
-   F5.0   138 lines  base             ; Z8:1A/1B/1C/1D
-ID 2D   (ObjAnimal)   36 rounds, 8 variants, 6 families
-   F0.0   133 lines  base             ; Z1:2A/2B/2C/2D
+ID 2C   (ObjProjector)   35 rounds, 10 variants, 7 families
+   F0.0   105 lines  base             ; Z1:1A
+   F1.0   121 lines  base             ; Z3:1A/2A
+   F1.1   106 lines  minor 93%        ; Z3:1B/2B
+   F1.2   134 lines  minor 95%        ; Z3:1C/1D/2C/2D
+   F2.0   204 lines  base             ; Z4:1A/1B/1C/1D/2A/2B/2C/2D
+   F3.0   105 lines  base             ; Z5:1A
+   F3.1   129 lines  moderate 89%     ; Z5:1B/1C/1D/2A/2B/2C/2D
+   F4.0   181 lines  base             ; Z6:1A/1B/1C/1D
+   F5.0   541 lines  base             ; Z7:3C/3D
+   F6.0   138 lines  base             ; Z8:1A/1B/1C/1D
+ID 2D   (ObjRobotGenerator)   40 rounds, 8 variants, 6 families
+   F0.0   133 lines  base             ; Z1:1A/1B/1C/1D/2A/2B/2C/2D
    F1.0   145 lines  base             ; Z3:1A/1B/1C/1D/2A/2B/2C/2D
    F2.0   258 lines  base             ; Z4:1A/1B/1C/1D/2A/2B/2C/2D
    F3.0     9 lines  base             ; Z5:1A/1B/1C/1D/2A/2B/2C/2D
@@ -162,57 +167,59 @@ ID 2D   (ObjAnimal)   36 rounds, 8 variants, 6 families
    F4.1   134 lines  minor 95%        ; Z6:2B
    F4.2   164 lines  minor 95%        ; Z6:2C/2D
    F5.0   222 lines  base             ; Z8:2A/2B/2C/2D
-ID 2E   (ObjRobotGenerator)   39 rounds, 5 variants, 5 families
-   F0.0   134 lines  base             ; Z1:2A/2B/2C/2D
+ID 2E   (ObjRobotGenerator)   44 rounds, 5 variants, 5 families
+   F0.0   134 lines  base             ; Z1:1A/1B/1C/1D/2A/2B/2C/2D
    F1.0   246 lines  base             ; Z3:1A/1B/1C/1D/2A/2B/2C/2D
    F2.0   330 lines  base             ; Z4:1A/1B/1C/1D/2A/2B/2C/2D
-   F3.0   133 lines  base             ; Z5:1A/1B/1C/1D/2A/2B/2C/2D Z6:1B/1C/1D/2A/2B/2C/2D
+   F3.0   133 lines  base             ; Z5:1A/1B/1C/1D/2A/2B/2C/2D Z6:1A/1B/1C/1D/2A/2B/2C/2D
    F4.0     5 lines  base             ; Z8:1A/1B/1C/1D
-ID 2F   (Obj2F_20F930)   37 rounds, 5 variants, 5 families
-   F0.0   232 lines  base             ; Z3:1A/1B/1C/1D/2A/2B/2C/2D
-   F1.0   127 lines  base             ; Z4:1A/1B/1C/1D/2A/2B/2C/2D/3C/3D
-   F2.0   283 lines  base             ; Z5:1A/1B/1C/1D/2A/2B/2C/2D
-   F3.0    23 lines  base             ; Z6:1B/1C/1D/2A/2B/2C/2D
-   F4.0   504 lines  base             ; Z8:1A/1B/1C/1D
-ID 30   (Obj30_20E340)   11 rounds, 4 variants, 3 families
+ID 2F   (Obj2F_20F930)   39 rounds, 6 variants, 6 families
+   F0.0   399 lines  base             ; Z1:1A
+   F1.0   232 lines  base             ; Z3:1A/1B/1C/1D/2A/2B/2C/2D
+   F2.0   127 lines  base             ; Z4:1A/1B/1C/1D/2A/2B/2C/2D/3C/3D
+   F3.0   283 lines  base             ; Z5:1A/1B/1C/1D/2A/2B/2C/2D
+   F4.0    23 lines  base             ; Z6:1A/1B/1C/1D/2A/2B/2C/2D
+   F5.0   504 lines  base             ; Z8:1A/1B/1C/1D
+ID 30   (Obj30_20E340)   12 rounds, 4 variants, 3 families
    F0.0    37 lines  base             ; Z3:1A
    F0.1    37 lines  minor 97%        ; Z4:1A
    F1.0   169 lines  base             ; Z3:3C/3D
-   F2.0   180 lines  base             ; Z6:1B/1C/1D/2A/2B/2C/2D
-ID 31   (Obj31_20DD0C)   17 rounds, 3 variants, 3 families
-   F0.0    62 lines  base             ; Z3:3C/3D
-   F1.0   104 lines  base             ; Z5:1A/1B/1C/1D/2A/2B/2C/2D
-   F2.0   265 lines  base             ; Z6:1B/1C/1D/2A/2B/2C/2D
-ID 32   (ObjAnimal)   21 rounds, 6 variants, 6 families
-   F0.0    18 lines  base             ; Z1:2A/2B/2C/2D
+   F2.0   180 lines  base             ; Z6:1A/1B/1C/1D/2A/2B/2C/2D
+ID 31   (Obj31_208A0C)   22 rounds, 4 variants, 4 families
+   F0.0    10 lines  base             ; Z1:1A/1B/1C/1D
+   F1.0    62 lines  base             ; Z3:3C/3D
+   F2.0   104 lines  base             ; Z5:1A/1B/1C/1D/2A/2B/2C/2D
+   F3.0   265 lines  base             ; Z6:1A/1B/1C/1D/2A/2B/2C/2D
+ID 32   (ObjAnimal)   25 rounds, 6 variants, 6 families
+   F0.0    18 lines  base             ; Z1:1B/1C/1D/2A/2B/2C/2D
    F1.0   144 lines  base             ; Z3:1A
    F2.0   141 lines  base             ; Z4:1A
-   F3.0   221 lines  base             ; Z6:1B/1C/1D
+   F3.0   221 lines  base             ; Z6:1A/1B/1C/1D
    F4.0   166 lines  base             ; Z7:3C/3D
    F5.0     9 lines  base             ; Z8:1A/1B/1C/1D/2A/2B/2C/2D/3C/3D
-ID 33   (Obj33_208796)   23 rounds, 8 variants, 6 families
-   F0.0    10 lines  base             ; Z1:2A/2B/2C/2D
+ID 33   (Obj33_20896E)   28 rounds, 8 variants, 6 families
+   F0.0    10 lines  base             ; Z1:1A/1B/1C/1D/2A/2B/2C/2D
    F1.0   141 lines  base             ; Z4:1A/1B
    F2.0   120 lines  base             ; Z5:3C/3D
-   F3.0   223 lines  base             ; Z6:1B/1C/1D/2A/2B/2C/2D
+   F3.0   223 lines  base             ; Z6:1A/1B/1C/1D/2A/2B/2C/2D
    F4.0   251 lines  base             ; Z7:3C
    F4.1   249 lines  minor 100%       ; Z7:3D
    F5.0   269 lines  base             ; Z8:2A/2B/2C/2D
    F5.1   260 lines  minor 98%        ; Z8:3C/3D
-ID 34   (ObjSpinTunnel)   28 rounds, 4 variants, 4 families
-   F0.0   137 lines  base             ; Z1:2A/2B/2C/2D/3C/3D
+ID 34   (ObjSpinTunnel)   32 rounds, 4 variants, 4 families
+   F0.0   137 lines  base             ; Z1:1A/1B/1C/1D/2A/2B/2C/2D/3C/3D
    F1.0    33 lines  base             ; Z4:1A/1B/1C/1D/2A/2B/2C/2D/3C/3D
    F2.0   203 lines  base             ; Z6:3C/3D
    F3.0    54 lines  base             ; Z8:1A/1B/1C/1D/2A/2B/2C/2D/3C/3D
-ID 35   (ObjSpinTunnel)   36 rounds, 6 variants, 5 families
-   F0.0    16 lines  base             ; Z1:2A/2B/2C/2D
+ID 35   (ObjSpinTunnel)   40 rounds, 6 variants, 5 families
+   F0.0    16 lines  base             ; Z1:1A/1B/1C/1D/2A/2B/2C/2D
    F1.0   137 lines  base             ; Z3:1A/1B/1C/1D/2A/2B/2C/2D/3C/3D
    F2.0    59 lines  base             ; Z4:1A/1B/2A/2B
    F2.1    54 lines  moderate 74%     ; Z4:1C/1D/2C/2D
    F3.0    28 lines  base             ; Z7:1A/1B/1C/1D/2A/2B/2C/2D/3C/3D
    F4.0   256 lines  base             ; Z8:1A/1B/1C/1D
-ID 36   (Obj36_20ED8C)   22 rounds, 7 variants, 5 families
-   F0.0     9 lines  base             ; Z1:2A/2B/2C/2D
+ID 36   (ObjGameOver)   26 rounds, 7 variants, 5 families
+   F0.0     9 lines  base             ; Z1:1A/1B/1C/1D/2A/2B/2C/2D
    F1.0     5 lines  base             ; Z3:3C/3D
    F2.0   182 lines  base             ; Z4:1A/2A/2C/2D
    F3.0   107 lines  base             ; Z7:3C/3D
@@ -230,17 +237,17 @@ ID 38   (ObjProjector)   24 rounds, 4 variants, 4 families
 ID 39   (ObjAnimal)   13 rounds, 2 variants, 2 families
    F0.0     9 lines  base             ; Z3:1A/1B/1C/1D/2A/2B/2C/2D
    F1.0   129 lines  base             ; Z4:1A/2A/2B/2C/2D
-ID 3D   (Obj3D_20B3AE)   8 rounds, 3 variants, 3 families
-   F0.0     9 lines  base             ; Z1:2A/2B/2C/2D
+ID 3D   (Obj3D_20B586)   12 rounds, 3 variants, 3 families
+   F0.0     9 lines  base             ; Z1:1A/1B/1C/1D/2A/2B/2C/2D
    F1.0   252 lines  base             ; Z4:1B/2B
    F2.0    72 lines  base             ; Z8:3C/3D
-ID 3E   (ObjPataBata)   10 rounds, 2 variants, 2 families
-   F0.0    67 lines  base             ; Z1:2A/2B/2C/2D
+ID 3E   (ObjPataBata)   14 rounds, 2 variants, 2 families
+   F0.0    67 lines  base             ; Z1:1A/1B/1C/1D/2A/2B/2C/2D
    F1.0   191 lines  base             ; Z8:2A/2B/2C/2D/3C/3D
-ID 3F   (ObjAnton)   4 rounds, 1 variants, 1 families
-   F0.0    67 lines  base             ; Z1:2A/2B/2C/2D
-ID 40   (Obj40_20B8D0)   4 rounds, 1 variants, 1 families
-   F0.0    15 lines  base             ; Z1:2A/2B/2C/2D
+ID 3F   (ObjAnton)   8 rounds, 1 variants, 1 families
+   F0.0    67 lines  base             ; Z1:1A/1B/1C/1D/2A/2B/2C/2D
+ID 40   (Obj40_20BAA8)   8 rounds, 1 variants, 1 families
+   F0.0    15 lines  base             ; Z1:1A/1B/1C/1D/2A/2B/2C/2D
 ID 42   (Obj42_20F23A)   1 rounds, 1 variants, 1 families
    F0.0    84 lines  base             ; Z4:2A
 ID 43   (Obj43_20E410)   8 rounds, 1 variants, 1 families
@@ -264,4 +271,4 @@ ID 51   (ObjRobotGenerator)   4 rounds, 1 variants, 1 families
 ID 52   (ObjProjector)   2 rounds, 1 variants, 1 families
    F0.0   121 lines  base             ; Z4:1B/2B
 
-summary: {'base': 178, 'ids': 60, 'multi-family-ids': 36, 'moderate': 9, 'minor': 18}
+summary: {'base': 182, 'ids': 60, 'multi-family-ids': 36, 'moderate': 9, 'minor': 21}

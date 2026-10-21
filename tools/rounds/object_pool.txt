@@ -1,180 +1,185 @@
-Global object pool (placed objects, one entry per family; moderate/minor variants merged into the first by round order).
-NEWID  oldID.fam  base label  lines  first-round family / rounds using it
-01  04.F0  Obj04_208E70  107  ; Z6:1B/1C/1D/2A/2B/2C/2D
-02  05.F0  Obj05_2069EC  103  ; Z4:2A/2B/2C/2D
-03  05.F1  Obj05_2069EC  299  ; Z6:1B/1C/1D/2A/2B/2C/2D
-04  07.F0  ObjTunnelPath  242  ; Z1:2A/2B/2C/2D
-05  07.F1  ObjTunnelPath  308  ; Z6:1B/1C/1D/2A/2B/2C/2D/3C/3D
-06  08.F0  Obj08_208872  68  ; Z6:1B/1C/1D
-07  08.F1  Obj08_208872  121  ; Z7:1A/1B/1C/1D/2A/2B/2C/2D
-08  09.F0  ObjSpinningDisc  160  ; Z1:2A/2B/2C/2D
-09  09.F1  ObjSpinningDisc  22  ; Z8:2A/2B/2C/2D/3C/3D
-0A  0A.F0  ObjSpring  276  ; Z1:2A/2B/2C/2D/3C/3D Z3:1A/1B/1C/1D/2A/2B/2C/2D/3C/3D Z4:1A/1B/1C/1D/2A/2B/2C/2D/3C/3D Z5:
-0B  0D.F0  ObjTunnelDoor  84  ; Z1:2A/2B/2C/2D
-0C  0F.F0  ObjMovingSpring  67  ; Z1:2A/2B/2C/2D
-0D  0F.F1  ObjMovingSpring  39  ; Z8:1A/1B/1C/1D/2A/2B/2C/2D/3C/3D
-0E  10.F0  Obj10_209AB4  44  ; Z1:2A/2B/2C/2D/3C/3D Z3:1A/1B/1C/1D/2A/2B/2C/2D Z4:1A/1B/1C/1D/2A/2B/2C/2D/3C/3D Z5:1A/1B/
-0F  10.F1  Obj10_209AB4  144  ; Z3:3C/3D Z8:3C/3D
-10  12.F0  ObjFloatBlock  98  ; Z1:2A/2B/2C/2D
-11  13.F0  ObjCheckpoint  120  ; Z1:2A/2B/2C/2D Z3:1A/2A/2B/2C/2D Z5:1A/1B/1C/1D/2A/2B/2C/2D Z7:1A/1B/1C/1D/2A/2B/2C/2D Z8:
-12  14.F0  ObjBigRing  107  ; Z1:2A/2B/2C/2D Z3:1A/1B/1C/1D/2A/2B/2C/2D Z4:1A/1B/1C/1D/2A/2B/2C/2D Z5:1A/1B/1C/1D/2A/2B/
-13  15.F0  ObjCapsule  165  ; Z1:3C/3D Z4:3C/3D Z5:3C/3D Z6:3C/3D
-14  16.F0  ObjGoalPost  87  ; Z1:2A/2B/2C/2D Z3:1A/1B/1C/1D/2A/2B/2C/2D Z4:1A/1B/1C/1D/2A/2B/2C/2D/3C/3D Z5:1A/1B/1C/1D/
-15  17.F0  Obj17_20D4EC  12  ; Z1:2A/2B/2C/2D Z3:1A/1B/1C/1D/2A/2B/2C/2D Z4:1A/1B/1C/1D/2A/2B/2C/2D Z5:1A/1B/1C/1D/2A/2B/
-16  19.F0  ObjMonitorTimepost  6  ; Z1:2A/2B/2C/2D/3C/3D Z3:1A/1B/1C/1D/2A/2B/2C/2D/3C/3D Z4:1A/1B/1C/1D/2A/2B/2C/2D/3C/3D Z5:
-17  1B.F0  Obj1B_209420  10  ; Z1:2A/2B/2C/2D
-18  1D.F0  Obj3DPlant  109  ; Z3:1A/1B/1C/1D/2A/2B/2C/2D/3C/3D
-19  1D.F1  Obj3DPlant  106  ; Z7:1A/1B/1C/1D/2A/2B/2C/2D
-1A  1D.F2  Obj3DPlant  176  ; Z8:2A/2B/2C/2D
-1B  1E.F0  ObjSpinTunnel  111  ; Z3:1A/1B/1C/1D/2A/2B/2C/2D/3C/3D
-1C  1E.F1  ObjSpinTunnel  137  ; Z6:1B/1C/1D/2A/2B/2C/2D
-1D  1E.F2  ObjSpinTunnel  549  ; Z7:1A/1B/1C/1D/2A/2B/2C/2D
-1E  20.F0  ObjCollapsePlatform  247  ; Z1:2A/2B/2C/2D
-1F  20.F1  ObjCollapsePlatform  33  ; Z3:1A/1B/1C/1D/2A/2B/2C/2D/3C/3D
-20  20.F2  ObjCollapsePlatform  220  ; Z4:1A/1B/1C/1D/2A/2B/2C/2D
-21  20.F3  ObjCollapsePlatform  11  ; Z5:1A/1B/1C/1D/2A/2B/2C/2D
-22  20.F4  ObjCollapsePlatform  26  ; Z6:1B/1C/1D
-23  20.F5  ObjCollapsePlatform  209  ; Z8:2A/2B/2C/2D
-24  21.F0  ObjPataBata  91  ; Z1:2A/2B/2C/2D
-25  21.F1  ObjPataBata  90  ; Z3:1A/1B/1C/1D/2A/2B/2C/2D
-26  21.F2  ObjPataBata  64  ; Z5:1A/1B/1C/1D/2A/2B/2C/2D
-27  21.F3  ObjPataBata  65  ; Z5:3C/3D
-28  21.F4  ObjPataBata  214  ; Z6:1B/1C/1D/2A/2B/2C/2D
-29  21.F5  ObjPataBata  114  ; Z7:1A/1B/1C/1D/2A/2B/2C/2D
-2A  21.F6  ObjPataBata  59  ; Z8:2A/2B/2C/2D
-2B  22.F0  ObjTamabboh  192  ; Z1:2A/2B/2C/2D/3C/3D
-2C  22.F1  ObjTamabboh  107  ; Z3:1A/1B/1C/1D/2A/2B/2C/2D
-2D  22.F2  ObjTamabboh  27  ; Z4:1A/1B/1C/1D/2A/2B/2C/2D
-2E  22.F3  ObjTamabboh  182  ; Z5:1A/1B/1C/1D/2A/2B/2C/2D
-2F  22.F4  ObjTamabboh  208  ; Z7:1A/1B/1C/1D/2A/2B/2C/2D
-30  22.F5  ObjTamabboh  99  ; Z8:2A/2B/2C/2D
-31  23.F0  Obj23_20C452  56  ; Z3:1A/1B/1C/1D/2A/2B/2C/2D
-32  23.F1  Obj23_20C452  212  ; Z5:1A/1B/1C/1D/2A/2B/2C/2D
-33  23.F2  Obj23_20C452  148  ; Z6:1B/1C/1D
-34  23.F3  Obj23_20C452  461  ; Z7:1A/1B/1C/1D/2A/2B/2C/2D
-35  23.F4  Obj23_20C452  469  ; Z8:2A/2B/2C/2D
-36  24.F0  ObjAnimal  9  ; Z1:2A/2B/2C/2D/3C/3D
-37  24.F1  ObjAnimal  188  ; Z3:1A/1B/1C/1D/2A/2B/2C/2D
-38  24.F2  ObjAnimal  119  ; Z5:1A/1B/1C/1D/2A/2B/2C/2D
-39  24.F3  ObjAnimal  54  ; Z6:1B/1C/1D/2A/2B/2C/2D
-3A  24.F4  ObjAnimal  32  ; Z7:1A/1B/1C/1D/2A/2B/2C/2D
-3B  24.F5  ObjAnimal  132  ; Z8:1A/1B/1C/1D/2A/2B/2C/2D/3C/3D
-3C  25.F0  Obj25_20CEE0  92  ; Z4:2A/2C/2D
-3D  25.F1  Obj25_20CEE0  91  ; Z5:1A/1B/1C/1D/2A/2B/2C/2D
-3E  25.F2  Obj25_20CEE0  27  ; Z6:1B/1C/1D/2A/2B/2C/2D
-3F  25.F3  Obj25_20CEE0  8  ; Z7:1A/1B/1C/1D/2A/2B/2C/2D
-40  25.F4  Obj25_20CEE0  119  ; Z8:1A/1B/1C/1D/2A/2B/2C/2D/3C/3D
-41  26.F0  Obj26_20BF50  8  ; Z1:2A/2B/2C/2D
-42  26.F1  Obj26_20BF50  20  ; Z3:1A/1B/1C/1D
-43  26.F2  Obj26_20BF50  33  ; Z5:1A/1B/1C/1D/2A/2B/2C/2D
-44  26.F3  Obj26_20BF50  113  ; Z7:1A/1B/1C/1D/2A/2B/2C/2D
-45  26.F4  Obj26_20BF50  223  ; Z8:2A/2B/2C/2D
-46  27.F0  ObjProjector  114  ; Z4:1A/1B/1C/1D/2A/2B/2C/2D
-47  27.F1  ObjProjector  111  ; Z5:1A/1B/1C/1D/2A/2B/2C/2D
-48  27.F2  ObjProjector  27  ; Z6:1B/1C/1D/2A/2B/2C/2D/3C/3D
-49  27.F3  ObjProjector  129  ; Z7:1A/1B/1C/1D/2A/2B/2C/2D
-4A  27.F4  ObjProjector  153  ; Z8:1A/1B/1C/1D/3C/3D
-4B  28.F0  ObjAnimal  14  ; Z1:2A/2B/2C/2D
-4C  28.F1  ObjAnimal  22  ; Z3:2A/2B/2C/2D
-4D  28.F2  ObjAnimal  42  ; Z4:1A/2A/2C/2D
-4E  28.F3  ObjAnimal  161  ; Z5:1A/1B/1C/1D/2A/2B/2C/2D
-4F  28.F4  ObjAnimal  9  ; Z7:1A/1B/1C/1D/2A/2B/2C/2D
-50  28.F5  ObjAnimal  181  ; Z8:1A/1B/1C/1D
-51  29.F0  ObjAnimal  31  ; Z4:1A
-52  29.F1  ObjAnimal  106  ; Z5:1A/1B/1C/1D/2A/2B/2C/2D
-53  29.F2  ObjAnimal  9  ; Z6:1B/1C/1D/2A/2B/2C/2D/3C/3D
-54  29.F3  ObjAnimal  133  ; Z7:1A/1B/1C/1D/2A/2B/2C/2D
-55  29.F4  ObjAnimal  159  ; Z8:2A/2B/2C/2D/3C/3D
-56  2A.F0  Obj2A_20B136  95  ; Z3:1A/1B/1C/1D/2A/2B/2C/2D
-57  2A.F1  Obj2A_20B136  57  ; Z4:1A
-58  2A.F2  Obj2A_20B136  163  ; Z5:2A/2B/2C/2D
-59  2A.F3  Obj2A_20B136  217  ; Z6:1B/1C/1D/2A/2B/2C/2D
-5A  2A.F4  Obj2A_20B136  227  ; Z7:1A/1B/1C/1D
-5B  2A.F5  Obj2A_20B136  26  ; Z8:1A/1B/1C/1D
-5C  2A.F6  Obj2A_20B136  117  ; Z8:3C/3D
-5D  2B.F0  ObjSpinTunnel  88  ; Z4:1A/1B/1C/1D/2A/2B/2C/2D
-5E  2B.F1  ObjSpinTunnel  80  ; Z5:1A/1B/1C/1D/2A/2B/2C/2D
-5F  2B.F2  ObjSpinTunnel  162  ; Z6:1B/1C/1D
-60  2B.F3  ObjSpinTunnel  137  ; Z7:1A/1B/1C/1D/2A/2B/2C/2D
-61  2B.F4  ObjSpinTunnel  116  ; Z7:3C/3D
-62  2B.F5  ObjSpinTunnel  55  ; Z8:3C/3D
-63  2C.F0  ObjProjector  121  ; Z3:1A/2A
-64  2C.F1  ObjProjector  204  ; Z4:1A/1B/1C/1D/2A/2B/2C/2D
-65  2C.F2  ObjProjector  105  ; Z5:1A
-66  2C.F3  ObjProjector  181  ; Z6:1B/1C/1D
-67  2C.F4  ObjProjector  541  ; Z7:3C/3D
-68  2C.F5  ObjProjector  138  ; Z8:1A/1B/1C/1D
-69  2D.F0  ObjAnimal  133  ; Z1:2A/2B/2C/2D
-6A  2D.F1  ObjAnimal  145  ; Z3:1A/1B/1C/1D/2A/2B/2C/2D
-6B  2D.F2  ObjAnimal  258  ; Z4:1A/1B/1C/1D/2A/2B/2C/2D
-6C  2D.F3  ObjAnimal  9  ; Z5:1A/1B/1C/1D/2A/2B/2C/2D
-6D  2D.F4  ObjAnimal  149  ; Z6:2A
-6E  2D.F5  ObjAnimal  222  ; Z8:2A/2B/2C/2D
-6F  2E.F0  ObjRobotGenerator  134  ; Z1:2A/2B/2C/2D
-70  2E.F1  ObjRobotGenerator  246  ; Z3:1A/1B/1C/1D/2A/2B/2C/2D
-71  2E.F2  ObjRobotGenerator  330  ; Z4:1A/1B/1C/1D/2A/2B/2C/2D
-72  2E.F3  ObjRobotGenerator  133  ; Z5:1A/1B/1C/1D/2A/2B/2C/2D Z6:1B/1C/1D/2A/2B/2C/2D
-73  2E.F4  ObjRobotGenerator  5  ; Z8:1A/1B/1C/1D
-74  2F.F0  Obj2F_20F930  232  ; Z3:1A/1B/1C/1D/2A/2B/2C/2D
-75  2F.F1  Obj2F_20F930  127  ; Z4:1A/1B/1C/1D/2A/2B/2C/2D/3C/3D
-76  2F.F2  Obj2F_20F930  283  ; Z5:1A/1B/1C/1D/2A/2B/2C/2D
-77  2F.F3  Obj2F_20F930  23  ; Z6:1B/1C/1D/2A/2B/2C/2D
-78  2F.F4  Obj2F_20F930  504  ; Z8:1A/1B/1C/1D
-79  30.F0  Obj30_20E340  37  ; Z3:1A
-7A  30.F1  Obj30_20E340  169  ; Z3:3C/3D
-7B  30.F2  Obj30_20E340  180  ; Z6:1B/1C/1D/2A/2B/2C/2D
-7C  31.F0  Obj31_20DD0C  62  ; Z3:3C/3D
-7D  31.F1  Obj31_20DD0C  104  ; Z5:1A/1B/1C/1D/2A/2B/2C/2D
-7E  31.F2  Obj31_20DD0C  265  ; Z6:1B/1C/1D/2A/2B/2C/2D
-7F  32.F0  ObjAnimal  18  ; Z1:2A/2B/2C/2D
-80  32.F1  ObjAnimal  144  ; Z3:1A
-81  32.F2  ObjAnimal  141  ; Z4:1A
-82  32.F3  ObjAnimal  221  ; Z6:1B/1C/1D
-83  32.F4  ObjAnimal  166  ; Z7:3C/3D
-84  32.F5  ObjAnimal  9  ; Z8:1A/1B/1C/1D/2A/2B/2C/2D/3C/3D
-85  33.F0  Obj33_208796  10  ; Z1:2A/2B/2C/2D
-86  33.F1  Obj33_208796  141  ; Z4:1A/1B
-87  33.F2  Obj33_208796  120  ; Z5:3C/3D
-88  33.F3  Obj33_208796  223  ; Z6:1B/1C/1D/2A/2B/2C/2D
-89  33.F4  Obj33_208796  251  ; Z7:3C
-8A  33.F5  Obj33_208796  269  ; Z8:2A/2B/2C/2D
-8B  34.F0  ObjSpinTunnel  137  ; Z1:2A/2B/2C/2D/3C/3D
-8C  34.F1  ObjSpinTunnel  33  ; Z4:1A/1B/1C/1D/2A/2B/2C/2D/3C/3D
-8D  34.F2  ObjSpinTunnel  203  ; Z6:3C/3D
-8E  34.F3  ObjSpinTunnel  54  ; Z8:1A/1B/1C/1D/2A/2B/2C/2D/3C/3D
-8F  35.F0  ObjSpinTunnel  16  ; Z1:2A/2B/2C/2D
-90  35.F1  ObjSpinTunnel  137  ; Z3:1A/1B/1C/1D/2A/2B/2C/2D/3C/3D
-91  35.F2  ObjSpinTunnel  59  ; Z4:1A/1B/2A/2B
-92  35.F3  ObjSpinTunnel  28  ; Z7:1A/1B/1C/1D/2A/2B/2C/2D/3C/3D
-93  35.F4  ObjSpinTunnel  256  ; Z8:1A/1B/1C/1D
-94  36.F0  Obj36_20ED8C  9  ; Z1:2A/2B/2C/2D
-95  36.F1  Obj36_20ED8C  5  ; Z3:3C/3D
-96  36.F2  Obj36_20ED8C  182  ; Z4:1A/2A/2C/2D
-97  36.F3  Obj36_20ED8C  107  ; Z7:3C/3D
-98  36.F4  Obj36_20ED8C  159  ; Z8:1A/1B/1C/1D
-99  37.F0  ObjRobotGenerator  133  ; Z3:1A/1B/1C/1D/2A/2B/2C/2D
-9A  37.F1  ObjRobotGenerator  17  ; Z4:2A/2C/2D
-9B  38.F0  ObjProjector  129  ; Z3:1A/1B/1C/1D/2A/2B/2C/2D
-9C  38.F1  ObjProjector  108  ; Z4:1C/1D/2C/2D
-9D  38.F2  ObjProjector  151  ; Z7:1A/1B/1C/1D/2A/2B/2C/2D
-9E  38.F3  ObjProjector  26  ; Z8:1A/1B/1C/1D
-9F  39.F0  ObjAnimal  9  ; Z3:1A/1B/1C/1D/2A/2B/2C/2D
-A0  39.F1  ObjAnimal  129  ; Z4:1A/2A/2B/2C/2D
-A1  3D.F0  Obj3D_20B3AE  9  ; Z1:2A/2B/2C/2D
-A2  3D.F1  Obj3D_20B3AE  252  ; Z4:1B/2B
-A3  3D.F2  Obj3D_20B3AE  72  ; Z8:3C/3D
-A4  3E.F0  ObjPataBata  67  ; Z1:2A/2B/2C/2D
-A5  3E.F1  ObjPataBata  191  ; Z8:2A/2B/2C/2D/3C/3D
-A6  3F.F0  ObjAnton  67  ; Z1:2A/2B/2C/2D
-A7  40.F0  Obj40_20B8D0  15  ; Z1:2A/2B/2C/2D
-A8  42.F0  Obj42_20F23A  84  ; Z4:2A
-A9  43.F0  Obj43_20E410  11  ; Z8:1A/1B/1C/1D/2A/2B/2C/2D
-AA  44.F0  Obj44_20EDEC  113  ; Z4:2A
-AB  45.F0  Obj45_20EF66  78  ; Z4:2A
-AC  47.F0  Obj47_20B6C0  113  ; Z4:3C/3D
-AD  48.F0  Obj48_20D7D4  20  ; Z4:2C/2D
-AE  49.F0  Obj49_20F7F6  102  ; Z4:2C/2D
-AF  4A.F0  Obj4A_20BA56  401  ; Z4:3C/3D
-B0  4C.F0  Obj4C_20C3CE  32  ; Z4:3C/3D
-B1  51.F0  ObjRobotGenerator  133  ; Z4:1A/1B/2A/2B
-B2  52.F0  ObjProjector  121  ; Z4:1B/2B
+Global object pool: 182 objects (highest ID $CC; limit $FF).
+Family 0 keeps its old ID; other families get new IDs.
+NEWID  old ID.family  label  rounds
+04  04.F0  Obj04_208E52  ; 8 rounds, first R61A
+05  05.F0  Obj05_2069EC  ; 4 rounds, first R42A
+07  07.F0  ObjTunnelPath  ; 20 rounds, first R11A
+08  08.F0  Obj08_208854  ; 4 rounds, first R61A
+09  09.F0  ObjSpinningDisc  ; 8 rounds, first R11A
+0A  0A.F0  ObjSpring  ; 68 rounds, first R11A
+0D  0D.F0  ObjTunnelDoor  ; 8 rounds, first R11A
+0F  0F.F0  ObjMovingSpring  ; 8 rounds, first R11A
+10  10.F0  Obj10_209C8C  ; 62 rounds, first R11A
+12  12.F0  ObjFloatBlock  ; 8 rounds, first R11A
+13  13.F0  ObjCheckpoint  ; 50 rounds, first R11A
+14  14.F0  ObjBigRing  ; 56 rounds, first R11A
+15  15.F0  ObjCapsule  ; 10 rounds, first R13C
+16  16.F0  ObjGoalPost  ; 60 rounds, first R11A
+17  17.F0  Obj17_20D7C2  ; 56 rounds, first R11A
+19  19.F0  ObjMonitorTimepost  ; 70 rounds, first R11A
+1B  1B.F0  Obj1B_2095F8  ; 8 rounds, first R11A
+1D  1D.F0  Obj3DPlant  ; 12 rounds, first R31A
+1E  1E.F0  ObjSpinTunnel  ; 10 rounds, first R31A
+20  20.F0  ObjCollapsePlatform  ; 8 rounds, first R11A
+21  21.F0  ObjPataBata  ; 8 rounds, first R11A
+22  22.F0  ObjTamabboh  ; 10 rounds, first R11A
+23  23.F0  Obj23_20C452  ; 8 rounds, first R31A
+24  24.F0  ObjAnimal  ; 10 rounds, first R11A
+25  25.F0  Obj25_20CEE0  ; 3 rounds, first R42A
+26  26.F0  Obj26_20C128  ; 8 rounds, first R11A
+27  27.F0  ObjProjector  ; 8 rounds, first R41A
+28  28.F0  ObjAnimal  ; 4 rounds, first R12A
+29  29.F0  ObjAnimal  ; 1 rounds, first R41A
+2A  2A.F0  Obj3DRamp  ; 1 rounds, first R11A
+2B  2B.F0  ObjSpinTunnel  ; 8 rounds, first R41A
+2C  2C.F0  ObjProjector  ; 1 rounds, first R11A
+2D  2D.F0  ObjRobotGenerator  ; 8 rounds, first R11A
+2E  2E.F0  ObjRobotGenerator  ; 8 rounds, first R11A
+2F  2F.F0  Obj2F_20F930  ; 1 rounds, first R11A
+30  30.F0  Obj30_20E340  ; 2 rounds, first R31A
+31  31.F0  Obj31_208A0C  ; 4 rounds, first R11A
+32  32.F0  ObjAnimal  ; 7 rounds, first R11B
+33  33.F0  Obj33_20896E  ; 8 rounds, first R11A
+34  34.F0  ObjSpinTunnel  ; 10 rounds, first R11A
+35  35.F0  ObjSpinTunnel  ; 8 rounds, first R11A
+36  36.F0  ObjGameOver  ; 8 rounds, first R11A
+37  37.F0  ObjRobotGenerator  ; 8 rounds, first R31A
+38  38.F0  ObjProjector  ; 8 rounds, first R31A
+39  39.F0  ObjAnimal  ; 8 rounds, first R31A
+3D  3D.F0  Obj3D_20B586  ; 8 rounds, first R11A
+3E  3E.F0  ObjPataBata  ; 8 rounds, first R11A
+3F  3F.F0  ObjAnton  ; 8 rounds, first R11A
+40  40.F0  Obj40_20BAA8  ; 8 rounds, first R11A
+42  42.F0  Obj42_20F23A  ; 1 rounds, first R42A
+43  43.F0  Obj43_20E410  ; 8 rounds, first R81A
+44  44.F0  Obj44_20EDEC  ; 1 rounds, first R42A
+45  45.F0  Obj45_20EF66  ; 1 rounds, first R42A
+47  47.F0  Obj47_20B6C0  ; 2 rounds, first R43C
+48  48.F0  Obj48_20D7D4  ; 2 rounds, first R42C
+49  49.F0  Obj49_20F7F6  ; 2 rounds, first R42C
+4A  4A.F0  Obj4A_20BA56  ; 2 rounds, first R43C
+4C  4C.F0  Obj4C_20C3CE  ; 2 rounds, first R43C
+51  51.F0  ObjRobotGenerator  ; 4 rounds, first R41A
+52  52.F0  ObjProjector  ; 2 rounds, first R41B
+53  20.F1  ObjCollapsePlatform  ; 10 rounds, first R31A
+54  21.F1  ObjPataBata  ; 8 rounds, first R31A
+55  22.F1  ObjTamabboh  ; 8 rounds, first R31A
+56  24.F1  ObjAnimal  ; 8 rounds, first R31A
+57  26.F1  Obj26_20C128  ; 10 rounds, first R31A
+58  2A.F1  Obj3DRamp  ; 8 rounds, first R31A
+59  2C.F1  ObjProjector  ; 8 rounds, first R31A
+5A  2D.F1  ObjRobotGenerator  ; 8 rounds, first R31A
+5B  2E.F1  ObjRobotGenerator  ; 8 rounds, first R31A
+5C  2F.F1  Obj2F_20F930  ; 8 rounds, first R31A
+5D  32.F1  ObjAnimal  ; 1 rounds, first R31A
+5E  35.F1  ObjSpinTunnel  ; 10 rounds, first R31A
+5F  28.F1  ObjAnimal  ; 4 rounds, first R32A
+60  10.F1  Obj10_209C8C  ; 8 rounds, first R33C
+61  30.F1  Obj30_20E340  ; 2 rounds, first R33C
+62  31.F1  Obj31_208A0C  ; 2 rounds, first R33C
+63  36.F1  ObjGameOver  ; 2 rounds, first R33C
+64  33.F1  Obj33_20896E  ; 2 rounds, first R41A
+65  34.F1  ObjSpinTunnel  ; 10 rounds, first R41A
+66  39.F1  ObjAnimal  ; 5 rounds, first R41A
+67  3D.F1  Obj3D_20B586  ; 2 rounds, first R41B
+68  38.F1  ObjProjector  ; 4 rounds, first R41C
+69  37.F1  ObjRobotGenerator  ; 3 rounds, first R42A
+6A  23.F1  Obj23_20C452  ; 8 rounds, first R51A
+6B  25.F1  Obj25_20CEE0  ; 8 rounds, first R51A
+6C  27.F1  ObjProjector  ; 8 rounds, first R51A
+6D  29.F1  ObjAnimal  ; 8 rounds, first R51A
+6E  2B.F1  ObjSpinTunnel  ; 8 rounds, first R51A
+6F  05.F1  Obj05_2069EC  ; 8 rounds, first R61A
+70  07.F1  ObjTunnelPath  ; 10 rounds, first R61A
+71  1E.F1  ObjSpinTunnel  ; 8 rounds, first R61A
+72  08.F1  Obj08_208854  ; 8 rounds, first R71A
+73  1D.F1  Obj3DPlant  ; 8 rounds, first R71A
+74  0F.F1  ObjMovingSpring  ; 10 rounds, first R81A
+75  09.F1  ObjSpinningDisc  ; 6 rounds, first R82A
+76  3E.F1  ObjPataBata  ; 6 rounds, first R82A
+77  20.F2  ObjCollapsePlatform  ; 8 rounds, first R41A
+78  22.F2  ObjTamabboh  ; 18 rounds, first R41A
+79  28.F2  ObjAnimal  ; 14 rounds, first R41A
+7A  2A.F2  Obj3DRamp  ; 1 rounds, first R41A
+7B  2C.F2  ObjProjector  ; 8 rounds, first R41A
+7C  2D.F2  ObjRobotGenerator  ; 8 rounds, first R41A
+7D  2E.F2  ObjRobotGenerator  ; 8 rounds, first R41A
+7E  2F.F2  Obj2F_20F930  ; 10 rounds, first R41A
+7F  32.F2  ObjAnimal  ; 1 rounds, first R41A
+80  35.F2  ObjSpinTunnel  ; 8 rounds, first R41A
+81  36.F2  ObjGameOver  ; 4 rounds, first R41A
+82  21.F2  ObjPataBata  ; 8 rounds, first R51A
+83  24.F2  ObjAnimal  ; 8 rounds, first R51A
+84  26.F2  Obj26_20C128  ; 8 rounds, first R51A
+85  31.F2  Obj31_208A0C  ; 8 rounds, first R51A
+86  33.F2  Obj33_20896E  ; 2 rounds, first R53C
+87  23.F2  Obj23_20C452  ; 4 rounds, first R61A
+88  25.F2  Obj25_20CEE0  ; 8 rounds, first R61A
+89  27.F2  ObjProjector  ; 10 rounds, first R61A
+8A  29.F2  ObjAnimal  ; 10 rounds, first R61A
+8B  2B.F2  ObjSpinTunnel  ; 4 rounds, first R61A
+8C  30.F2  Obj30_20E340  ; 8 rounds, first R61A
+8D  34.F2  ObjSpinTunnel  ; 2 rounds, first R63C
+8E  1E.F2  ObjSpinTunnel  ; 8 rounds, first R71A
+8F  38.F2  ObjProjector  ; 8 rounds, first R71A
+90  1D.F2  Obj3DPlant  ; 4 rounds, first R82A
+91  3D.F2  Obj3D_20B586  ; 2 rounds, first R83C
+92  20.F3  ObjCollapsePlatform  ; 8 rounds, first R51A
+93  22.F3  ObjTamabboh  ; 8 rounds, first R51A
+94  28.F3  ObjAnimal  ; 10 rounds, first R51A
+95  2C.F3  ObjProjector  ; 8 rounds, first R51A
+96  2D.F3  ObjRobotGenerator  ; 8 rounds, first R51A
+97  2E.F3  ObjRobotGenerator  ; 16 rounds, first R51A
+98  2F.F3  Obj2F_20F930  ; 8 rounds, first R51A
+99  2A.F3  Obj3DRamp  ; 4 rounds, first R52A
+9A  21.F3  ObjPataBata  ; 2 rounds, first R53C
+9B  24.F3  ObjAnimal  ; 8 rounds, first R61A
+9C  31.F3  Obj31_208A0C  ; 8 rounds, first R61A
+9D  32.F3  ObjAnimal  ; 4 rounds, first R61A
+9E  33.F3  Obj33_20896E  ; 8 rounds, first R61A
+9F  23.F3  Obj23_20C452  ; 8 rounds, first R71A
+A0  25.F3  Obj25_20CEE0  ; 8 rounds, first R71A
+A1  26.F3  Obj26_20C128  ; 8 rounds, first R71A
+A2  27.F3  ObjProjector  ; 8 rounds, first R71A
+A3  29.F3  ObjAnimal  ; 8 rounds, first R71A
+A4  2B.F3  ObjSpinTunnel  ; 8 rounds, first R71A
+A5  35.F3  ObjSpinTunnel  ; 10 rounds, first R71A
+A6  36.F3  ObjGameOver  ; 2 rounds, first R73C
+A7  34.F3  ObjSpinTunnel  ; 10 rounds, first R81A
+A8  38.F3  ObjProjector  ; 4 rounds, first R81A
+A9  20.F4  ObjCollapsePlatform  ; 12 rounds, first R61A
+AA  21.F4  ObjPataBata  ; 8 rounds, first R61A
+AB  2A.F4  Obj3DRamp  ; 8 rounds, first R61A
+AC  2C.F4  ObjProjector  ; 4 rounds, first R61A
+AD  2F.F4  Obj2F_20F930  ; 8 rounds, first R61A
+AE  2D.F4  ObjRobotGenerator  ; 4 rounds, first R62A
+AF  22.F4  ObjTamabboh  ; 8 rounds, first R71A
+B0  24.F4  ObjAnimal  ; 8 rounds, first R71A
+B1  28.F4  ObjAnimal  ; 8 rounds, first R71A
+B2  2B.F4  ObjSpinTunnel  ; 2 rounds, first R73C
+B3  32.F4  ObjAnimal  ; 2 rounds, first R73C
+B4  33.F4  Obj33_20896E  ; 2 rounds, first R73C
+B5  25.F4  Obj25_20CEE0  ; 10 rounds, first R81A
+B6  27.F4  ObjProjector  ; 6 rounds, first R81A
+B7  2E.F4  ObjRobotGenerator  ; 4 rounds, first R81A
+B8  35.F4  ObjSpinTunnel  ; 4 rounds, first R81A
+B9  36.F4  ObjGameOver  ; 10 rounds, first R81A
+BA  23.F4  Obj23_20C452  ; 4 rounds, first R82A
+BB  26.F4  Obj26_20C128  ; 4 rounds, first R82A
+BC  29.F4  ObjAnimal  ; 6 rounds, first R82A
+BD  21.F5  ObjPataBata  ; 8 rounds, first R71A
+BE  2A.F5  Obj3DRamp  ; 4 rounds, first R71A
+BF  2C.F5  ObjProjector  ; 2 rounds, first R73C
+C0  24.F5  ObjAnimal  ; 10 rounds, first R81A
+C1  28.F5  ObjAnimal  ; 4 rounds, first R81A
+C2  2F.F5  Obj2F_20F930  ; 4 rounds, first R81A
+C3  32.F5  ObjAnimal  ; 10 rounds, first R81A
+C4  20.F5  ObjCollapsePlatform  ; 4 rounds, first R82A
+C5  22.F5  ObjTamabboh  ; 4 rounds, first R82A
+C6  2D.F5  ObjRobotGenerator  ; 4 rounds, first R82A
+C7  33.F5  Obj33_20896E  ; 6 rounds, first R82A
+C8  2B.F5  ObjSpinTunnel  ; 2 rounds, first R83C
+C9  2A.F6  Obj3DRamp  ; 4 rounds, first R81A
+CA  2C.F6  ObjProjector  ; 4 rounds, first R81A
+CB  21.F6  ObjPataBata  ; 4 rounds, first R82A
+CC  2A.F7  Obj3DRamp  ; 2 rounds, first R83C

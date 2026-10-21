@@ -17,6 +17,8 @@ for r in used:
     p = rlib.round_path(r, generated=False)
     if not os.path.exists(p): continue
     rs = rlib.routines(p); by = {x.name: x for x in rs}
+    if 'ObjectIndex' not in by:
+        rs = rlib.routines(rlib.round_path(r, generated=True)); by = {x.name: x for x in rs}
     if 'ObjectIndex' not in by: continue
     tg = [m.group(1) for l in by['ObjectIndex'].lines for m in [re.match(r'\s*dc\.l\s+(\w+)', l)] if m]
     for s, n in enumerate(tg):

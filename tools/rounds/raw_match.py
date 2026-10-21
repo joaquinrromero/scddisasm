@@ -10,6 +10,7 @@ for r in sorted(used):
     p=rlib.round_path(r,generated=False)
     if not os.path.exists(p): continue
     by={x.name:x for x in rlib.routines(p)}
+    if 'ObjectIndex' not in by: by={x.name:x for x in rlib.routines(rlib.round_path(r,generated=True))}
     if 'ObjectIndex' not in by: continue
     am=json.load(open(f'/tmp/addrmap_{r}.json')); addrs=sorted(set(am.values()))
     d=open(f'/home/claude/work/mdport/tools/{r}__.MMD','rb').read()
