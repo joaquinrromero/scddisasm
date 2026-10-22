@@ -36,25 +36,29 @@
 	include	"_Include/Main CPU.inc"
 	include	"MD Port/Floor Demo/params.inc"
 
-BUF0		EQU	$FF0000-$1000000	; Negative so .w addressing works (sign_ext($0000)=$FF0000 on 24-bit bus)
-; IMGBYTES = 32 tile-cols × (FD_ROWS/8) tile-rows × 32 bytes/tile
-; FD_R0 must be a multiple of 8 (tile-aligned).
-; With FD_R0=48, FD_ROWS=48: 32×6×32 = 6144 = $1800
-IMGBYTES	EQU	32*(FD_ROWS/8)*32
-BUF1		EQU	BUF0+IMGBYTES
-IMGVRAM		EQU	$0020
+; Buffer layout — column-major, 32 tile-cols × 12 tile-rows × 32 bytes/tile.
+; COL_STRIDE = 12*32 = 384 bytes.  The render uses a fixed 380-byte skip between
+; tile-cols (= COL_STRIDE-4), so IMGBYTES must always be 32*12*32 = $3000.
+; FD_R0 is the first rendered scanline; it must be a multiple of 8 (tile-aligned).
+; The render writes FD_ROWS scanlines starting at byte 0 of the buffer; those bytes
+; land in tile-rows FD_R0/8..FD_R0/8+FD_ROWS/8-1 of VRAM (the upper tile-rows in
+; the buffer are filled with zeros on init and never touched).
+BUF0		EQU	$FF0000-$1000000	; expressed as negative so .w mode works
+IMGBYTES	EQU	$3000			; 32 tile-cols * 12 tile-rows * 32 B = fixed
+BUF1		EQU	BUF0+IMGBYTES		; = $FF3000
+IMGVRAM		EQU	$0020			; VRAM dest of DMA (tile 1 onwards)
 
-; Texture at BUF1+IMGBYTES = $FF3000, size $6200 (25088), ends at $FF9200
-FLOORTEX_ADDR	EQU	BUF1+IMGBYTES
+; RAM texture immediately after both buffers.
+; BUF0=$FF0000, BUF1=$FF3000, FLOORTEX=$FF6000, ends=$FFC200 → vars at $FFC200.
+FLOORTEX_ADDR	EQU	BUF1+IMGBYTES		; = $FF6000
 
-; Camera base pointer within texture = FD_START rows down + FD_START/2 bytes across
-; = FD_START*FD_WPACKED + FD_START/2  = 112*112 + 56 = 12544 + 56 = 12600
+; Camera base offset within texture (camera pixel = centre = FD_START,FD_START).
+; FD_START=W/2=112.  Packed row stride = FD_WPACKED=112.
+; Offset = FD_START*FD_WPACKED + FD_START/2 = 112*112+56 = 12600.
 TEXBASE_OFF	EQU	FD_START*FD_WPACKED+(FD_START/2)
 
-; Variables placed immediately after FLOORTEX.
-; FLOORTEX = BUF1+IMGBYTES .. BUF1+IMGBYTES+$6200-1
-; With FD_R0=48: BUF1=FF1800, IMGBYTES=$1800, FLOORTEX=FF3000..FF91FF
-; $FF9200 as .w: $9200 sign-extends to $FFFF9200 = $FF9200 on 24-bit bus. ✓
+; Variables immediately after texture ($FFC200).
+; $C200 >= $8000 so sign_ext($C200) = $FFFF_C200 = $FFC200 on 24-bit bus. OK.
 	rsset	FLOORTEX_ADDR+FD_TEXSIZE
 vcount		rs.w	1
 dmaState	rs.b	1
@@ -202,22 +206,30 @@ EntryPoint:
 
 	movea.l	(Vectors).l,sp
 
-	; Plane A nametable (column-major tile numbers)
-	moveq	#0,d6
+	; Plane A nametable — column-major tile indices.
+	; Buffer always has 12 tile-rows (IMGBYTES=$3000, COL_STRIDE=384).
+	; The render writes FD_ROWS scanlines starting at buffer byte 0, which
+	; corresponds to tile-rows FD_R0/8..FD_R0/8+FD_ROWS/8-1 in VRAM.
+	; Tile index for (col, row_local):
+	;   tile = col*12 + (FD_R0/8 + row_local) + 1
+	; Screen nametable row = FD_R0/8 + row_local  (d6 = row_local 0..FD_ROWS/8-1)
+	moveq	#0,d6			; d6 = row_local (0..FD_ROWS/8-1)
 .NTRow:
+	; Set VDP write address to nametable row (FD_R0/8 + d6)
 	move.l	d6,d0
-	lsl.l	#7,d0
-	addi.l	#$C000+FD_R0/8*128,d0
+	addi.l	#FD_R0/8,d0		; d0 = screen tile-row
+	lsl.l	#7,d0			; * 128 (nametable row stride)
+	addi.l	#$C000,d0		; + Plane A base
 	andi.l	#$3FFF,d0
 	swap	d0
 	ori.l	#$40000003,d0
 	move.l	d0,VDPCTRL
-	moveq	#0,d5
+	moveq	#0,d5			; d5 = col (0..31)
 .NTCol:
 	move.w	d5,d1
-	mulu.w	#12,d1
-	add.w	d6,d1
-	addq.w	#1,d1
+	mulu.w	#12,d1			; col * 12
+	add.w	d6,d1			; + row_local
+	addi.w	#FD_R0/8+1,d1		; + FD_R0/8 + 1  (1-based, buffer offset)
 	move.w	d1,VDPDATA
 	addq.w	#1,d5
 	cmpi.w	#32,d5
