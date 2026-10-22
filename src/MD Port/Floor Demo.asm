@@ -36,19 +36,26 @@
 	include	"_Include/Main CPU.inc"
 	include	"MD Port/Floor Demo/params.inc"
 
-BUF0		EQU	$00FF0000
-BUF1		EQU	$00FF3000
-IMGBYTES	EQU	$3000
+BUF0		EQU	$FF0000-$1000000	; Negative so .w addressing works (sign_ext($0000)=$FF0000 on 24-bit bus)
+; IMGBYTES = 32 tile-cols × (FD_ROWS/8) tile-rows × 32 bytes/tile
+; FD_R0 must be a multiple of 8 (tile-aligned).
+; With FD_R0=48, FD_ROWS=48: 32×6×32 = 6144 = $1800
+IMGBYTES	EQU	32*(FD_ROWS/8)*32
+BUF1		EQU	BUF0+IMGBYTES
 IMGVRAM		EQU	$0020
 
-; Texture at $FF6000 ($FF3000 + $3000), size $6200 (25088), ends at $FFC200
+; Texture at BUF1+IMGBYTES = $FF3000, size $6200 (25088), ends at $FF9200
 FLOORTEX_ADDR	EQU	BUF1+IMGBYTES
 
 ; Camera base pointer within texture = FD_START rows down + FD_START/2 bytes across
 ; = FD_START*FD_WPACKED + FD_START/2  = 112*112 + 56 = 12544 + 56 = 12600
 TEXBASE_OFF	EQU	FD_START*FD_WPACKED+(FD_START/2)
 
-	rsset	$FFFF8000
+; Variables placed immediately after FLOORTEX.
+; FLOORTEX = BUF1+IMGBYTES .. BUF1+IMGBYTES+$6200-1
+; With FD_R0=48: BUF1=FF1800, IMGBYTES=$1800, FLOORTEX=FF3000..FF91FF
+; $FF9200 as .w: $9200 sign-extends to $FFFF9200 = $FF9200 on 24-bit bus. ✓
+	rsset	FLOORTEX_ADDR+FD_TEXSIZE
 vcount		rs.w	1
 dmaState	rs.b	1
 		rs.b	1
@@ -61,9 +68,9 @@ camY		rs.w	1
 stampX		rs.w	1		; Current stamp column in map (0..127)
 stampY		rs.w	1		; Current stamp row in map (0..127)
 yaw		rs.b	1
-padHold		rs.b	1
+		rs.b	1		; pad — keeps padHold word-aligned
+padHold		rs.b	1		; tst.w (padHold) must be at even address
 padTap		rs.b	1
-		rs.b	1
 frames		rs.l	1
 
 ; -------------------------------------------------------------------------
@@ -71,7 +78,7 @@ frames		rs.l	1
 ; -------------------------------------------------------------------------
 
 Vectors:
-	dc.l	$01000000
+	dc.l	$00FFFE00		; Initial SP — top of work RAM stack area
 	dc.l	EntryPoint
 	rept	23
 		dc.l	ErrorTrap
@@ -200,7 +207,7 @@ EntryPoint:
 .NTRow:
 	move.l	d6,d0
 	lsl.l	#7,d0
-	addi.l	#$C000+12*128,d0
+	addi.l	#$C000+FD_R0/8*128,d0
 	andi.l	#$3FFF,d0
 	swap	d0
 	ori.l	#$40000003,d0
@@ -216,7 +223,7 @@ EntryPoint:
 	cmpi.w	#32,d5
 	bne.s	.NTCol
 	addq.w	#1,d6
-	cmpi.w	#12,d6
+	cmpi.w	#FD_ROWS/8,d6
 	bne.s	.NTRow
 
 	move.l	#BUF1,backBuf.w
@@ -501,7 +508,8 @@ RenderPicture:
 	movea.l	(a2,d0.w),a2
 
 	movea.l	backBuf.w,a0
-	adda.w	#FD_R0*4,a0
+	; No FD_R0 offset here — tile row 0 of buffer = first rendered scanline.
+	; Nametable row FD_R0/8 references tile index col*12+1 = buffer tile row 0. ✓
 	moveq	#FD_ROWS-1,d7
 
 .Row:
