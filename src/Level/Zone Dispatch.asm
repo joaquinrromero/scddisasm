@@ -47,18 +47,6 @@ ZoneLevelScroll:
 	move.l	zLevelScroll.w,-(sp)
 	rts
 
-ZoneDrawLevel:
-	move.l	zDrawLevel.w,-(sp)
-	rts
-
-ZoneInitLevelDraw:
-	move.l	zInitLevelDraw.w,-(sp)
-	rts
-
-ZoneDrawLevelBG:
-	move.l	zDrawLevelBG.w,-(sp)
-	rts
-
 ZonePaletteCycle:
 	move.l	zPaletteCycle.w,-(sp)
 	rts

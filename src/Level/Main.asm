@@ -246,7 +246,7 @@ LevelStart:
 	bsr.w	ZoneLevelScroll			; Initialize level scrolling
 	bset	#2,scrollFlags.w		; Force draw a block column on the left side of the screen
 	bsr.w	LoadLevelData			; Load level data
-	bsr.w	ZoneInitLevelDraw			; Begin level drawing
+	bsr.w	InitLevelDraw			; Begin level drawing
 	jsr	ConvColArray			; Convert collision data (dummied out)
 	bsr.w	LoadLevelCollision		; Load collision block IDs
 
@@ -777,7 +777,7 @@ VInt_S1SegaScr:					; Pointer to here is leftover from Sonic 1's
 
 VInt_S1Title:
 	bsr.w	DoVIntUpdates			; Do V-INT updates
-	bsr.w	ZoneDrawLevelBG			; Draw level BG
+	bsr.w	DrawLevelBG			; Draw level BG
 	bsr.w	DecompPLCFast			; Process PLC art decompression
 
 	tst.w	vintTimer.w			; Is the V-INT timer running?
@@ -830,7 +830,7 @@ VInt_Level:
 	movem.l	d0-d7,camXCopy
 	movem.l	scrollFlags.w,d0-d1
 	movem.l	d0-d1,scrollFlagsCopy
-	bsr.w	ZoneDrawLevel
+	bsr.w	DrawLevel
 
 	bsr.w	DecompPLCSlow			; Process PLC art decompression
 	jmp	UpdateHUD			; Update the HUD
@@ -860,7 +860,7 @@ VInt_LevelLoad:
 	movem.l	d0-d7,camXCopy
 	movem.l	scrollFlags.w,d0-d1
 	movem.l	d0-d1,scrollFlagsCopy
-	bsr.w	ZoneDrawLevel
+	bsr.w	DrawLevel
 
 	bra.w	DecompPLCFast			; Process PLC art decompression
 

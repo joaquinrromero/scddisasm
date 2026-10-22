@@ -890,7 +890,7 @@ DrawLevelFG:
 ; -------------------------------------------------------------------------
 
 DrawLevelBG1:
-	lea	BGCameraSectIDs,a0		; Prepare background section camera IDs
+	movea.l	zBGCameraSectIDs.w,a0		; Prepare background section camera IDs
 	adda.w	#1,a0
 
 	moveq	#-$10,d4			; Prepare to draw a row at the top
@@ -1095,7 +1095,7 @@ InitLevelDrawBG:
 
 .Draw:
 	movem.l	d4-d6/a0,-(sp)			; Draw a row of blocks
-	lea	BGCameraSectIDs,a0
+	movea.l	zBGCameraSectIDs.w,a0
 	adda.w	#1,a0
 	move.w	cameraBgY.w,d0
 	add.w	d4,d0

@@ -201,9 +201,7 @@ zMapFlowerCapsule	rs.l	1		; MapSpr_FlowerCapsule
 zAniFlowerCapsule	rs.l	1		; Ani_FlowerCapsule
 zLevelSizeLoad	rs.l	1		; LevelSizeLoad
 zLevelScroll	rs.l	1		; LevelScroll
-zDrawLevel	rs.l	1		; DrawLevel
-zInitLevelDraw	rs.l	1		; InitLevelDraw
-zDrawLevelBG	rs.l	1		; DrawLevelBG
+zBGCameraSectIDs	rs.l	1		; BGCameraSectIDs (which camera each BG block row uses)
 zPaletteCycle	rs.l	1		; PaletteCycle
 zLevelPaletteID	rs.l	1		; LevelPaletteID
 zObjectLayouts	rs.l	1		; ObjectLayouts

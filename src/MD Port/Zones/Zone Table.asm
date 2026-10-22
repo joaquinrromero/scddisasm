@@ -42,9 +42,7 @@ ZoneData_Past:
 	dc.l	Past_Ani_FlowerCapsule
 	dc.l	Past_LevelSizeLoad
 	dc.l	Past_LevelScroll
-	dc.l	Past_DrawLevel
-	dc.l	Past_InitLevelDraw
-	dc.l	Past_DrawLevelBG
+	dc.l	Past_BGCameraSectIDs
 	dc.l	Past_PaletteCycle
 	dc.l	Past_LevelPaletteID
 	dc.l	ObjectLayouts
@@ -72,9 +70,7 @@ ZoneData_Present:
 	dc.l	Ani_FlowerCapsule
 	dc.l	LevelSizeLoad
 	dc.l	LevelScroll
-	dc.l	DrawLevel
-	dc.l	InitLevelDraw
-	dc.l	DrawLevelBG
+	dc.l	BGCameraSectIDs
 	dc.l	PaletteCycle
 	dc.l	LevelPaletteID
 	dc.l	ObjectLayouts
@@ -102,9 +98,7 @@ ZoneData_GoodFuture:
 	dc.l	GoodFuture_Ani_FlowerCapsule
 	dc.l	GoodFuture_LevelSizeLoad
 	dc.l	GoodFuture_LevelScroll
-	dc.l	GoodFuture_DrawLevel
-	dc.l	GoodFuture_InitLevelDraw
-	dc.l	GoodFuture_DrawLevelBG
+	dc.l	GoodFuture_BGCameraSectIDs
 	dc.l	GoodFuture_PaletteCycle
 	dc.l	GoodFuture_LevelPaletteID
 	dc.l	ObjectLayouts
@@ -132,9 +126,7 @@ ZoneData_BadFuture:
 	dc.l	BadFuture_Ani_FlowerCapsule
 	dc.l	BadFuture_LevelSizeLoad
 	dc.l	BadFuture_LevelScroll
-	dc.l	BadFuture_DrawLevel
-	dc.l	BadFuture_InitLevelDraw
-	dc.l	BadFuture_DrawLevelBG
+	dc.l	BadFuture_BGCameraSectIDs
 	dc.l	BadFuture_PaletteCycle
 	dc.l	BadFuture_LevelPaletteID
 	dc.l	ObjectLayouts
@@ -162,9 +154,7 @@ ZoneData_R12B:
 	dc.l	R12B_Ani_FlowerCapsule
 	dc.l	R12B_sub_2028B0
 	dc.l	R12B_sub_202A1E
-	dc.l	R12B_DrawLevel
-	dc.l	R12B_InitLevelDraw
-	dc.l	R12B_DrawLevelBG
+	dc.l	R12B_BGCameraSectIDs
 	dc.l	R12B_PaletteCycle
 	dc.l	R12B_LevelPaletteID
 	dc.l	R12B_ObjectLayouts
@@ -192,9 +182,7 @@ ZoneData_R12A:
 	dc.l	R12A_Ani_FlowerCapsule
 	dc.l	R12A_sub_2028F4
 	dc.l	R12A_sub_202A58
-	dc.l	R12A_DrawLevel
-	dc.l	R12A_InitLevelDraw
-	dc.l	R12A_DrawLevelBG
+	dc.l	R12A_BGCameraSectIDs
 	dc.l	R12A_PaletteCycle
 	dc.l	R12A_LevelPaletteID
 	dc.l	R12A_ObjectLayouts
@@ -222,9 +210,7 @@ ZoneData_R12C:
 	dc.l	R12C_Ani_FlowerCapsule
 	dc.l	R12C_sub_20279C
 	dc.l	R12C_sub_20290A
-	dc.l	R12C_DrawLevel
-	dc.l	R12C_InitLevelDraw
-	dc.l	R12C_DrawLevelBG
+	dc.l	R12C_BGCameraSectIDs
 	dc.l	R12C_PaletteCycle
 	dc.l	R12C_LevelPaletteID
 	dc.l	R12C_ObjectLayouts
@@ -252,9 +238,7 @@ ZoneData_R12D:
 	dc.l	R12D_Ani_FlowerCapsule
 	dc.l	R12D_sub_202808
 	dc.l	R12D_sub_202970
-	dc.l	R12D_DrawLevel
-	dc.l	R12D_InitLevelDraw
-	dc.l	R12D_DrawLevelBG
+	dc.l	R12D_BGCameraSectIDs
 	dc.l	R12D_PaletteCycle
 	dc.l	R12D_LevelPaletteID
 	dc.l	R12D_ObjectLayouts
