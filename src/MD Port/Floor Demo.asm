@@ -229,7 +229,7 @@ EntryPoint:
 	move.w	d5,d1
 	mulu.w	#12,d1			; col * 12
 	add.w	d6,d1			; + row_local
-	addi.w	#FD_R0/8+1,d1		; + FD_R0/8 + 1  (1-based, buffer offset)
+	addq.w	#1,d1			; + 1 (1-based; tile-row within col = row_local)
 	move.w	d1,VDPDATA
 	addq.w	#1,d5
 	cmpi.w	#32,d5
