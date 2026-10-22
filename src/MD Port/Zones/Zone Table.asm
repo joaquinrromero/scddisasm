@@ -10,10 +10,10 @@ ZoneTable:
 	dc.l	ZoneData_Present
 	dc.l	ZoneData_GoodFuture
 	dc.l	ZoneData_BadFuture
-	dc.l	ZoneData_Present
+	dc.l	ZoneData_R12B
 	dc.l	ZoneData_R12A
-	dc.l	ZoneData_Present
-	dc.l	ZoneData_Present
+	dc.l	ZoneData_R12C
+	dc.l	ZoneData_R12D
 	dc.l	ZoneData_Present
 	dc.l	ZoneData_Present
 	dc.l	ZoneData_Present
@@ -139,6 +139,36 @@ ZoneData_BadFuture:
 	dc.l	BadFuture_LevelPaletteID
 	dc.l	ObjectLayouts
 
+ZoneData_R12B:
+	dc.l	R12B_LevelDataIndex
+	dc.l	R12B_LevelLayouts
+	dc.l	R12B_LevelCollision
+	dc.l	R12B_PLCLists
+	dc.l	R12B_PaletteTable
+	dc.l	R12B_ObjectTileIDs
+	dc.l	ObjectIndex
+	dc.l	DebugItemIndex
+	dc.l	R12B_SectionRanges
+	dc.l	R12B_SectionInitPLCs
+	dc.l	R12B_SectionUpdatePLCs
+	dc.l	R12B_ObjCollapsePlatform_Sizes1
+	dc.l	R12B_ObjCollapsePlatform_Sizes2
+	dc.l	R12B_MapSpr_CollapsePlatform1
+	dc.l	R12B_MapSpr_CollapsePlatform2
+	dc.l	R12B_MapSpr_CollapsePlatform3
+	dc.l	R12B_MapSpr_CollapsePlatform4
+	dc.l	R12A_MapSpr_Explosion
+	dc.l	MapSpr_FlowerCapsule
+	dc.l	R12B_Ani_FlowerCapsule
+	dc.l	R12B_sub_2028B0
+	dc.l	R12B_sub_202A1E
+	dc.l	R12B_DrawLevel
+	dc.l	R12B_InitLevelDraw
+	dc.l	R12B_DrawLevelBG
+	dc.l	R12B_PaletteCycle
+	dc.l	R12B_LevelPaletteID
+	dc.l	R12B_ObjectLayouts
+
 ZoneData_R12A:
 	dc.l	R12A_LevelDataIndex
 	dc.l	R12A_LevelLayouts
@@ -168,3 +198,63 @@ ZoneData_R12A:
 	dc.l	R12A_PaletteCycle
 	dc.l	R12A_LevelPaletteID
 	dc.l	R12A_ObjectLayouts
+
+ZoneData_R12C:
+	dc.l	R12C_LevelDataIndex
+	dc.l	R12C_LevelLayouts
+	dc.l	R12C_LevelCollision
+	dc.l	R12C_PLCLists
+	dc.l	R12C_PaletteTable
+	dc.l	R12C_ObjectTileIDs
+	dc.l	ObjectIndex
+	dc.l	DebugItemIndex
+	dc.l	R12C_SectionRanges
+	dc.l	R12C_SectionInitPLCs
+	dc.l	R12C_SectionUpdatePLCs
+	dc.l	R12C_ObjCollapsePlatform_Sizes1
+	dc.l	R12C_ObjCollapsePlatform_Sizes2
+	dc.l	R12C_MapSpr_CollapsePlatform1
+	dc.l	R12C_MapSpr_CollapsePlatform2
+	dc.l	R12C_MapSpr_CollapsePlatform3
+	dc.l	R12C_MapSpr_CollapsePlatform4
+	dc.l	R12A_MapSpr_Explosion
+	dc.l	MapSpr_FlowerCapsule
+	dc.l	R12C_Ani_FlowerCapsule
+	dc.l	R12C_sub_20279C
+	dc.l	R12C_sub_20290A
+	dc.l	R12C_DrawLevel
+	dc.l	R12C_InitLevelDraw
+	dc.l	R12C_DrawLevelBG
+	dc.l	R12C_PaletteCycle
+	dc.l	R12C_LevelPaletteID
+	dc.l	R12C_ObjectLayouts
+
+ZoneData_R12D:
+	dc.l	R12D_LevelDataIndex
+	dc.l	R12D_LevelLayouts
+	dc.l	R12D_LevelCollision
+	dc.l	R12D_PLCLists
+	dc.l	R12D_PaletteTable
+	dc.l	R12D_ObjectTileIDs
+	dc.l	ObjectIndex
+	dc.l	DebugItemIndex
+	dc.l	R12D_SectionRanges
+	dc.l	R12D_SectionInitPLCs
+	dc.l	R12D_SectionUpdatePLCs
+	dc.l	R12D_ObjCollapsePlatform_Sizes1
+	dc.l	R12D_ObjCollapsePlatform_Sizes2
+	dc.l	R12D_MapSpr_CollapsePlatform1
+	dc.l	R12D_MapSpr_CollapsePlatform2
+	dc.l	R12D_MapSpr_CollapsePlatform3
+	dc.l	R12D_MapSpr_CollapsePlatform4
+	dc.l	R12A_MapSpr_Explosion
+	dc.l	MapSpr_FlowerCapsule
+	dc.l	R12D_Ani_FlowerCapsule
+	dc.l	R12D_sub_202808
+	dc.l	R12D_sub_202970
+	dc.l	R12D_DrawLevel
+	dc.l	R12D_InitLevelDraw
+	dc.l	R12D_DrawLevelBG
+	dc.l	R12D_PaletteCycle
+	dc.l	R12D_LevelPaletteID
+	dc.l	R12D_ObjectLayouts

@@ -290,11 +290,15 @@ MDVDPRegsEnd:
 	include	"MD Port/Zones/GoodFuture.asm"
 	include	"MD Port/Zones/BadFuture.asm"
 	include	"MD Port/Zones/R12A.asm"
+	include	"MD Port/Zones/R12B.asm"
+	include	"MD Port/Zones/R12C.asm"
+	include	"MD Port/Zones/R12D.asm"
 
 ; -------------------------------------------------------------------------
 ; Zone table
 ; -------------------------------------------------------------------------
 
+	include	"Level/_Art/Pool.asm"
 	include	"MD Port/Zones/Zone Table.asm"
 
 	ALIGN	$20000, $FF				; Pad ROM to a multiple of 128KB

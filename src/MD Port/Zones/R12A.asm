@@ -930,269 +930,6 @@ R12A_loc_203478:
 	jsr   DrawBlockRowAbsX
 R12A_loc_20348C:
 	rts     
-R12A_ObjectIndex:
-	dc.l	ObjSonic
-	dc.l	ObjSonic
-	dc.l	ObjPowerup
-	dc.l	ObjWaterfall
-	dc.l	R12A_Obj05_207086
-	dc.l	ObjTestBadnik
-	dc.l	ObjTunnelPath
-	dc.l	R12A_Obj08_207084
-	dc.l	ObjSpinningDisc
-	dc.l	ObjSpring
-	dc.l	ObjTunnelDoorSplash
-	dc.l	ObjTunnelDoorSplashSet
-	dc.l	ObjTunnelDoor
-	dc.l	ObjSpinSplash
-	dc.l	ObjMovingSpring
-	dc.l	ObjRing
-	dc.l	ObjLostRing
-	dc.l	ObjFloatBlock
-	dc.l	ObjCheckpoint
-	dc.l	ObjBigRing
-	dc.l	ObjCapsule
-	dc.l	ObjGoalPost
-	dc.l	R12A_Obj17_20D4EC
-	dc.l	ObjExplosion
-	dc.l	ObjMonitorTimepost
-	dc.l	ObjMonitorItem
-	dc.l	R12A_Obj1B_209420
-	dc.l	ObjHUDPoints
-	dc.l	R12A_ObjNull
-	dc.l	R12A_ObjNull
-	dc.l	ObjFlower
-	dc.l	ObjCollapsePlatform
-	dc.l	R12A_Obj21_20C582
-	dc.l	ObjTamabboh
-	dc.l	R12A_Obj23_20BB48
-	dc.l	ObjAnimal
-	dc.l	R12A_ObjNull
-	dc.l	R12A_Obj26_20BF50
-	dc.l	R12A_ObjNull
-	dc.l	R12A_Obj28_20BC18
-	dc.l	R12A_ObjNull
-	dc.l	R12A_ObjNull
-	dc.l	R12A_ObjNull
-	dc.l	R12A_ObjNull
-	dc.l	ObjRobotGenerator
-	dc.l	ObjProjector
-	dc.l	R12A_ObjNull
-	dc.l	R12A_ObjNull
-	dc.l	R12A_ObjNull
-	dc.l	R12A_Obj32_2086D2
-	dc.l	R12A_Obj33_208796
-	dc.l	ObjSpinTunnel
-	dc.l	R12A_Obj35_20CB08
-	dc.l	R12A_Obj36_20ED8C
-	dc.l	R12A_ObjNull
-	dc.l	R12A_ObjNull
-	dc.l	R12A_ObjNull
-	dc.l	ObjResults
-	dc.l	R12A_Obj3B_20D9F4
-	dc.l	R12A_Obj3C_20DB10
-	dc.l	R12A_Obj3D_20B3AE
-	dc.l	ObjPataBata
-	dc.l	ObjAnton
-	dc.l	R12A_Obj40_20B8D0
-R12A_ObjNull:
-	move.b  #$0, (a0)
-	rts     
-R12A_Obj01_203E32:
-	dc.w	$4A39,$00FF,$0F01,$6614,$B0FC,$D040,$670E,$4A39
-	dc.w	$00FF,$1906,$6706,$4EF9,$0020,$70D2,$1028,$002A
-	dc.w	$6724,$5200,$0828,$0002,$0022,$670C,$0C00,$002D
-	dc.w	$6510,$103C,$002D,$600A,$0C00,$001E,$6504,$103C
-	dc.w	$001E,$1140,$002A,$7000,$1028,$0024,$323B,$0006
-	dc.w	$4EFB,$1002,$004C,$018C,$13FE,$1470,$14F8
-R12A_Obj08_207084:
-	dc.w	$4E75
-R12A_Obj05_207086:
-	dc.w	$4E75
-R12A_Obj32_2086D2:
-	moveq   #$0, d0
-	move.b  oRoutine(a0), d0
-	move.w  R12A_dat_2086EC(pc, d0.w), d0
-	jsr     R12A_dat_2086EC(pc, d0.w)
-	jsr     DrawObject.l
-	jmp     CheckObjDespawn.l
-R12A_dat_2086EC:
-	dc.w	R12A_loc_2086F0-R12A_dat_2086EC
-	dc.w	R12A_tr_dat_2086EC_ObjLogShadow_Main-R12A_dat_2086EC
-R12A_loc_2086F0:
-	addq.b  #$2, oRoutine(a0)
-	ori.b   #$4, oSprFlags(a0)
-	move.l  #R12A_ObjLogShadow_BaseTileList+12, oMap(a0)
-	move.b  oSubtype(a0), oMapFrame(a0)
-	move.b  #$10, oWidth(a0)
-	move.b  #$18, oYRadius(a0)
-	bsr.w   R12A_ObjScenery_SetBaseTile
-	even
-R12A_tr_dat_2086EC_ObjLogShadow_Main:	jmp	ObjLogShadow_Main
-R12A_ObjScenery_SetBaseTile:
-	moveq   #$0, d0
-	move.b  timeZone.l, d0
-	andi.b  #$7f, d0
-	cmpi.b  #$2, d0
-	bne.s   R12A_loc_208734
-	moveq   #$1, d0
-	add.b   goodFuture.l, d0
-R12A_loc_208734:
-	add.w   d0, d0
-	add.b   act.l, d0
-	add.w   d0, d0
-	move.w  R12A_ObjLogShadow_BaseTileList(pc, d0.w), oTile(a0)
-	ori.w   #$4000, oTile(a0)
-	rts     
-R12A_ObjLogShadow_BaseTileList:
-	dc.w	$03CB,$045E,$0418,$03F0,$0428,$038F,$0428,$037F
-R12A_Obj33_208796:
-	moveq   #$0, d0
-	move.b  oRoutine(a0), d0
-	move.w  R12A_dat_2087B0(pc, d0.w), d0
-	jsr     R12A_dat_2087B0(pc, d0.w)
-	jsr     DrawObject.l
-	jmp     CheckObjDespawn.l
-R12A_dat_2087B0:
-	dc.w	R12A_tr_dat_2087B0_ObjLogShadow_Init-R12A_dat_2087B0
-	dc.w	R12A_tr_dat_2087B0_ObjLogShadow_Main-R12A_dat_2087B0
-	even
-R12A_tr_dat_2087B0_ObjLogShadow_Init:	jmp	ObjLogShadow_Init
-R12A_tr_dat_2087B0_ObjLogShadow_Main:	jmp	ObjLogShadow_Main
-R12A_Obj1B_209420:
-	moveq   #$0, d0
-	move.b  oRoutine(a0), d0
-	move.w  R12A_dat_20943A(pc, d0.w), d0
-	jsr     R12A_dat_20943A(pc, d0.w)
-	jsr     DrawObject.l
-	jmp     CheckObjDespawn.l
-R12A_dat_20943A:
-	dc.w	R12A_tr_dat_20943A_ObjBoulder_Init-R12A_dat_20943A
-	dc.w	R12A_tr_dat_20943A_ObjBoulder_Main-R12A_dat_20943A
-	even
-R12A_tr_dat_20943A_ObjBoulder_Init:	jmp	ObjBoulder_Init
-R12A_tr_dat_20943A_ObjBoulder_Main:	jmp	ObjBoulder_Main
-R12A_Obj10_209AB4:
-	dc.w	$7000,$1028,$0024,$323B,$0006,$4EFB,$1002,$002A
-	dc.w	$01DE,$0216,$026E,$027C,$1000,$1800,$2000,$0010
-	dc.w	$0018,$0020,$1010,$1818,$2020,$F010,$E818,$E020
-	dc.w	$1008,$1810,$F008,$E810,$45F9,$00FF,$1200,$7000
-	dc.w	$1028,$0023,$3200,$D241,$D041,$7200,$1239,$00FF
-	dc.w	$152E,$0881,$0007,$6718,$1438,$F784,$4882,$4442
-	dc.w	$D242,$6A04,$7200,$6008,$0C41,$0003,$6502,$7202
-	dc.w	$D041,$45F2,$0002,$1812,$1228,$0028,$7000,$1001
-	dc.w	$0241,$0007,$0C41,$0007,$6602,$7206,$4841,$323C
-	dc.w	$0001,$E808,$D040,$43F9,$0020,$9ACC,$1A31,$0000
-	dc.w	$4885,$1C31,$0001,$4886,$2248,$3428,$0008,$3628
-	dc.w	$000C,$47EA,$0001,$7000,$1039,$00FF,$152E,$0880
-	dc.w	$0007,$6718,$1438,$F784,$4882,$4442,$D042,$6A04
-	dc.w	$7000,$6008,$0C40,$0003,$6502,$7002,$1823,$E22C
-	dc.w	$6500,$00C8,$51C8,$FFF6,$0892,$0007,$6044,$4841
-	dc.w	$47EA,$0001,$7000,$1039,$00FF,$152E,$0880,$0007
-	dc.w	$6718,$1438,$F784,$4882,$4442,$D042,$6A04,$7000
-	dc.w	$6008,$0C40,$0003,$6502,$7002,$1823,$E22C,$6500
-	dc.w	$008A,$51C8,$FFF6,$0892,$0007,$6100,$DAFC,$6600
-	dc.w	$0086,$137C,$0010,$0000,$137C,$0002,$0024,$3342
-	dc.w	$0008,$3368,$0008,$0032,$3343,$000C,$237C,$0020
-	dc.w	$9F30,$0004,$337C,$A7AE,$0002,$137C,$0002,$0018
-	dc.w	$0C39,$0006,$00FF,$1506,$661E,$137C,$0000,$0018
-	dc.w	$1368,$0029,$0029,$4A29,$0029,$670C,$0229,$007F
-	dc.w	$0002,$137C,$0002,$0018,$137C,$0004,$0001,$137C
-	dc.w	$0047,$0020,$137C,$0008,$0019,$137C,$0008,$0016
-	dc.w	$1368,$0023,$0023,$1341,$0034,$5241,$D445,$D646
-	dc.w	$4841,$51C9,$FF3A,$7000,$1039,$00FF,$152E,$0880
-	dc.w	$0007,$6718,$1438,$F784,$4882,$4442,$D042,$6A04
-	dc.w	$7000,$6008,$0C40,$0003,$6502,$7002,$47EA,$0001
-	dc.w	$0823,$0000,$6600,$9D94,$51C8,$FFF6,$4A28,$0001
-	dc.w	$6B1E,$3028,$0032,$0240,$FF80,$3238,$F700,$0441
-	dc.w	$0080,$0241,$FF80,$9041,$0C40,$0280,$6200,$007C
-	dc.w	$4A79,$00FF,$190E,$6608,$1179,$00FF,$1913,$001A
-	dc.w	$6000,$9CAC
-	dc.w	$5428,$0024,$117C,$0000,$0020,$117C,$0001,$0018
-	dc.w	$6100,$0058,$45F9,$00FF,$1200,$7000,$1028,$0023
-	dc.w	$3200,$D241,$D041,$7200,$1239,$00FF,$152E,$0881
-	dc.w	$0007,$6718,$1438,$F784,$4882,$4442,$D242,$6A04
-	dc.w	$7200,$6008,$0C41,$0003,$6502,$7202,$D041,$1228
-	dc.w	$0034,$5301,$03F2,$0002
-	dc.w	$43F9,$0020,$9F28,$6100,$BE64,$6000,$9C46,$6000
-	dc.w	$9CEE
-R12A_Obj3D_20B3AE:
-	jsr     DestroyOnGoodFuture.l
-	moveq   #$0, d0
-	move.b  oRoutine(a0), d0
-	move.w  R12A_ObjMosqui_Index(pc, d0.w), d0
-	jsr     R12A_ObjMosqui_Index(pc, d0.w)
-	jsr     DrawObject.l
-	move.w  $2a(a0), d0
-	jmp     CheckObjDespawn2.l
-R12A_ObjMosqui_Index:
-	dc.w	R12A_tr_ObjMosqui_Index_ObjMosqui_Init-R12A_ObjMosqui_Index
-	dc.w	R12A_tr_ObjMosqui_Index_ObjMosqui_Main-R12A_ObjMosqui_Index
-	dc.w	R12A_tr_ObjMosqui_Index_ObjMosqui_Animate-R12A_ObjMosqui_Index
-	dc.w	R12A_tr_ObjMosqui_Index_ObjMosqui_Dive-R12A_ObjMosqui_Index
-	dc.w	R12A_tr_ObjMosqui_Index_ObjMosqui_Wait-R12A_ObjMosqui_Index
-	even
-R12A_tr_ObjMosqui_Index_ObjMosqui_Init:	jmp	ObjMosqui_Init
-R12A_tr_ObjMosqui_Index_ObjMosqui_Main:	jmp	ObjMosqui_Main
-R12A_tr_ObjMosqui_Index_ObjMosqui_Animate:	jmp	ObjMosqui_Animate
-R12A_tr_ObjMosqui_Index_ObjMosqui_Dive:	jmp	ObjMosqui_Dive
-R12A_tr_ObjMosqui_Index_ObjMosqui_Wait:	jmp	ObjMosqui_Wait
-R12A_Obj40_20B8D0:
-	jsr     DestroyOnGoodFuture.l
-	moveq   #$0, d0
-	move.b  oRoutine(a0), d0
-	move.w  R12A_dat_20B8F4(pc, d0.w), d0
-	jsr     R12A_dat_20B8F4(pc, d0.w)
-	jsr     DrawObject.l
-	move.w  $2a(a0), d0
-	jmp     CheckObjDespawn2.l
-R12A_dat_20B8F4:
-	dc.w	R12A_tr_dat_20B8F4_ObTagaTaga_Init-R12A_dat_20B8F4
-	dc.w	R12A_tr_dat_20B8F4_ObjTagaTaga_Init2-R12A_dat_20B8F4
-	dc.w	R12A_tr_dat_20B8F4_ObjTagaTaga_Animate-R12A_dat_20B8F4
-	dc.w	R12A_tr_dat_20B8F4_ObjTagaTaga_Jump-R12A_dat_20B8F4
-	dc.w	R12A_tr_dat_20B8F4_ObjTagaTaga_Main-R12A_dat_20B8F4
-	even
-R12A_tr_dat_20B8F4_ObTagaTaga_Init:	jmp	ObTagaTaga_Init
-R12A_tr_dat_20B8F4_ObjTagaTaga_Init2:	jmp	ObjTagaTaga_Init2
-R12A_tr_dat_20B8F4_ObjTagaTaga_Animate:	jmp	ObjTagaTaga_Animate
-R12A_tr_dat_20B8F4_ObjTagaTaga_Jump:	jmp	ObjTagaTaga_Jump
-R12A_tr_dat_20B8F4_ObjTagaTaga_Main:	jmp	ObjTagaTaga_Main
-R12A_Obj23_20BB48:
-	dc.w	$4E75
-R12A_Obj28_20BC18:
-	moveq   #$0, d0
-	move.b  oRoutine(a0), d0
-	move.w  R12A_dat_20BC2C(pc, d0.w), d0
-	jsr     R12A_dat_20BC2C(pc, d0.w)
-	jmp     CheckObjDespawn.l
-R12A_dat_20BC2C:
-	dc.w	R12A_tr_dat_20BC2C_ObjSpringBoard_Init-R12A_dat_20BC2C
-	dc.w	R12A_tr_dat_20BC2C_ObjSpringBoard_NormalMain-R12A_dat_20BC2C
-	dc.w	R12A_tr_dat_20BC2C_ObjSpringBoard_FlipMain-R12A_dat_20BC2C
-	dc.w	R12A_tr_dat_20BC2C_ObjSpringBoard_NormalMain2-R12A_dat_20BC2C
-	dc.w	R12A_tr_dat_20BC2C_ObjSpringBoard_FlipMain2-R12A_dat_20BC2C
-	dc.w	R12A_tr_dat_20BC2C_ObjSpringBoard_NormalFling-R12A_dat_20BC2C
-	dc.w	R12A_tr_dat_20BC2C_ObjSpringBoard_FlipFling-R12A_dat_20BC2C
-	even
-R12A_tr_dat_20BC2C_ObjSpringBoard_Init:	jmp	ObjSpringBoard_Init
-R12A_tr_dat_20BC2C_ObjSpringBoard_NormalMain:	jmp	ObjSpringBoard_NormalMain
-R12A_tr_dat_20BC2C_ObjSpringBoard_FlipMain:	jmp	ObjSpringBoard_FlipMain
-R12A_tr_dat_20BC2C_ObjSpringBoard_NormalMain2:	jmp	ObjSpringBoard_NormalMain2
-R12A_tr_dat_20BC2C_ObjSpringBoard_FlipMain2:	jmp	ObjSpringBoard_FlipMain2
-R12A_tr_dat_20BC2C_ObjSpringBoard_NormalFling:	jmp	ObjSpringBoard_NormalFling
-R12A_tr_dat_20BC2C_ObjSpringBoard_FlipFling:	jmp	ObjSpringBoard_FlipFling
-R12A_Obj26_20BF50:
-	moveq   #$0, d0
-	move.b  oRoutine(a0), d0
-	move.w  R12A_dat_20BF5E(pc, d0.w), d0
-	jmp     R12A_dat_20BF5E(pc, d0.w)
-R12A_dat_20BF5E:
-	dc.w	R12A_tr_dat_20BF5E_ObjSpikes_Init-R12A_dat_20BF5E
-	dc.w	R12A_tr_dat_20BF5E_ObjSpikes_Main-R12A_dat_20BF5E
-	even
-R12A_tr_dat_20BF5E_ObjSpikes_Init:	jmp	ObjSpikes_Init
-R12A_tr_dat_20BF5E_ObjSpikes_Main:	jmp	ObjSpikes_Main
 R12A_MapSpr_CollapsePlatform1:
 	dc.w	$0002,$17D0,$0508,$0DD8,$D005,$080D,$E8D0,$0508
 	dc.w	$0DF8,$D005,$080D,$08D0,$0508,$0D18,$E005,$0811
@@ -1236,808 +973,6 @@ R12A_MapSpr_CollapsePlatform4:
 	dc.w	$0004,$0019,$04D8,$0500,$0DF8,$E805,$0011,$F8F8
 	dc.w	$0500,$15F8,$0805,$0021,$F803,$E005,$000D,$F8F0
 	dc.w	$0500,$11F8,$0005,$0015,$F800
-R12A_Obj21_20C582:
-	dc.w	$7000
-	dc.w	$1028
-	dc.w	$0024
-	dc.w	$303B
-	dc.w	$000E
-	dc.w	$4EBB
-	dc.w	$000A
-	dc.w	$4EB9
-	dc.l	DrawObject
-	dc.w	$4E75
-	dc.w	$0016
-	dc.w	$00E8
-	dc.w	$43F8
-	dc.w	$D000
-	dc.w	$3628
-	dc.w	$0008
-	dc.w	$3828
-	dc.w	$000C
-	dc.w	$4EF9
-	dc.l	TopSolidObject
-	dc.w	$0028
-	dc.w	$0004
-	dc.w	$0001
-	dc.w	$317C
-	dc.w	$44BE
-	dc.w	$0002
-	dc.w	$117C
-	dc.w	$0002
-	dc.w	$0018
-	dc.w	$3168
-	dc.w	$0008
-	dc.w	$0038
-	dc.w	$3168
-	dc.w	$000C
-	dc.w	$003A
-	dc.w	$3168
-	dc.w	$000C
-	dc.w	$0036
-	dc.w	$203C
-	dc.l	R12A_Obj21_20C582+$47E
-	dc.w	$0C79
-	dc.w	$0000
-	dc.w	$00FF
-	dc.w	$1506
-	dc.w	$6716
-	dc.w	$203C
-	dc.l	R12A_Obj21_20C582+$47E
-	dc.w	$0C79
-	dc.w	$0001
-	dc.w	$00FF
-	dc.w	$1506
-	dc.w	$6706
-	dc.w	$203C
-	dc.l	R12A_Obj21_20C582+$47E
-	dc.w	$2140
-	dc.w	$0004
-	dc.w	$1028
-	dc.w	$0028
-	dc.w	$1200
-	dc.w	$0240
-	dc.w	$0003
-	dc.w	$1140
-	dc.w	$001A
-	dc.w	$117B
-	dc.w	$006C
-	dc.w	$0019
-	dc.w	$117C
-	dc.w	$0008
-	dc.w	$0016
-	dc.w	$E409
-	dc.w	$0241
-	dc.w	$0003
-	dc.w	$117B
-	dc.w	$105E
-	dc.w	$002D
-	dc.w	$1028
-	dc.w	$0029
-	dc.w	$674A
-	dc.w	$4EB9
-	dc.l	FindObjSlot
-	dc.w	$6706
-	dc.w	$4EF9
-	dc.l	R12A_Obj21_20C582+$454
-	dc.w	$137C
-	dc.w	$000A
-	dc.w	$0000
-	dc.w	$3368
-	dc.w	$0008
-	dc.w	$0008
-	dc.w	$3368
-	dc.w	$000C
-	dc.w	$000C
-	dc.w	$0469
-	dc.w	$0010
-	dc.w	$000C
-	dc.w	$137C
-	dc.w	$00F0
-	dc.w	$0039
-	dc.w	$3348
-	dc.w	$0034
-	dc.w	$1028
-	dc.w	$0029
-	dc.w	$1200
-	dc.w	$0201
-	dc.w	$0002
-	dc.w	$1341
-	dc.w	$0028
-	dc.w	$0200
-	dc.w	$00F8
-	dc.w	$1340
-	dc.w	$0038
-	dc.w	$D169
-	dc.w	$0008
-	dc.w	$5428
-	dc.w	$0024
-	dc.w	$4E75
-	dc.w	$1020
-	dc.w	$3000
-	dc.w	$0203
-	dc.w	$0406
-	dc.w	$4A79
-	dc.w	$00FF
-	dc.w	$190E
-	dc.w	$6704
-	dc.w	$6000
-	dc.w	$FF12
-	dc.w	$1028
-	dc.w	$0028
-	dc.w	$E808
-	dc.w	$0240
-	dc.w	$000F
-	dc.w	$D040
-	dc.w	$303B
-	dc.w	$0032
-	dc.w	$4EBB
-	dc.w	$002E
-	dc.w	$3028
-	dc.w	$0038
-	dc.w	$0240
-	dc.w	$FF80
-	dc.w	$3238
-	dc.w	$F700
-	dc.w	$0441
-	dc.w	$0080
-	dc.w	$0241
-	dc.w	$FF80
-	dc.w	$9041
-	dc.w	$0C40
-	dc.w	$0280
-	dc.w	$6202
-	dc.w	$4E75
-	dc.w	$43F8
-	dc.w	$D000
-	dc.w	$4EB9
-	dc.l	GetOffObject
-	dc.w	$6000
-	dc.w	$030C
-	dc.w	$0014
-	dc.w	$002A
-	dc.w	$0084
-	dc.w	$00A8
-	dc.w	$00CE
-	dc.w	$00E2
-	dc.w	$014E
-	dc.w	$01A2
-	dc.w	$0202
-	dc.w	$027A
-	dc.w	$5228
-	dc.w	$002A
-	dc.w	$4EBA
-	dc.w	$02D8
-	dc.w	$D068
-	dc.w	$003A
-	dc.w	$3140
-	dc.w	$000C
-	dc.w	$4EF9
-	dc.l	R12A_Obj21_20C582+$1A
-	dc.w	$2F28
-	dc.w	$0008
-	dc.w	$4EBA
-	dc.w	$02C2
-	dc.w	$D068
-	dc.w	$0038
-	dc.w	$3140
-	dc.w	$0008
-	dc.w	$5228
-	dc.w	$002A
-	dc.w	$7000
-	dc.w	$1028
-	dc.w	$002C
-	dc.w	$E200
-	dc.w	$D068
-	dc.w	$003A
-	dc.w	$3140
-	dc.w	$000C
-	dc.w	$201F
-	dc.w	$2228
-	dc.w	$0008
-	dc.w	$9280
-	dc.w	$E081
-	dc.w	$3141
-	dc.w	$0010
-	dc.w	$4EBA
-	dc.w	$FE72
-	dc.w	$6712
-	dc.w	$1028
-	dc.w	$002C
-	dc.w	$0C00
-	dc.w	$0008
-	dc.w	$6404
-	dc.w	$5228
-	dc.w	$002C
-	dc.w	$7001
-	dc.w	$4E75
-	dc.w	$7000
-	dc.w	$1028
-	dc.w	$002C
-	dc.w	$6704
-	dc.w	$5328
-	dc.w	$002C
-	dc.w	$7000
-	dc.w	$4E75
-	dc.w	$2F28
-	dc.w	$0008
-	dc.w	$5228
-	dc.w	$002A
-	dc.w	$4EBA
-	dc.w	$0264
-	dc.w	$D068
-	dc.w	$003A
-	dc.w	$3140
-	dc.w	$000C
-	dc.w	$4EBA
-	dc.w	$0258
-	dc.w	$D068
-	dc.w	$0038
-	dc.w	$3140
-	dc.w	$0008
-	dc.w	$6000
-	dc.w	$FFA8
-	dc.w	$2F28
-	dc.w	$0008
-	dc.w	$5228
-	dc.w	$002A
-	dc.w	$4EBA
-	dc.w	$0240
-	dc.w	$D068
-	dc.w	$003A
-	dc.w	$3140
-	dc.w	$000C
-	dc.w	$4EBA
-	dc.w	$0234
-	dc.w	$4440
-	dc.w	$D068
-	dc.w	$0038
-	dc.w	$3140
-	dc.w	$0008
-	dc.w	$6000
-	dc.w	$FF82
-	dc.w	$7000
-	dc.w	$1028
-	dc.w	$002C
-	dc.w	$E200
-	dc.w	$D068
-	dc.w	$003A
-	dc.w	$3140
-	dc.w	$000C
-	dc.w	$6000
-	dc.w	$FF7C
-	dc.w	$1028
-	dc.w	$002B
-	dc.w	$6612
-	dc.w	$4EBA
-	dc.w	$FFE4
-	dc.w	$6602
-	dc.w	$4E75
-	dc.w	$117C
-	dc.w	$001E
-	dc.w	$002E
-	dc.w	$5428
-	dc.w	$002B
-	dc.w	$1028
-	dc.w	$002E
-	dc.w	$6708
-	dc.w	$5328
-	dc.w	$002E
-	dc.w	$6000
-	dc.w	$FFC8
-	dc.w	$4EBA
-	dc.w	$FDC6
-	dc.w	$2228
-	dc.w	$000C
-	dc.w	$3028
-	dc.w	$0012
-	dc.w	$48C0
-	dc.w	$E180
-	dc.w	$D280
-	dc.w	$2141
-	dc.w	$000C
-	dc.w	$3028
-	dc.w	$0012
-	dc.w	$0C40
-	dc.w	$0400
-	dc.w	$6406
-	dc.w	$0668
-	dc.w	$0040
-	dc.w	$0012
-	dc.w	$3038
-	dc.w	$F704
-	dc.w	$0640
-	dc.w	$0100
-	dc.w	$B068
-	dc.w	$000C
-	dc.w	$6410
-	dc.w	$43F8
-	dc.w	$D000
-	dc.w	$4EB9
-	dc.l	GetOffObject
-	dc.w	$4EF9
-	dc.l	DeleteObject
-	dc.w	$4E75
-	dc.w	$1028
-	dc.w	$002B
-	dc.w	$0240
-	dc.w	$00FF
-	dc.w	$303B
-	dc.w	$0006
-	dc.w	$4EFB
-	dc.w	$0002
-	dc.w	$0006
-	dc.w	$0012
-	dc.w	$0040
-	dc.w	$4EBA
-	dc.w	$FF68
-	dc.w	$6602
-	dc.w	$4E75
-	dc.w	$5428
-	dc.w	$002B
-	dc.w	$1028
-	dc.w	$002A
-	dc.w	$0C00
-	dc.w	$0040
-	dc.w	$6400
-	dc.w	$001A
-	dc.w	$4EBA
-	dc.w	$0174
-	dc.w	$4440
-	dc.w	$D068
-	dc.w	$003A
-	dc.w	$3140
-	dc.w	$000C
-	dc.w	$5428
-	dc.w	$002A
-	dc.w	$4EF9
-	dc.l	R12A_Obj21_20C582+$1A
-	dc.w	$3168
-	dc.w	$000C
-	dc.w	$003A
-	dc.w	$5428
-	dc.w	$002B
-	dc.w	$6000
-	dc.w	$FF2E
-	dc.w	$1028
-	dc.w	$002B
-	dc.w	$0240
-	dc.w	$00FF
-	dc.w	$303B
-	dc.w	$0006
-	dc.w	$4EFB
-	dc.w	$0002
-	dc.w	$0006
-	dc.w	$0018
-	dc.w	$004C
-	dc.w	$4EBA
-	dc.w	$FF14
-	dc.w	$6602
-	dc.w	$4E75
-	dc.w	$5428
-	dc.w	$002B
-	dc.w	$117C
-	dc.w	$003C
-	dc.w	$002E
-	dc.w	$1028
-	dc.w	$002E
-	dc.w	$6708
-	dc.w	$5328
-	dc.w	$002E
-	dc.w	$6000
-	dc.w	$FEF8
-	dc.w	$4EB9
-	dc.l	ObjMove
-	dc.w	$5168
-	dc.w	$0012
-	dc.w	$4EB9
-	dc.l	Player_GetCeilDist_Part2+$24
-	dc.w	$4A41
-	dc.w	$6B04
-	dc.w	$6000
-	dc.w	$FE6E
-	dc.w	$9368
-	dc.w	$000C
-	dc.w	$3168
-	dc.w	$000C
-	dc.w	$003A
-	dc.w	$5428
-	dc.w	$002B
-	dc.w	$6000
-	dc.w	$FECE
-	dc.w	$1028
-	dc.w	$002B
-	dc.w	$0240
-	dc.w	$00FF
-	dc.w	$303B
-	dc.w	$0006
-	dc.w	$4EFB
-	dc.w	$0002
-	dc.w	$0006
-	dc.w	$0018
-	dc.w	$0064
-	dc.w	$4EBA
-	dc.w	$FEB4
-	dc.w	$6602
-	dc.w	$4E75
-	dc.w	$5428
-	dc.w	$002B
-	dc.w	$117C
-	dc.w	$003C
-	dc.w	$002E
-	dc.w	$1028
-	dc.w	$002E
-	dc.w	$6708
-	dc.w	$5328
-	dc.w	$002E
-	dc.w	$6000
-	dc.w	$FE98
-	dc.w	$1028
-	dc.w	$002A
-	dc.w	$0C00
-	dc.w	$0040
-	dc.w	$6400
-	dc.w	$002A
-	dc.w	$2F28
-	dc.w	$0008
-	dc.w	$4EBA
-	dc.w	$00A8
-	dc.w	$D068
-	dc.w	$0038
-	dc.w	$3140
-	dc.w	$0008
-	dc.w	$5228
-	dc.w	$002A
-	dc.w	$7000
-	dc.w	$1028
-	dc.w	$002C
-	dc.w	$E200
-	dc.w	$D068
-	dc.w	$003A
-	dc.w	$3140
-	dc.w	$000C
-	dc.w	$6000
-	dc.w	$FDE4
-	dc.w	$3168
-	dc.w	$0008
-	dc.w	$0038
-	dc.w	$5428
-	dc.w	$002B
-	dc.w	$6000
-	dc.w	$FE56
-	dc.w	$1028
-	dc.w	$002B
-	dc.w	$0240
-	dc.w	$00FF
-	dc.w	$303B
-	dc.w	$0006
-	dc.w	$4EFB
-	dc.w	$0002
-	dc.w	$0006
-	dc.w	$0018
-	dc.w	$0064
-	dc.w	$4EBA
-	dc.w	$FE3C
-	dc.w	$6602
-	dc.w	$4E75
-	dc.w	$5428
-	dc.w	$002B
-	dc.w	$117C
-	dc.w	$003C
-	dc.w	$002E
-	dc.w	$1028
-	dc.w	$002E
-	dc.w	$6708
-	dc.w	$5328
-	dc.w	$002E
-	dc.w	$6000
-	dc.w	$FE20
-	dc.w	$1028
-	dc.w	$002A
-	dc.w	$0C00
-	dc.w	$0040
-	dc.w	$642A
-	dc.w	$2F28
-	dc.w	$0008
-	dc.w	$4EBA
-	dc.w	$0032
-	dc.w	$4440
-	dc.w	$D068
-	dc.w	$0038
-	dc.w	$3140
-	dc.w	$0008
-	dc.w	$5228
-	dc.w	$002A
-	dc.w	$7000
-	dc.w	$1028
-	dc.w	$002C
-	dc.w	$E200
-	dc.w	$D068
-	dc.w	$003A
-	dc.w	$3140
-	dc.w	$000C
-	dc.w	$6000
-	dc.w	$FD6C
-	dc.w	$3168
-	dc.w	$0008
-	dc.w	$0038
-	dc.w	$5428
-	dc.w	$002B
-	dc.w	$6000
-	dc.w	$FDDE
-	dc.w	$7000
-	dc.w	$1028
-	dc.w	$002A
-	dc.w	$4EB9
-	dc.l	CalcSine
-	dc.w	$7400
-	dc.w	$1428
-	dc.w	$002D
-	dc.w	$C1C2
-	dc.w	$E840
-	dc.w	$4E75
-	dc.w	$7000
-	dc.w	$1028
-	dc.w	$0023
-	dc.w	$671C
-	dc.w	$43F9
-	dc.w	$00FF
-	dc.w	$1200
-	dc.w	$3200
-	dc.w	$D241
-	dc.w	$D041
-	dc.w	$7200
-	dc.w	$1239
-	dc.w	$00FF
-	dc.w	$152E
-	dc.w	$D041
-	dc.w	$08B1
-	dc.w	$0007
-	dc.w	$0002
-	dc.w	$4EF9
-	dc.l	DeleteObject
-	dc.w	$0006
-	dc.w	$001C
-	dc.w	$0046
-	dc.w	$04F0
-	dc.w	$0500
-	dc.w	$01F0
-	dc.w	$F005
-	dc.w	$0801
-	dc.w	$0000
-	dc.w	$0500
-	dc.w	$05F0
-	dc.w	$0005
-	dc.w	$0805
-	dc.w	$0000
-	dc.w	$08F0
-	dc.w	$0500
-	dc.w	$01E0
-	dc.w	$F005
-	dc.w	$0001
-	dc.w	$F0F0
-	dc.w	$0500
-	dc.w	$0100
-	dc.w	$F005
-	dc.w	$0001
-	dc.w	$1000
-	dc.w	$0500
-	dc.w	$05E0
-	dc.w	$0005
-	dc.w	$0009
-	dc.w	$F000
-	dc.w	$0500
-	dc.w	$0900
-	dc.w	$0005
-	dc.w	$0805
-	dc.w	$1000
-	dc.w	$0CF0
-	dc.w	$0500
-	dc.w	$01D0
-	dc.w	$F005
-	dc.w	$0001
-	dc.w	$E0F0
-	dc.w	$0500
-	dc.w	$01F0
-	dc.w	$F005
-	dc.w	$0001
-	dc.w	$00F0
-	dc.w	$0500
-	dc.w	$0110
-	dc.w	$F005
-	dc.w	$0001
-	dc.w	$2000
-	dc.w	$0500
-	dc.w	$05D0
-	dc.w	$0005
-	dc.w	$0009
-	dc.w	$E000
-	dc.w	$0500
-	dc.w	$09F0
-	dc.w	$0005
-	dc.w	$0009
-	dc.w	$0000
-	dc.w	$0500
-	dc.w	$0910
-	dc.w	$0005
-	dc.w	$0805
-	dc.w	$2000
-	dc.w	$0006
-	dc.w	$001C
-	dc.w	$0046
-	dc.w	$04F0
-	dc.w	$0500
-	dc.w	$31F0
-	dc.w	$F005
-	dc.w	$0831
-	dc.w	$0000
-	dc.w	$0500
-	dc.w	$35F0
-	dc.w	$0005
-	dc.w	$0835
-	dc.w	$0000
-	dc.w	$08F0
-	dc.w	$0500
-	dc.w	$31E0
-	dc.w	$F005
-	dc.w	$0831
-	dc.w	$F000
-	dc.w	$0500
-	dc.w	$35E0
-	dc.w	$0005
-	dc.w	$0835
-	dc.w	$F0F0
-	dc.w	$0500
-	dc.w	$3100
-	dc.w	$F005
-	dc.w	$0831
-	dc.w	$1000
-	dc.w	$0500
-	dc.w	$3500
-	dc.w	$0005
-	dc.w	$0835
-	dc.w	$1000
-	dc.w	$0CF0
-	dc.w	$0500
-	dc.w	$31D0
-	dc.w	$F005
-	dc.w	$0831
-	dc.w	$E000
-	dc.w	$0500
-	dc.w	$35D0
-	dc.w	$0005
-	dc.w	$0835
-	dc.w	$E0F0
-	dc.w	$0500
-	dc.w	$31F0
-	dc.w	$F005
-	dc.w	$0831
-	dc.w	$0000
-	dc.w	$0500
-	dc.w	$35F0
-	dc.w	$0005
-	dc.w	$0835
-	dc.w	$00F0
-	dc.w	$0500
-	dc.w	$3110
-	dc.w	$F005
-	dc.w	$0831
-	dc.w	$2000
-	dc.w	$0500
-	dc.w	$3510
-	dc.w	$0005
-	dc.w	$0835
-	dc.w	$2000
-R12A_Obj35_20CB08:
-	dc.w	$7000
-	dc.w	$1028
-	dc.w	$0024
-	dc.w	$303B
-	dc.w	$0012
-	dc.w	$4EBB
-	dc.w	$000E
-	dc.w	$4EB9
-	dc.l	DrawObject
-	dc.w	$4EF9
-	dc.l	CheckObjDespawn
-	dc.w	$0018
-	dc.w	$0044
-	dc.w	$0090
-	dc.w	$43F8
-	dc.w	$D000
-	dc.w	$3628
-	dc.w	$0008
-	dc.w	$3828
-	dc.w	$000C
-	dc.w	$4EF9
-	dc.l	SolidObject
-	dc.w	$5428
-	dc.w	$0024
-	dc.w	$217C
-	dc.l	R12A_Obj35_20CB08+$CA
-	dc.w	$0004
-	dc.w	$117C
-	dc.w	$0001
-	dc.w	$0018
-	dc.w	$0028
-	dc.w	$0004
-	dc.w	$0001
-	dc.w	$117C
-	dc.w	$0004
-	dc.w	$0019
-	dc.w	$117C
-	dc.w	$0018
-	dc.w	$0016
-	dc.w	$700C
-	dc.w	$4EB9
-	dc.l	SetObjectTileID
-	dc.w	$43F8
-	dc.w	$D000
-	dc.w	$3028
-	dc.w	$000C
-	dc.w	$9069
-	dc.w	$000C
-	dc.w	$6402
-	dc.w	$4440
-	dc.w	$0C40
-	dc.w	$0020
-	dc.w	$6432
-	dc.w	$3028
-	dc.w	$0008
-	dc.w	$9069
-	dc.w	$0008
-	dc.w	$6528
-	dc.w	$0C40
-	dc.w	$0030
-	dc.w	$6422
-	dc.w	$4268
-	dc.w	$003A
-	dc.w	$117C
-	dc.w	$0004
-	dc.w	$0024
-	dc.w	$0828
-	dc.w	$0007
-	dc.w	$0001
-	dc.w	$6710
-	dc.w	$303C
-	dc.w	$00A4
-	dc.w	$4EB9
-	dc.l	PlayFMSound
-	dc.w	$117C
-	dc.w	$0001
-	dc.w	$001A
-	dc.w	$6000
-	dc.w	$FF7C
-	dc.w	$5028
-	dc.w	$003A
-	dc.w	$640A
-	dc.w	$5528
-	dc.w	$0024
-	dc.w	$117C
-	dc.w	$0000
-	dc.w	$001A
-	dc.w	$4E75
-	dc.w	$0002
-	dc.w	$0000
-	dc.w	$0001
-	dc.w	$0101
-	dc.w	$0101
-	dc.w	$0101
-	dc.w	$01FC
-	dc.w	$0004
-	dc.w	$0010
-	dc.w	$02E8
-	dc.w	$0118
-	dc.w	$04FC
-	dc.w	$F803
-	dc.w	$1800
-	dc.w	$FC00
-	dc.w	$02E8
-	dc.w	$0C00
-	dc.w	$06FC
-	dc.w	$E804
-	dc.w	$000A
-	dc.w	$1C00
 R12A_SectionRanges:
 	dc.w	$0A00,$1500,$1800,$1D00,$FFFF
 R12A_SectionUpdatePLCs:
@@ -2050,69 +985,6 @@ R12A_ObjectTileIDs:
 	dc.w	$0046,$0048,$23A7,$23A7,$2400,$23DB,$23DB,$242C
 	dc.w	$435A,$0330,$0000,$4000,$4000,$0380,$036C,$834E
 	dc.w	$03A7,$0338,$0490,$0000,$0418
-R12A_Obj17_20D4EC:
-	moveq   #$0, d0
-	move.b  oRoutine(a0), d0
-	move.w  R12A_dat_20D500(pc, d0.w), d0
-	jsr     R12A_dat_20D500(pc, d0.w)
-	jmp     DrawObject.l
-R12A_dat_20D500:
-	dc.w	R12A_tr_dat_20D500_ObjSignpost_Init-R12A_dat_20D500
-	dc.w	R12A_tr_dat_20D500_ObjSignpost_Main-R12A_dat_20D500
-	dc.w	R12A_tr_dat_20D500_ObjSignpost_Spin-R12A_dat_20D500
-	dc.w	R12A_tr_dat_20D500_StartResults-R12A_dat_20D500
-	dc.w	R12A_tr_dat_20D500_ResultsActive-R12A_dat_20D500
-	even
-R12A_tr_dat_20D500_ObjSignpost_Init:	jmp	ObjSignpost_Init
-R12A_tr_dat_20D500_ObjSignpost_Main:	jmp	ObjSignpost_Main
-R12A_tr_dat_20D500_ObjSignpost_Spin:	jmp	ObjSignpost_Spin
-R12A_tr_dat_20D500_StartResults:	jmp	StartResults
-R12A_tr_dat_20D500_ResultsActive:	jmp	ResultsActive
-R12A_Obj3B_20D9F4:
-	moveq   #$0, d0
-	move.b  oRoutine(a0), d0
-	move.w  R12A_dat_20DA02(pc, d0.w), d0
-	jmp     R12A_dat_20DA02(pc, d0.w)
-R12A_dat_20DA02:
-	dc.w	R12A_tr_dat_20DA02_ObjGameOver_Init-R12A_dat_20DA02
-	dc.w	R12A_tr_dat_20DA02_ObjGameOver_Main-R12A_dat_20DA02
-	even
-R12A_tr_dat_20DA02_ObjGameOver_Init:	jmp	ObjGameOver_Init
-R12A_tr_dat_20DA02_ObjGameOver_Main:	jmp	ObjGameOver_Main
-R12A_Obj3C_20DB10:
-	moveq   #$0, d0
-	move.b  oRoutine(a0), d0
-	move.w  R12A_dat_20DB1E(pc, d0.w), d0
-	jmp     R12A_dat_20DB1E(pc, d0.w)
-R12A_dat_20DB1E:
-	dc.w	R12A_tr_dat_20DB1E_ObjTitleCard_Init-R12A_dat_20DB1E
-	dc.w	R12A_tr_dat_20DB1E_ObjTitleCard_SlideInVert-R12A_dat_20DB1E
-	dc.w	R12A_tr_dat_20DB1E_ObjTitleCard_SlideInHoriz-R12A_dat_20DB1E
-	dc.w	R12A_tr_dat_20DB1E_ObjTitleCard_SlideOutVert-R12A_dat_20DB1E
-	dc.w	R12A_tr_dat_20DB1E_ObjTitleCard_SlideOutHoriz-R12A_dat_20DB1E
-	dc.w	R12A_tr_dat_20DB1E_ObjTitleCard_WaitPLC-R12A_dat_20DB1E
-	even
-R12A_tr_dat_20DB1E_ObjTitleCard_Init:	jmp	ObjTitleCard_Init
-R12A_tr_dat_20DB1E_ObjTitleCard_SlideInVert:	jmp	ObjTitleCard_SlideInVert
-R12A_tr_dat_20DB1E_ObjTitleCard_SlideInHoriz:	jmp	ObjTitleCard_SlideInHoriz
-R12A_tr_dat_20DB1E_ObjTitleCard_SlideOutVert:	jmp	ObjTitleCard_SlideOutVert
-R12A_tr_dat_20DB1E_ObjTitleCard_SlideOutHoriz:	jmp	ObjTitleCard_SlideOutHoriz
-R12A_tr_dat_20DB1E_ObjTitleCard_WaitPLC:	jmp	ObjTitleCard_WaitPLC
-R12A_Data_20EB56:
-	incbin	"Level/Palmtree Panic/Data/Misc/Data_20EB56.bin"
-R12A_Obj36_20ED8C:
-	moveq   #$0, d0
-	move.b  oRoutine(a0), d0
-	move.w  R12A_dat_20ED9A(pc, d0.w), d0
-	jmp     R12A_dat_20ED9A(pc, d0.w)
-R12A_dat_20ED9A:
-	dc.w	R12A_tr_dat_20ED9A_ObjBreakableWall_Init-R12A_dat_20ED9A
-	dc.w	R12A_tr_dat_20ED9A_ObjBreakableWall_Main-R12A_dat_20ED9A
-	dc.w	R12A_tr_dat_20ED9A_ObjBreakableWall_Fall-R12A_dat_20ED9A
-	even
-R12A_tr_dat_20ED9A_ObjBreakableWall_Init:	jmp	ObjBreakableWall_Init
-R12A_tr_dat_20ED9A_ObjBreakableWall_Main:	jmp	ObjBreakableWall_Main
-R12A_tr_dat_20ED9A_ObjBreakableWall_Fall:	jmp	ObjBreakableWall_Fall
 R12A_LevelDataIndex:
 	dc.l	$3000000|R12A_Art_LevelTiles
 	dc.l	$2000000|R12A_LevelBlocks
@@ -2147,191 +1019,191 @@ R12A_PLCLists:
 
 R12A_PLC_Level:
 	dc.w	$1
-	dc.l	R12A_Art_LevelTiles
+	dc.l	ArtPool_4baa722a
 	dc.w	$0
-	dc.l	R12A_Art_Checkpoint
+	dc.l	ArtPool_fd173692
 	dc.w	$D960
 
 R12A_PLC_Std:
 	dc.w	$D
-	dc.l	R12A_Art_Spikes
+	dc.l	Art_Spikes
 	dc.w	$6600
-	dc.l	R12A_Data_237272
+	dc.l	ArtPool_fff935f3
 	dc.w	$6700
-	dc.l	R12A_Data_2376BA
+	dc.l	ArtPool_ac40fcb3
 	dc.w	$69C0
-	dc.l	R12A_Art_TitleCard
+	dc.l	ArtPool_857ceae8
 	dc.w	$6C00
-	dc.l	R12A_Data_236D90
+	dc.l	ArtPool_65b33b1f
 	dc.w	$7A00
-	dc.l	R12A_Data_236EBA
+	dc.l	Art_Platform
 	dc.w	$97C0
-	dc.l	R12A_Art_GoalPost
+	dc.l	Art_GoalPost
 	dc.w	$9EE0
-	dc.l	R12A_Art_Springs
+	dc.l	Art_Springs
 	dc.w	$A400
-	dc.l	R12A_Art_HUD
+	dc.l	Art_HUD
 	dc.w	$AD00
-	dc.l	R12A_Art_MonitorTimePosts
+	dc.l	Art_MonitorTimePosts
 	dc.w	$B500
-	dc.l	R12A_Art_Explosions
+	dc.l	Art_Explosions
 	dc.w	$D000
-	dc.l	R12A_Art_Points
+	dc.l	Art_Points
 	dc.w	$D8C0
-	dc.l	R12A_Data_236B0A
+	dc.l	ArtPool_5894e814
 	dc.w	$DAE0
-	dc.l	R12A_Art_Rings
+	dc.l	ArtPool_fb715390
 	dc.w	$F5C0
 
 R12A_PLC_Cam1_Full:
 	dc.w	$A
-	dc.l	R12A_Data_236EBA+$2D2
+	dc.l	Art_FloatBlock
 	dc.w	$6B40
-	dc.l	R12A_Data_236EBA+$1C4
+	dc.l	Art_Boulder
 	dc.w	$6D80
-	dc.l	R12A_Data_237272+$B6
+	dc.l	Art_SpinningDisc
 	dc.w	$7000
-	dc.l	Art_Animals
+	dc.l	ArtPool_3cabe053
 	dc.w	$71E0
-	dc.l	Art_PataBata
+	dc.l	ArtPool_c3f0afb8
 	dc.w	$74E0
-	dc.l	Art_Springboard
+	dc.l	ArtPool_52c1fcc2
 	dc.w	$7B60
-	dc.l	R12A_Art_Checkpoint+$FA
+	dc.l	ArtPool_47724fa5
 	dc.w	$7E00
 	dc.l	Art_Anton
 	dc.w	$8000
-	dc.l	Art_SwingingPlatform
+	dc.l	ArtPool_fe72ebda
 	dc.w	$8300
 	dc.l	Art_Tamabboh
 	dc.w	$8580
-	dc.l	Art_DiagonalSpring
+	dc.l	ArtPool_48748a9c
 	dc.w	$9200
 
 R12A_PLC_Cam2_Full:
 	dc.w	$9
-	dc.l	R12A_Data_236EBA+$2D2
+	dc.l	Art_FloatBlock
 	dc.w	$6B40
-	dc.l	R12A_Data_236EBA+$1C4
+	dc.l	Art_Boulder
 	dc.w	$6D80
-	dc.l	R12A_Data_237272+$B6
+	dc.l	Art_SpinningDisc
 	dc.w	$7000
-	dc.l	Art_Animals
+	dc.l	ArtPool_3cabe053
 	dc.w	$71E0
 	dc.l	Art_Mosqui
 	dc.w	$74E0
-	dc.l	R12A_Art_Checkpoint+$FA
+	dc.l	ArtPool_47724fa5
 	dc.w	$7E00
 	dc.l	Art_Anton
 	dc.w	$8000
-	dc.l	Art_SwingingPlatform
+	dc.l	ArtPool_fe72ebda
 	dc.w	$8300
 	dc.l	Art_Tamabboh
 	dc.w	$8580
-	dc.l	Art_DiagonalSpring
+	dc.l	ArtPool_48748a9c
 	dc.w	$9200
 
 R12A_PLC_Cam3_Full:
 	dc.w	$8
-	dc.l	R12A_Data_236EBA+$2D2
+	dc.l	Art_FloatBlock
 	dc.w	$6B40
-	dc.l	R12A_Data_236EBA+$1C4
+	dc.l	Art_Boulder
 	dc.w	$6D80
-	dc.l	R12A_Data_237272+$B6
+	dc.l	Art_SpinningDisc
 	dc.w	$7000
-	dc.l	Art_Animals
+	dc.l	ArtPool_3cabe053
 	dc.w	$71E0
-	dc.l	R12A_Data_2376BA+$9A
+	dc.l	Art_TunnelDoorSplash
 	dc.w	$74E0
-	dc.l	Art_RobotGenWithered
+	dc.l	ArtPool_af2adfb1
 	dc.w	$8000
-	dc.l	Art_SwingingPlatform
+	dc.l	ArtPool_fe72ebda
 	dc.w	$8300
 	dc.l	Art_Tamabboh
 	dc.w	$8580
-	dc.l	Art_DiagonalSpring
+	dc.l	ArtPool_48748a9c
 	dc.w	$9200
 
 R12A_PLC_Cam4_Full:
 	dc.w	$9
-	dc.l	R12A_Data_236EBA+$2D2
+	dc.l	Art_FloatBlock
 	dc.w	$6B40
-	dc.l	R12A_Data_236EBA+$1C4
+	dc.l	Art_Boulder
 	dc.w	$6D80
-	dc.l	R12A_Data_237272+$B6
+	dc.l	Art_SpinningDisc
 	dc.w	$7000
-	dc.l	Art_Animals
+	dc.l	ArtPool_3cabe053
 	dc.w	$71E0
-	dc.l	Art_PataBata
+	dc.l	ArtPool_c3f0afb8
 	dc.w	$74E0
 	dc.l	Art_Anton
 	dc.w	$7B60
-	dc.l	Art_RobotGenWithered
+	dc.l	ArtPool_af2adfb1
 	dc.w	$8000
-	dc.l	Art_SwingingPlatform
+	dc.l	ArtPool_fe72ebda
 	dc.w	$8300
 	dc.l	Art_Tamabboh
 	dc.w	$8580
-	dc.l	Art_DiagonalSpring
+	dc.l	ArtPool_48748a9c
 	dc.w	$9200
 
 R12A_PLC_Cam5_Full:
 	dc.w	$8
-	dc.l	R12A_Data_236EBA+$2D2
+	dc.l	Art_FloatBlock
 	dc.w	$6B40
-	dc.l	R12A_Data_236EBA+$1C4
+	dc.l	Art_Boulder
 	dc.w	$6D80
-	dc.l	R12A_Data_237272+$B6
+	dc.l	Art_SpinningDisc
 	dc.w	$7000
-	dc.l	Art_Animals
+	dc.l	ArtPool_3cabe053
 	dc.w	$71E0
-	dc.l	Art_PataBata
+	dc.l	ArtPool_c3f0afb8
 	dc.w	$74E0
 	dc.l	Art_TagaTaga
 	dc.w	$7B60
-	dc.l	Art_SwingingPlatform
+	dc.l	ArtPool_fe72ebda
 	dc.w	$8300
 	dc.l	Art_Tamabboh
 	dc.w	$8580
-	dc.l	Art_DiagonalSpring
+	dc.l	ArtPool_48748a9c
 	dc.w	$9200
 
 R12A_PLC_Cam1_Incr:
 	dc.w	$4
-	dc.l	R12A_Data_237272+$B6
+	dc.l	Art_SpinningDisc
 	dc.w	$7000
-	dc.l	Art_Animals
+	dc.l	ArtPool_3cabe053
 	dc.w	$71E0
-	dc.l	Art_PataBata
+	dc.l	ArtPool_c3f0afb8
 	dc.w	$74E0
-	dc.l	Art_Springboard
+	dc.l	ArtPool_52c1fcc2
 	dc.w	$7B60
-	dc.l	Art_DiagonalSpring
+	dc.l	ArtPool_48748a9c
 	dc.w	$9200
 
 R12A_PLC_Cam2_Incr:
 	dc.w	$2
 	dc.l	Art_Mosqui
 	dc.w	$74E0
-	dc.l	R12A_Art_Checkpoint+$FA
+	dc.l	ArtPool_47724fa5
 	dc.w	$7E00
 	dc.l	Art_Anton
 	dc.w	$8000
 
 R12A_PLC_Cam3_Incr:
 	dc.w	$1
-	dc.l	R12A_Data_2376BA+$9A
+	dc.l	Art_TunnelDoorSplash
 	dc.w	$74E0
-	dc.l	Art_RobotGenWithered
+	dc.l	ArtPool_af2adfb1
 	dc.w	$8000
 
 R12A_PLC_Cam4_Incr:
 	dc.w	$2
-	dc.l	Art_PataBata
+	dc.l	ArtPool_c3f0afb8
 	dc.w	$74E0
 	dc.l	Art_Anton
 	dc.w	$7B60
-	dc.l	Art_RobotGenWithered
+	dc.l	ArtPool_af2adfb1
 	dc.w	$8000
 
 R12A_PLC_Cam5_Incr:
@@ -2341,16 +1213,16 @@ R12A_PLC_Cam5_Incr:
 
 R12A_PLC_Results:
 	dc.w	$0
-	dc.l	Art_Results
+	dc.l	ArtPool_436710d1
 	dc.w	$7880
 
 R12A_PLC_Signpost:
 	dc.w	$2
-	dc.l	Art_Signpost
+	dc.l	ArtPool_908aad1d
 	dc.w	$8780
-	dc.l	Art_BigRing
+	dc.l	ArtPool_a1ea1b09
 	dc.w	$9100
-	dc.l	MapSpr_BigRingFlash+$1A0
+	dc.l	Art_BigRingFlash
 	dc.w	$7DE0
 
 	incbin	"Level/Palmtree Panic/Data/Level/Padding (Act 2 Present).bin"
@@ -2367,40 +1239,6 @@ R12A_Ani_FlowerCapsule:
 	dc.w	$0000,$0000,$0000,$0000,$0000,$0000,$0000,$0000
 	dc.w	$0000,$0001,$0000,$0100,$0001,$FF00,$0203,$0405
 	dc.w	$0607,$08FF
-R12A_Art_Points:
-	incbin	"Level/_Objects/HUD and Points/Data/Art (Points).nem"
-R12A_Art_GoalPost:
-	incbin	"Level/_Objects/Level End/Data/Art (Goal Post).nem"
-R12A_Art_TitleCard:
-	incbin	"Level/_Objects/Title Card/Data/Art.nem"
-R12A_Art_Springs:
-	incbin	"Level/_Objects/Spring/Data/Art (Normal).nem"
-R12A_Art_MonitorTimePosts:
-	incbin	"Level/_Objects/Monitor and Time Post/Data/Art.nem"
-R12A_Art_Explosions:
-	incbin	"Level/_Objects/Explosion/Data/Art.nem"
-R12A_Art_Rings:
-	incbin	"Level/_Objects/Ring/Data/Art.nem"
-R12A_Art_HUD:
-	incbin	"Level/_Objects/HUD and Points/Data/Art (HUD).nem"
-R12A_Art_Checkpoint:
-	incbin	"Level/_Objects/Checkpoint/Data/Art.nem"
-	dc.w	$0008,$8044,$0E72,$0283,$2306,$7100,$FFBF,$07FE
-	dc.w	$0DDF,$D3FC,$8000,$556E,$0015,$5C00,$35FE,$0FC1
-	dc.w	$F6FC,$8000,$7F4C,$0010,$8371,$00FF,$0000,$0000
-	dc.w	$0000,$0000,$0000,$0000,$0000,$0000,$0000
-R12A_Data_236B0A:
-	incbin	"Level/Palmtree Panic/Data/Art/Art_Flower.nem"
-R12A_Data_236D90:
-	incbin	"Level/Palmtree Panic/Data/Art/Art_TitleCardText.nem"
-R12A_Data_236EBA:
-	incbin	"Level/Palmtree Panic/Data/Misc/Data_236EBA.bin"
-R12A_Data_237272:
-	incbin	"Level/Palmtree Panic/Data/Misc/Data_237272.bin"
-R12A_Data_2376BA:
-	incbin	"Level/Palmtree Panic/Data/Misc/Data_2376BA.bin"
-R12A_Art_Spikes:
-	incbin	"Level/_Objects/Spikes/Data/Art.nem"
 R12A_LevelCollision:
 	incbin	"Level/Palmtree Panic/Data/Collision/Collision (Act 2 Present).bin"
 R12A_LevelLayouts:
