@@ -36,29 +36,29 @@
 	include	"_Include/Main CPU.inc"
 	include	"MD Port/Floor Demo/params.inc"
 
-; Buffer layout — column-major, 32 tile-cols × 12 tile-rows × 32 bytes/tile.
-; COL_STRIDE = 12*32 = 384 bytes.  The render uses a fixed 380-byte skip between
-; tile-cols (= COL_STRIDE-4), so IMGBYTES must always be 32*12*32 = $3000.
+; Buffer layout — column-major, 32 tile-cols × 5 tile-rows × 32 bytes/tile.
+; COL_STRIDE = 5*32 = 160 bytes.  The render uses a fixed 156-byte skip between
+; tile-cols (= COL_STRIDE-4), so IMGBYTES must always be 32*5*32 = $1400.
 ; FD_R0 is the first rendered scanline; it must be a multiple of 8 (tile-aligned).
 ; The render writes FD_ROWS scanlines starting at byte 0 of the buffer; those bytes
 ; land in tile-rows FD_R0/8..FD_R0/8+FD_ROWS/8-1 of VRAM (the upper tile-rows in
 ; the buffer are filled with zeros on init and never touched).
 BUF0		EQU	$FF0000-$1000000	; expressed as negative so .w mode works
-IMGBYTES	EQU	$3000			; 32 tile-cols * 12 tile-rows * 32 B = fixed
-BUF1		EQU	BUF0+IMGBYTES		; = $FF3000
+IMGBYTES	EQU	$1400			; 32 tile-cols * 5 tile-rows * 32 B = fixed
+BUF1		EQU	BUF0+IMGBYTES		; = $FF1400
 IMGVRAM		EQU	$0020			; VRAM dest of DMA (tile 1 onwards)
 
 ; RAM texture immediately after both buffers.
-; BUF0=$FF0000, BUF1=$FF3000, FLOORTEX=$FF6000, ends=$FFC200 → vars at $FFC200.
-FLOORTEX_ADDR	EQU	BUF1+IMGBYTES		; = $FF6000
+; BUF0=$FF0000, BUF1=$FF1400, FLOORTEX=$FF2800, ends~$FFA000 → vars at ~$FFA000.
+FLOORTEX_ADDR	EQU	BUF1+IMGBYTES		; = $FF2800
 
-; Camera base offset within texture (camera pixel = centre = FD_START,FD_START).
-; FD_START=W/2=112.  Packed row stride = FD_WPACKED=112.
-; Offset = FD_START*FD_WPACKED + FD_START/2 = 112*112+56 = 12600.
+; Camera base offset within texture (camera pixel = centre = FD_START,FD_START = W/2,W/2).
+; FD_START=W/2=144.  Packed row stride = FD_WPACKED=144.
+; Offset = FD_START*FD_WPACKED + FD_START/2 = 144*144+72 = 20808.
 TEXBASE_OFF	EQU	FD_START*FD_WPACKED+(FD_START/2)
 
-; Variables immediately after texture ($FFC200).
-; $C200 >= $8000 so sign_ext($C200) = $FFFF_C200 = $FFC200 on 24-bit bus. OK.
+; Variables immediately after texture (~$FFA000).
+; $CA00 >= $8000 so sign_ext($CA00) = $FFFF_CA00 = $FFCA00 on 24-bit bus. OK.
 	rsset	FLOORTEX_ADDR+FD_TEXSIZE
 vcount		rs.w	1
 dmaState	rs.b	1
@@ -207,11 +207,11 @@ EntryPoint:
 	movea.l	(Vectors).l,sp
 
 	; Plane A nametable — column-major tile indices.
-	; Buffer always has 12 tile-rows (IMGBYTES=$3000, COL_STRIDE=384).
+	; Buffer always has 5 tile-rows (IMGBYTES=$1400, COL_STRIDE=160).
 	; The render writes FD_ROWS scanlines starting at buffer byte 0, which
 	; corresponds to tile-rows FD_R0/8..FD_R0/8+FD_ROWS/8-1 in VRAM.
 	; Tile index for (col, row_local):
-	;   tile = col*12 + (FD_R0/8 + row_local) + 1
+	;   tile = col*5 + (FD_R0/8 + row_local) + 1
 	; Screen nametable row = FD_R0/8 + row_local  (d6 = row_local 0..FD_ROWS/8-1)
 	moveq	#0,d6			; d6 = row_local (0..FD_ROWS/8-1)
 .NTRow:
@@ -227,7 +227,7 @@ EntryPoint:
 	moveq	#0,d5			; d5 = col (0..31)
 .NTCol:
 	move.w	d5,d1
-	mulu.w	#12,d1			; col * 12
+	mulu.w	#5,d1			; col * 5
 	add.w	d6,d1			; + row_local
 	addq.w	#1,d1			; + 1 (1-based; tile-row within col = row_local)
 	move.w	d1,VDPDATA
@@ -402,13 +402,13 @@ UpdateCamera:
 ; -------------------------------------------------------------------------
 ; LoadStampTex — rebuild W×W RAM texture around current stamp
 ; -------------------------------------------------------------------------
-; The texture is FD_WSTAMPS × FD_WSTAMPS stamps (7×7 = 224×224 pixels).
+; The texture is FD_WSTAMPS × FD_WSTAMPS stamps (9×9 = 288×288 pixels).
 ; Top-left stamp: TX = (stampX - FD_WSTAMPS/2) & $7F
 ;                 TY = (stampY - FD_WSTAMPS/2) & $7F
 ;
-; For each of the 7 stamp-rows:
+; For each of the 9 stamp-rows:
 ;   For each of 32 pixel rows within that stamp strip:
-;     For each of 7 stamp columns:
+;     For each of 9 stamp columns:
 ;       Copy 16 bytes (one packed stamp row) → texture row
 ;
 ; Register allocation:
@@ -461,8 +461,8 @@ LoadStampTex:
 	move.w	d5,a3				; a3 = running col (preserved across this iter)
 	andi.w	#$7F,d5				; d5 = wrapped col (0..127)
 	lsl.w	#1,d5				; d5 = byte offset into map row (col*2)
-	move.w	(a0,d5.w),d5			; d5.w = stamp index — upper word still dirty!
-	andi.l	#$FFFF,d5			; clear upper word → d5 = clean stamp index
+	move.w	(a0,d5.w),d5			; d5.w = variant_index — upper word still dirty!
+	andi.l	#$FFFF,d5			; clear upper word → d5 = clean variant_index
 
 	; a2 → stamp pixel row d4 in ROM
 	lsl.l	#8,d5				; d5 * 256
@@ -511,7 +511,15 @@ LoadStampTex:
 
 RenderPicture:
 	lea	FLOORTEX_ADDR,a5
-	addi.l	#TEXBASE_OFF,a5			; a5 = tex byte under camera
+	addi.l	#TEXBASE_OFF,a5			; base: camera at stamp centre (camX=camY=0)
+	; Add dynamic camera offset: camY*FD_WPACKED + camX/2
+	moveq	#0,d0
+	move.w	camY.w,d0
+	mulu.w	#FD_WPACKED,d0			; camY * row stride
+	add.l	d0,a5
+	move.w	camX.w,d0
+	lsr.w	#1,d0				; camX/2 (camX always even)
+	adda.w	d0,a5				; a5 = tex byte under camera
 
 	moveq	#0,d0
 	move.b	yaw.w,d0
@@ -521,7 +529,7 @@ RenderPicture:
 
 	movea.l	backBuf.w,a0
 	; No FD_R0 offset here — tile row 0 of buffer = first rendered scanline.
-	; Nametable row FD_R0/8 references tile index col*12+1 = buffer tile row 0. ✓
+	; Nametable row FD_R0/8 references tile index col*5+1 = buffer tile row 0. ✓
 	moveq	#FD_ROWS-1,d7
 
 .Row:
@@ -540,7 +548,7 @@ RenderPicture:
 	move.b	(a3,d1.w),(a1)+			; pair 2
 	move.w	(a2)+,d1
 	move.b	(a3,d1.w),(a1)+			; pair 3
-	lea	380(a1),a1			; skip to next tile column
+	lea	156(a1),a1			; skip to next tile column
 
 	; Pairs 4-7: 4 more output bytes, then skip to next tile column
 	move.w	(a2)+,d1
@@ -551,7 +559,7 @@ RenderPicture:
 	move.b	(a3,d1.w),(a1)+			; pair 6
 	move.w	(a2)+,d1
 	move.b	(a3,d1.w),(a1)+			; pair 7
-	lea	380(a1),a1			; skip to next tile column (next segment starts here)
+	lea	156(a1),a1			; skip to next tile column (next segment starts here)
 
 	dbf	d6,.Seg
 	addq.l	#4,a0				; next row

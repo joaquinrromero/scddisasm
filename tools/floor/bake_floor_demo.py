@@ -76,10 +76,9 @@ This is what we had at the end of the last session. The only issue was bugs in
 BuildTex/UpdateTexture. Here we replace those with LoadStampTex which is simpler.
 """
 import struct, sys, os
+sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 import numpy as np
 from ref import *
-
-sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 OUT = sys.argv[1] if len(sys.argv) > 1 else "src/MD Port/Floor Demo"
 NANG = int(os.environ.get("NANG", "32")); R0 = int(os.environ.get("R0", "55"))
 Z = 0x160; SEG = 16
@@ -99,19 +98,74 @@ for a in range(NANG):
         X = (xs*256 + i*dx) >> 11; Y = (ys*256 + i*dy) >> 11
         maxR_pre = max(maxR_pre, int(np.abs(X).max()), int(np.abs(Y).max()))
 W = H = int(np.ceil((maxR_pre * 2 + 1) / 32)) * 32
-assert W == 224, f"Expected W=224, got {W}"
+W = H = max(W, 9 * 32)  # minimum 9×9 stamps for camera headroom (288 px)
 
-# ---- packed stamps (ROM) ----
-nstamps = S.shape[0]
-packed_stamps = np.zeros((nstamps, 32, 16), np.uint8)
-packed_stamps[:, :, :] = (S[:, :, 0::2] << 4) | S[:, :, 1::2]
+# ---- packed stamp variants (ROM) ----
+# The Sonic CD stamp map word encoding:
+#   bits 12-2 (11 bits): stamp index field → sid = (word & 0x7FF) >> 2
+#   bit 15: horizontal flip
+#   bits 14-13: rotation (0=0°, 1=90°CW, 2=180°, 3=270°CW)
+# We pre-bake all (sid, flag) variants with the transform applied so LoadStampTex
+# can index directly: variant_index * 512 bytes into stamps_packed.bin.
+# stamp_map.bin stores the variant_index (u16) for each cell.
+nstamps = S.shape[0]  # includes blank stamp 0
+
+# Build lookup coords for transforms (shape 32×32)
+_u = np.arange(32); _v = np.arange(32)
+UU, VV = np.meshgrid(_u, _v)  # UU[y,x]=x, VV[y,x]=y
+
+def apply_stamp_transform(stamp_img, flag3):
+    """Apply 3-bit flag (hf=bit2, rot=bits1:0) to a 32×32 stamp.
+    flag3 = (raw_word >> 13) & 7 where raw_word has bit15=hflip, bits14-13=rot.
+    stamp_pixel_xform expects the flags in raw_word bit positions, so shift back."""
+    raw_flag = int(flag3) << 13
+    hf  = (raw_flag >> 15) & 1
+    rot = (raw_flag >> 13) & 3
+    u2 = np.where(hf == 1, 31 - UU, UU)
+    su = np.select([rot==0, rot==1, rot==2, rot==3], [u2,        VV,     31-u2,    31-VV])
+    sv = np.select([rot==0, rot==1, rot==2, rot==3], [VV,  31-u2,    31-VV,       u2])
+    return stamp_img[sv, su]
+
+# Enumerate unique (sid, flag) pairs in map order; variant 0 = blank
+raw_flat = M.ravel().astype(np.int32)
+variant_map = {(0, 0): 0}
+variant_list = [(0, 0)]   # index = variant_index; variant_list[0] = blank
+
+for w in raw_flat:
+    sid  = (w & 0x7FF) >> 2
+    flag = (w >> 13) & 7
+    if sid == 0 or sid >= nstamps:
+        continue
+    key = (int(sid), int(flag))
+    if key not in variant_map:
+        variant_map[key] = len(variant_list)
+        variant_list.append(key)
+
+nvariants = len(variant_list)   # variant 0 = blank + non-blank variants
+# Pack all variant images: variant 0 = all-zero (blank)
+packed_stamps = np.zeros((nvariants, 32, 16), np.uint8)
+for vi, (sid, flag) in enumerate(variant_list):
+    if sid == 0:
+        continue  # blank stays zero
+    img = apply_stamp_transform(S[sid], flag)        # shape (32,32) uint8 pixel indices
+    packed_stamps[vi] = (img[:, 0::2] << 4) | img[:, 1::2]  # 4bpp row-major
+
 open(f"{OUT}/stamps_packed.bin", "wb").write(packed_stamps.tobytes())
 
 # ---- stamp map (ROM) ----
-# Clamp invalid entries (>=nstamps or 0xFFFF) to stamp 0 to avoid out-of-bounds access
-M_safe = M.copy()
-M_safe[M_safe >= nstamps] = 0
-open(f"{OUT}/stamp_map.bin", "wb").write(M_safe.astype(">u2").tobytes())
+# Each cell = variant_index (u16 big-endian). LoadStampTex: addr = variant_index * 512.
+variant_index_map = np.zeros(M.shape, dtype=np.uint16)
+for r in range(M.shape[0]):
+    for c in range(M.shape[1]):
+        w = int(M[r, c])
+        sid  = (w & 0x7FF) >> 2
+        flag = (w >> 13) & 7
+        if sid == 0 or sid >= nstamps:
+            variant_index_map[r, c] = 0
+        else:
+            variant_index_map[r, c] = variant_map[(sid, flag)]
+
+open(f"{OUT}/stamp_map.bin", "wb").write(variant_index_map.astype(">u2").tobytes())
 
 # ---- angle tables ----
 # Format per segment: 1 signed longword (base byte-offset of packed byte 0 of the segment,
@@ -133,10 +187,15 @@ for a in range(NANG):
         L = Y * W + X
         for s in range(256 // SEG):
             seg = L[s*SEG:(s+1)*SEG]
-            # Sample even pixels only (one per packed byte)
-            seg_bytes = seg[0::2]            # 8 values: offsets of bytes 0..7
-            base_packed = int(seg_bytes[0]) >> 1
-            rel_packed = [int(seg_bytes[k] - seg_bytes[0]) >> 1 for k in range(1, 8)]
+            # Sample even pixels only (one per packed byte).
+            # Round each pixel offset DOWN to even texture-column so the render
+            # always reads the HIGH nibble of a packed byte (high = left pixel).
+            # A pixel at odd texture X would be in the LOW nibble; rounding to
+            # even shifts it one left — a ±1px horizontal error, imperceptible.
+            seg_bytes = seg[0::2]                           # 8 pixel offsets (even segment indices)
+            aligned = np.array([int(v) & ~1 for v in seg_bytes])  # round each to even col
+            base_packed = int(aligned[0]) >> 1              # byte offset of pair 0
+            rel_packed = [(int(aligned[k]) - int(aligned[0])) >> 1 for k in range(1, 8)]
             maxrel = max(maxrel, max(abs(r) for r in rel_packed))
             assert all(abs(r) < 32768 for r in rel_packed), ("segment rel overflow", a, r, s)
             angles += struct.pack(">l", base_packed) + struct.pack(">7h", *rel_packed)
@@ -173,7 +232,8 @@ FD_WSTAMPS\tEQU\t{W//32}\t\t\t; Texture width/height in stamps
 FD_R0\t\tEQU\t{R0}\t\t\t; First rendered row
 FD_ROWS\t\tEQU\t{rows}
 FD_NANG\t\tEQU\t{NANG}
-FD_NSTAMPS\tEQU\t{nstamps}\t\t\t; Total stamps in ROM
+FD_NSTAMPS\tEQU\t{nstamps}\t\t\t; Total base stamps in ROM
+FD_NVARIANTS\tEQU\t{nvariants}\t\t\t; Total stamp variants (with flip/rot pre-baked)
 FD_START\tEQU\t{W//2}\t\t\t; Camera pixel within texture (always W/2)
 FD_STARTCAMX\tEQU\t{start_camx_in_stamp}\t\t\t; Camera pixel within starting stamp (X)
 FD_STARTCAMY\tEQU\t{start_camy_in_stamp}\t\t\t; Camera pixel within starting stamp (Y)
@@ -181,9 +241,10 @@ FD_STARTSTX\tEQU\t{start_stampx}\t\t\t; Starting stamp map column
 FD_STARTSTY\tEQU\t{start_stampy}\t\t\t; Starting stamp map row
 """)
 
+stamps_rom = nvariants * 512
 print(f"R0={R0}, NANG={NANG}, rows {R0}..95 ({rows}), footprint R={maxR}, W={W} ({W//32} stamps)")
-print(f"angle tables: {len(angles)//1024} KB  stamps: {nstamps*512//1024} KB  map: {128*128*2//1024} KB")
+print(f"angle tables: {len(angles)//1024} KB  stamps: {stamps_rom//1024} KB ({nvariants} variants)  map: {128*128*2//1024} KB")
 print(f"RAM texture: {W}x{W} 4bpp packed = {tex_ram//1024} KB")
-print(f"Total ROM: {(len(angles)+nstamps*512+128*128*2)//1024} KB")
+print(f"Total ROM: {(len(angles)+stamps_rom+128*128*2)//1024} KB")
 print(f"Max segment relative byte offset: {maxrel}")
 print(f"Start: stamp ({start_stampx},{start_stampy}), cam-in-stamp ({start_camx_in_stamp},{start_camy_in_stamp})")
