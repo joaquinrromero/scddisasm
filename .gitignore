@@ -37,3 +37,4 @@ __pycache__/
 # Emulator debug output
 frame_*.ppm
 wram_*.bin
+ref_*.ppm
