@@ -7,22 +7,11 @@
 ; Palmtree Panic Act 1 Bad Future section data
 ; -------------------------------------------------------------------------
 
-BadFuture_SectionRanges:
-	dc.w	$700
-	dc.w	$1100
-	dc.w	$1A00
-	dc.w	-1
-	
+	even
 BadFuture_SectionUpdatePLCs:
 	dc.w	7
 	dc.w	8
 	dc.w	9
 	dc.w	$A
 	
-BadFuture_SectionInitPLCs:
-	dc.w	2
-	dc.w	4
-	dc.w	5
-	dc.w	6
-	
-; -------------------------------------------------------------------------
+	even

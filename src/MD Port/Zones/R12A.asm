@@ -161,10 +161,8 @@ R12A_CamBounds:
 R12A_loc_20295C:
 	dc.w	$0050,$03B0,$0EA0,$046C,$1750,$00BD,$0A00,$062C
 	dc.w	$0BB0,$004C,$1570,$016C,$01B0,$072C,$1400,$02AC
-R12A_LevelStartLoc:
-	dc.w	$0050,$0185
-R12A_SpecChunks:
-	dc.w	$91B6,$7F7F
+	even
+	even
 R12A_InitLevelScroll:
 	swap    d0
 	asr.l   #$4, d0
@@ -631,23 +629,8 @@ R12A_BGCameraSectIDs:
 	dc.w	$0000,$0000,$0000,$0006,$0606,$0606,$0606,$0606
 	dc.w	$0604,$0400,$0000,$0000,$0000,$0000,$0000,$0000
 	dc.w	$0000
-R12A_MapSpr_CollapsePlatform1:
-	dc.w	$0002,$17D0,$0508,$0DD8,$D005,$080D,$E8D0,$0508
-	dc.w	$0DF8,$D005,$080D,$08D0,$0508,$0D18,$E005,$0811
-	dc.w	$D8E0,$0508,$11E8,$E005,$0811,$F8E0,$0508,$1108
-	dc.w	$E005,$0811,$18F0,$0500,$19D8,$F005,$0815,$E8F0
-	dc.w	$0508,$15F8,$F005,$0815,$08F0,$0508,$1518,$0005
-	dc.w	$0825,$D800,$0500,$1DE8,$0005,$0021,$F800,$0500
-	dc.w	$2108,$0005,$081D,$1810,$0500,$19F8,$1005,$0019
-	dc.w	$0810,$0500,$1918
-R12A_ObjCollapsePlatform_Sizes1:
-	dc.w	$0002,$0403,$FFFF,$0000,$0001,$0203,$0304,$0005
-	dc.w	$0505,$0506,$0606,$0606
-R12A_MapSpr_CollapsePlatform3:
-	dc.w	$000E,$0014,$001A,$0020,$0026,$002C,$0032,$01F8
-	dc.w	$0500,$19F8,$01F8,$0508,$25F8,$01F8,$0500,$1DF8
-	dc.w	$01F8,$0500,$21F8,$01F8,$0508,$1DF8,$01F8,$0508
-	dc.w	$15F8,$02E8,$0508,$0DF8,$F805,$0811,$F800
+	even
+	even
 R12A_MapSpr_CollapsePlatform2:
 	dc.w	$0004,$00A5,$20D8,$0500,$0DC0,$D805,$000D,$D0D8
 	dc.w	$0500,$0DE0,$D805,$000D,$F0D8,$0500,$0D00,$D805
@@ -667,19 +650,13 @@ R12A_MapSpr_CollapsePlatform2:
 	dc.w	$20F0,$0500,$1130,$0005,$0015,$C000,$0500,$15D0
 	dc.w	$0005,$0015,$E000,$0500,$15F0,$0005,$0015,$0000
 	dc.w	$0500,$1510,$0005,$0015,$2000,$0500,$1530
-R12A_ObjCollapsePlatform_Sizes2:
-	dc.w	$0004,$000E,$0702,$0000,$0000,$0000,$0000,$0701
-	dc.w	$0101,$0101,$0101,$0101
-R12A_MapSpr_CollapsePlatform4:
-	dc.w	$0004,$0019,$04D8,$0500,$0DF8,$E805,$0011,$F8F8
-	dc.w	$0500,$15F8,$0805,$0021,$F803,$E005,$000D,$F8F0
-	dc.w	$0500,$11F8,$0005,$0015,$F800
+	even
+	even
 R12A_SectionRanges:
 	dc.w	$0A00,$1500,$1800,$1D00,$FFFF
 R12A_SectionUpdatePLCs:
 	dc.w	$0008,$0009,$000A,$000B,$000C
-R12A_SectionInitPLCs:
-	dc.w	$0002,$0004,$0005,$0006,$0007
+	even
 R12A_ObjectTileIDs:
 	dc.w	$0024,$0026,$0028,$002C,$002E,$0030,$003A,$0034
 	dc.w	$0038,$0036,$0032,$003C,$003E,$0040,$0042,$0044
@@ -935,11 +912,7 @@ R12A_LevelDemo:
 	incbin	"Level/Palmtree Panic/Data/Level/Demo (Act 2 Present).bin"
 R12A_MapSpr_Explosion:
 	incbin	"Level/Palmtree Panic/Data/Mappings/MapSpr_Explosion (Act 1 Past).bin"
-R12A_Ani_FlowerCapsule:
-	dc.w	$0004,$002C,$0100,$0000,$0000,$0000,$0000,$0000
-	dc.w	$0000,$0000,$0000,$0000,$0000,$0000,$0000,$0000
-	dc.w	$0000,$0001,$0000,$0100,$0001,$FF00,$0203,$0405
-	dc.w	$0607,$08FF
+	even
 R12A_LevelCollision:
 	incbin	"Level/Palmtree Panic/Data/Collision/Collision (Act 2 Present).bin"
 R12A_LevelLayouts:

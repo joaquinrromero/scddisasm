@@ -10,7 +10,16 @@ import re, os
 ACTS = [("Past", "Present", "GoodFuture", "BadFuture"), ("R12B", "R12A", "R12C", "R12D"), (None, None, "R13C", "R13D")]
 defs = open("Level/_Definitions.inc").read().split("zoneVars\t\trs.b\t0")[1].split("zoneVarsEnd")[0]
 syms = [m.group(2) for m in re.finditer(r"^(z\w+)\s+rs\.l\s+1\s*;\s*(\w+)", defs, re.M)]
+ALIAS = {}
+if os.path.exists("MD Port/Zones/Zone Aliases.txt"):
+    ALIAS = dict(l.split("=", 1) for l in open("MD Port/Zones/Zone Aliases.txt").read().split("\n") if "=" in l)
 def block(z):
+    b = block0(z)
+    if b:
+        for s in syms:
+            if f"{z}.{s}" in ALIAS: b[s] = ALIAS[f"{z}.{s}"]
+    return b
+def block0(z):
     if z == "Present": return {s: s for s in syms}
     f = f"MD Port/Zones/{z}/_symbols.txt"
     if not os.path.exists(f): return None
