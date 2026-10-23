@@ -39,10 +39,6 @@ LoadZoneVars:
 ; Zone code entry points (jump through the zone variable, keep all registers)
 ; -------------------------------------------------------------------------
 
-ZoneLevelSizeLoad:
-	move.l	zLevelSizeLoad.w,-(sp)
-	rts
-
 ZoneLevelScroll:
 	move.l	zLevelScroll.w,-(sp)
 	rts

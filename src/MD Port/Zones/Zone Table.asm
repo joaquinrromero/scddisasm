@@ -40,7 +40,10 @@ ZoneData_Past:
 	dc.l	Past_MapSpr_Explosion
 	dc.l	Past_MapSpr_FlowerCapsule
 	dc.l	Past_Ani_FlowerCapsule
-	dc.l	Past_LevelSizeLoad
+	dc.l	Past_CamBounds
+	dc.l	Past_LevelStartLoc
+	dc.l	Past_SpecChunks
+	dc.l	Past_InitLevelScroll
 	dc.l	Past_LevelScroll
 	dc.l	Past_BGCameraSectIDs
 	dc.l	Past_PaletteCycle
@@ -68,7 +71,10 @@ ZoneData_Present:
 	dc.l	MapSpr_Explosion
 	dc.l	MapSpr_FlowerCapsule
 	dc.l	Ani_FlowerCapsule
-	dc.l	LevelSizeLoad
+	dc.l	CamBounds
+	dc.l	LevelStartLoc
+	dc.l	SpecChunks
+	dc.l	InitLevelScroll
 	dc.l	LevelScroll
 	dc.l	BGCameraSectIDs
 	dc.l	PaletteCycle
@@ -96,7 +102,10 @@ ZoneData_GoodFuture:
 	dc.l	GoodFuture_MapSpr_Explosion
 	dc.l	GoodFuture_MapSpr_FlowerCapsule
 	dc.l	GoodFuture_Ani_FlowerCapsule
-	dc.l	GoodFuture_LevelSizeLoad
+	dc.l	GoodFuture_CamBounds
+	dc.l	GoodFuture_LevelStartLoc
+	dc.l	GoodFuture_SpecChunks
+	dc.l	GoodFuture_InitLevelScroll
 	dc.l	GoodFuture_LevelScroll
 	dc.l	GoodFuture_BGCameraSectIDs
 	dc.l	GoodFuture_PaletteCycle
@@ -124,7 +133,10 @@ ZoneData_BadFuture:
 	dc.l	BadFuture_MapSpr_Explosion
 	dc.l	BadFuture_MapSpr_FlowerCapsule
 	dc.l	BadFuture_Ani_FlowerCapsule
-	dc.l	BadFuture_LevelSizeLoad
+	dc.l	BadFuture_CamBounds
+	dc.l	BadFuture_LevelStartLoc
+	dc.l	BadFuture_SpecChunks
+	dc.l	BadFuture_InitLevelScroll
 	dc.l	BadFuture_LevelScroll
 	dc.l	BadFuture_BGCameraSectIDs
 	dc.l	BadFuture_PaletteCycle
@@ -152,7 +164,10 @@ ZoneData_R12B:
 	dc.l	R12A_MapSpr_Explosion
 	dc.l	MapSpr_FlowerCapsule
 	dc.l	R12B_Ani_FlowerCapsule
-	dc.l	R12B_sub_2028B0
+	dc.l	R12B_CamBounds
+	dc.l	R12B_LevelStartLoc
+	dc.l	R12B_SpecChunks
+	dc.l	R12B_InitLevelScroll
 	dc.l	R12B_sub_202A1E
 	dc.l	R12B_BGCameraSectIDs
 	dc.l	R12B_PaletteCycle
@@ -180,7 +195,10 @@ ZoneData_R12A:
 	dc.l	R12A_MapSpr_Explosion
 	dc.l	MapSpr_FlowerCapsule
 	dc.l	R12A_Ani_FlowerCapsule
-	dc.l	R12A_sub_2028F4
+	dc.l	R12A_CamBounds
+	dc.l	R12A_LevelStartLoc
+	dc.l	R12A_SpecChunks
+	dc.l	R12A_InitLevelScroll
 	dc.l	R12A_sub_202A58
 	dc.l	R12A_BGCameraSectIDs
 	dc.l	R12A_PaletteCycle
@@ -208,7 +226,10 @@ ZoneData_R12C:
 	dc.l	R12A_MapSpr_Explosion
 	dc.l	MapSpr_FlowerCapsule
 	dc.l	R12C_Ani_FlowerCapsule
-	dc.l	R12C_sub_20279C
+	dc.l	R12C_CamBounds
+	dc.l	R12C_LevelStartLoc
+	dc.l	R12C_SpecChunks
+	dc.l	R12C_InitLevelScroll
 	dc.l	R12C_sub_20290A
 	dc.l	R12C_BGCameraSectIDs
 	dc.l	R12C_PaletteCycle
@@ -236,7 +257,10 @@ ZoneData_R12D:
 	dc.l	R12A_MapSpr_Explosion
 	dc.l	MapSpr_FlowerCapsule
 	dc.l	R12D_Ani_FlowerCapsule
-	dc.l	R12D_sub_202808
+	dc.l	R12D_CamBounds
+	dc.l	R12D_LevelStartLoc
+	dc.l	R12D_SpecChunks
+	dc.l	R12D_InitLevelScroll
 	dc.l	R12D_sub_202970
 	dc.l	R12D_BGCameraSectIDs
 	dc.l	R12D_PaletteCycle

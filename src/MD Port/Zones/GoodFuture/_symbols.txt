@@ -10,7 +10,6 @@ Art_Scenery
 BGCameraSectIDs
 CamBounds
 DebugItemIndex
-EndingStLocsS1
 InitLevelScroll
 LevelBlocks
 LevelChunks
@@ -19,8 +18,6 @@ LevelDataIndex
 LevelLayouts
 LevelPaletteID
 LevelScroll
-LevelSizeLoad
-LevelSizeLoad_StartPos
 LevelStartLoc
 MapSpr_CollapsePlatform1
 MapSpr_CollapsePlatform2

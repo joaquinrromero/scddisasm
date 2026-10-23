@@ -199,7 +199,10 @@ zMapCollapse4	rs.l	1		; MapSpr_CollapsePlatform4
 zMapExplosion	rs.l	1		; MapSpr_Explosion
 zMapFlowerCapsule	rs.l	1		; MapSpr_FlowerCapsule
 zAniFlowerCapsule	rs.l	1		; Ani_FlowerCapsule
-zLevelSizeLoad	rs.l	1		; LevelSizeLoad
+zCamBounds	rs.l	1		; CamBounds
+zLevelStartLoc	rs.l	1		; LevelStartLoc
+zSpecChunks	rs.l	1		; SpecChunks
+zInitLevelScroll	rs.l	1		; InitLevelScroll
 zLevelScroll	rs.l	1		; LevelScroll
 zBGCameraSectIDs	rs.l	1		; BGCameraSectIDs (which camera each BG block row uses)
 zPaletteCycle	rs.l	1		; PaletteCycle

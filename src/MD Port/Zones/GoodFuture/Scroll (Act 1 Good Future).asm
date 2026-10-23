@@ -11,129 +11,12 @@
 ; Get level size and start position
 ; -------------------------------------------------------------------------
 
-GoodFuture_LevelSizeLoad:
-	lea	objPlayerSlot.w,a6		; Get player slot
-
-	moveq	#0,d0				; Clear unused variables
-	move.b	d0,unusedF740.w
-	move.b	d0,unusedF741.w
-	move.b	d0,unusedF746.w
-	move.b	d0,unusedF748.w
-	move.b	d0,eventRoutine.w		; Clear level event routine
-
-	lea	GoodFuture_CamBounds,a0			; Prepare camera boundary information
-	move.w	(a0)+,d0			; Get unused word
-	move.w	d0,unusedF730.w
-	move.l	(a0)+,d0			; Get left and right boundaries
-	move.l	d0,leftBound.w
-	move.l	d0,destLeftBound.w
-	move.l	(a0)+,d0			; Get top and bottom boundaries
-	move.l	d0,topBound.w
-	move.l	d0,destTopBound.w
-	move.w	leftBound.w,d0			; Get left boundary + $240
-	addi.w	#$240,d0
-	move.w	d0,leftBound3.w
-	move.w	#$1010,horizBlkCrossed.w	; Initialize horizontal block crossed flags
-	move.w	(a0)+,d0			; Get camera Y center
-	move.w	d0,camYCenter.w
-	move.w	#320/2,camXCenter.w		; Get camera X center
-
-	bra.w	GoodFuture_LevelSizeLoad_StartPos
-
 ; -------------------------------------------------------------------------
 ; Camera boundaries
 ; -------------------------------------------------------------------------
 
 GoodFuture_CamBounds:
 	dc.w	4, 0, $2897, 0, $310, $60
-
-; -------------------------------------------------------------------------
-; Leftover ending demo start positions from Sonic 1
-; -------------------------------------------------------------------------
-
-GoodFuture_EndingStLocsS1:
-	dc.w	$50, $3B0
-	dc.w	$EA0, $46C
-	dc.w	$1750, $BD
-	dc.w	$A00, $62C
-	dc.w	$BB0, $4C
-	dc.w	$1570, $16C
-	dc.w	$1B0, $72C
-	dc.w	$1400, $2AC
-
-; -------------------------------------------------------------------------
-
-GoodFuture_LevelSizeLoad_StartPos:
-	tst.b	spawnMode			; Is the player being spawned at the beginning?
-	beq.s	.DefaultStart			; If so, branch
-
-	jsr	LoadCheckpointData		; Load checkpoint data
-	moveq	#0,d0				; Get player position
-	moveq	#0,d1
-	move.w	oX(a6),d1
-	move.w	oY(a6),d0
-	bpl.s	.SkipCap			; If the Y position is positive, branch
-	moveq	#0,d0				; Cap the Y position at 0 if negative
-
-.SkipCap:
-	bra.s	.SetupCamera
-
-.DefaultStart:
-	lea	GoodFuture_LevelStartLoc,a1		; Prepare level start position
-	
-	tst.w	demoMode			; Are we in the credits (Sonic 1 leftover)?
-	bpl.s	.NotS1Credits			; If not, branch
-	move.w	s1CreditsIndex,d0		; Get Sonic 1 credits starting position
-	subq.w	#1,d0
-	lsl.w	#2,d0
-	lea	GoodFuture_EndingStLocsS1,a1
-	adda.w	d0,a1
-	bra.s	.SetStartPos
-	
-.NotS1Credits:
-	move.w	demoMode,d0			; Get start position
-	lsl.w	#2,d0
-	adda.w	d0,a1
-	
-.SetStartPos:
-	moveq	#0,d1				; Get starting X position
-	move.w	(a1)+,d1
-	move.w	d1,oX(a6)
-	moveq	#0,d0				; Get starting Y position
-	move.w	(a1),d0
-	move.w	d0,oY(a6)
-
-.SetupCamera:
-	subi.w	#320/2,d1			; Get camera X position
-	bcc.s	.SkipXLeftBnd			; If it doesn't need to be capped, branch
-	moveq	#0,d1				; If it does, cap at 0
-
-.SkipXLeftBnd:
-	move.w	rightBound.w,d2			; Is the camera past the right boundary?
-	cmp.w	d2,d1
-	bcs.s	.SkipXRightBnd			; If not, branch
-	move.w	d2,d1				; If so, cap it
-
-.SkipXRightBnd:
-	move.w	d1,cameraX.w			; Set camera X position
-
-	subi.w	#$60,d0				; Get camera Y position
-	bcc.s	.SkipYTopBnd			; If it doesn't need to be capped, branch
-	moveq	#0,d0				; If it does, cap at 0
-
-.SkipYTopBnd:
-	cmp.w	bottomBound.w,d0		; Is the camera past the bottom boundary?
-	blt.s	.SkipYBtmBnd			; If not, branch
-	move.w	bottomBound.w,d0		; If so, cap it
-
-.SkipYBtmBnd:
-	move.w	d0,cameraY.w			; Set camera Y position
-
-	bsr.w	GoodFuture_InitLevelScroll			; Initialize level scrolling
-
-	lea	GoodFuture_SpecChunks,a1			; Get loop chunks
-	move.l	(a1),specialChunks.w
-	rts
 
 ; -------------------------------------------------------------------------
 ; Start location

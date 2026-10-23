@@ -242,7 +242,7 @@ LevelStart:
 	moveq	#3,d0
 	bsr.w	LoadFadePal
 
-	bsr.w	ZoneLevelSizeLoad			; Get level size and start position
+	bsr.w	LevelSizeLoad			; Get level size and start position
 	bsr.w	ZoneLevelScroll			; Initialize level scrolling
 	bset	#2,scrollFlags.w		; Force draw a block column on the left side of the screen
 	bsr.w	LoadLevelData			; Load level data

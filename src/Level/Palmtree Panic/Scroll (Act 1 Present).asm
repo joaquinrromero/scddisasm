@@ -9,6 +9,8 @@
 ; -------------------------------------------------------------------------
 
 LevelSizeLoad:
+	lea	objPlayerSlot.w,a6		; Get player slot
+
 	moveq	#0,d0				; Clear unused variables
 	move.b	d0,unusedF740.w
 	move.b	d0,unusedF741.w
@@ -16,7 +18,7 @@ LevelSizeLoad:
 	move.b	d0,unusedF748.w
 	move.b	d0,eventRoutine.w		; Clear level event routine
 
-	lea	CamBounds,a0			; Prepare camera boundary information
+	movea.l	zCamBounds.w,a0			; Prepare camera boundary information
 	move.w	(a0)+,d0			; Get unused word
 	move.w	d0,unusedF730.w
 	move.l	(a0)+,d0			; Get left and right boundaries
@@ -36,27 +38,6 @@ LevelSizeLoad:
 	bra.w	LevelSizeLoad_StartPos
 
 ; -------------------------------------------------------------------------
-; Camera boundaries
-; -------------------------------------------------------------------------
-
-CamBounds:
-	dc.w	4, 0, $2897, 0, $710, $60
-
-; -------------------------------------------------------------------------
-; Leftover ending demo start positions from Sonic 1
-; -------------------------------------------------------------------------
-
-EndingStLocsS1:
-	dc.w	$50, $3B0
-	dc.w	$EA0, $46C
-	dc.w	$1750, $BD
-	dc.w	$A00, $62C
-	dc.w	$BB0, $4C
-	dc.w	$1570, $16C
-	dc.w	$1B0, $72C
-	dc.w	$1400, $2AC
-
-; -------------------------------------------------------------------------
 
 LevelSizeLoad_StartPos:
 	tst.b	spawnMode			; Is the player being spawned at the beginning?
@@ -65,8 +46,8 @@ LevelSizeLoad_StartPos:
 	jsr	LoadCheckpointData		; Load checkpoint data
 	moveq	#0,d0				; Get player position
 	moveq	#0,d1
-	move.w	objPlayerSlot+oX.w,d1
-	move.w	objPlayerSlot+oY.w,d0
+	move.w	oX(a6),d1
+	move.w	oY(a6),d0
 	bpl.s	.SkipCap			; If the Y position is positive, branch
 	moveq	#0,d0				; Cap the Y position at 0 if negative
 
@@ -74,13 +55,29 @@ LevelSizeLoad_StartPos:
 	bra.s	.SetupCamera
 
 .DefaultStart:
-	lea	LevelStartLoc,a1		; Prepare level start position
+	movea.l	zLevelStartLoc.w,a1		; Prepare level start position
+	
+	tst.w	demoMode			; Are we in the credits (Sonic 1 leftover)?
+	bpl.s	.NotS1Credits			; If not, branch
+	move.w	s1CreditsIndex,d0		; Get Sonic 1 credits starting position
+	subq.w	#1,d0
+	lsl.w	#2,d0
+	lea	EndingStLocsS1,a1
+	adda.w	d0,a1
+	bra.s	.SetStartPos
+	
+.NotS1Credits:
+	move.w	demoMode,d0			; Get start position
+	lsl.w	#2,d0
+	adda.w	d0,a1
+	
+.SetStartPos:
 	moveq	#0,d1				; Get starting X position
 	move.w	(a1)+,d1
-	move.w	d1,objPlayerSlot+oX.w
+	move.w	d1,oX(a6)
 	moveq	#0,d0				; Get starting Y position
 	move.w	(a1),d0
-	move.w	d0,objPlayerSlot+oY.w
+	move.w	d0,oY(a6)
 
 .SetupCamera:
 	subi.w	#320/2,d1			; Get camera X position
@@ -108,11 +105,33 @@ LevelSizeLoad_StartPos:
 .SkipYBtmBnd:
 	move.w	d0,cameraY.w			; Set camera Y position
 
-	bsr.w	InitLevelScroll			; Initialize level scrolling
+	movea.l	zInitLevelScroll.w,a0		; Initialize level scrolling
+	jsr	(a0)
 
-	lea	SpecChunks,a1			; Get loop chunks
+	movea.l	zSpecChunks.w,a1			; Get loop chunks
 	move.l	(a1),specialChunks.w
 	rts
+
+; -------------------------------------------------------------------------
+; Leftover ending demo start positions from Sonic 1
+; -------------------------------------------------------------------------
+
+EndingStLocsS1:
+	dc.w	$50, $3B0
+	dc.w	$EA0, $46C
+	dc.w	$1750, $BD
+	dc.w	$A00, $62C
+	dc.w	$BB0, $4C
+	dc.w	$1570, $16C
+	dc.w	$1B0, $72C
+	dc.w	$1400, $2AC
+
+; -------------------------------------------------------------------------
+; Camera boundaries
+; -------------------------------------------------------------------------
+
+CamBounds:
+	dc.w	4, 0, $2897, 0, $710, $60
 
 ; -------------------------------------------------------------------------
 ; Start location

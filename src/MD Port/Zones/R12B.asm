@@ -150,94 +150,12 @@ R12B_dat_200770:
 	dc.w	$0241,$FF80,$9041,$0C40,$0280,$6200,$0006,$6000
 	dc.w	$3114,$45F9,$00FF,$1200,$7000,$1028,$0023,$6706
 	dc.w	$08B2,$0007,$0002,$6000,$31A8
-R12B_sub_2028B0:
-	lea     objects.w, a6
-	moveq   #$0, d0
-	move.b  d0, unusedF740.w
-	move.b  d0, unusedF741.w
-	move.b  d0, unusedF746.w
-	move.b  d0, unusedF748.w
-	move.b  d0, eventRoutine.w
-	lea     R12B_CamBounds.l, a0
-	move.w  (a0)+, d0
-	move.w  d0, unusedF730.w
-	move.l  (a0)+, d0
-	move.l  d0, leftBound.w
-	move.l  d0, destLeftBound.w
-	move.l  (a0)+, d0
-	move.l  d0, topBound.w
-	move.l  d0, destTopBound.w
-	move.w  leftBound.w, d0
-	addi.w  #$240, d0
-	move.w  d0, leftBound3.w
-	move.w  #$1010, horizBlkCrossed.w
-	move.w  (a0)+, d0
-	move.w  d0, camYCenter.w
-	move.w  #$a0, camXCenter.w
-	bra.w   R12B_LevelSizeLoad_StartPos
 R12B_CamBounds:
 	dc.w	$0004,$0000,$2897,$0000,$0310,$0060
 R12B_loc_202918:
 	dc.w	$0050,$03B0,$0EA0,$046C,$1750,$00BD,$0A00,$062C
 	dc.w	$0BB0,$004C,$1570,$016C,$01B0,$072C,$1400,$02AC
-R12B_LevelSizeLoad_StartPos:
-	tst.b   spawnMode.l
-	beq.s   R12B_loc_202958
-	jsr     LoadCheckpointData.l
-	moveq   #$0, d0
-	moveq   #$0, d1
-	move.w  $8(a6), d1
-	move.w  $c(a6), d0
-	bpl.s   R12B_loc_202956
-	moveq   #$0, d0
-R12B_loc_202956:
-	bra.s   R12B_loc_202994
-R12B_loc_202958:
-	lea     R12B_loc_2029D0.l, a1
-	tst.w   demoMode.l
-	bpl.s   R12B_loc_20297A
-	move.w  s1CreditsIndex.l, d0
-	subq.w  #$1, d0
-	lsl.w   #$2, d0
-	lea     R12B_loc_202918.l, a1
-	adda.w  d0, a1
-	bra.s   R12B_loc_202984
-R12B_loc_20297A:
-	move.w  demoMode.l, d0
-	lsl.w   #$2, d0
-	adda.w  d0, a1
-R12B_loc_202984:
-	moveq   #$0, d1
-	move.w  (a1)+, d1
-	move.w  d1, $8(a6)
-	moveq   #$0, d0
-	move.w  (a1), d0
-	move.w  d0, $c(a6)
-R12B_loc_202994:
-	subi.w  #$a0, d1
-	bcc.s   R12B_loc_20299C
-	moveq   #$0, d1
-R12B_loc_20299C:
-	move.w  rightBound.w, d2
-	cmp.w   d2, d1
-	bcs.s   R12B_loc_2029A6
-	move.w  d2, d1
-R12B_loc_2029A6:
-	move.w  d1, cameraX.w
-	subi.w  #$60, d0
-	bcc.s   R12B_loc_2029B2
-	moveq   #$0, d0
-R12B_loc_2029B2:
-	cmp.w   bottomBound.w, d0
-	blt.s   R12B_loc_2029BC
-	move.w  bottomBound.w, d0
-R12B_loc_2029BC:
-	move.w  d0, cameraY.w
-	bsr.w   R12B_InitLevelScroll
-	lea     R12B_SpecChunks.l, a1
-	move.l  (a1), specialChunks.w
-	rts     
-R12B_loc_2029D0:
+R12B_LevelStartLoc:
 	dc.w	$0050,$0185
 R12B_SpecChunks:
 	dc.w	$91B6,$7F7F
